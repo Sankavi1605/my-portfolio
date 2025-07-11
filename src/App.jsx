@@ -1,5 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import React from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -9,20 +10,97 @@ import Education from './pages/Education';
 import Certifications from './pages/Certifications';
 import Contact from './pages/Contact';
 
+// Page transition component
+const PageTransition = ({ children }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+// Scroll to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, [pathname]);
+
+  return null;
+};
+
 function App() {
+  useEffect(() => {
+    // Enable smooth scrolling for the entire app
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Add custom scroll behavior
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+      const parallax = document.querySelectorAll('.parallax');
+      
+      parallax.forEach(element => {
+        const speed = element.dataset.speed || 0.5;
+        element.style.transform = `translateY(${scrolled * speed}px)`;
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <div className="min-h-screen flex flex-col">
+      <ScrollToTop />
+      <div className="min-h-screen flex flex-col bg-gray-900">
         <Navbar />
         <main className="flex-grow px-6 py-8">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/achievements" element={<Achievements />} />
-            <Route path="/education" element={<Education />} />
-            <Route path="/certifications" element={<Certifications />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route path="/" element={
+                <PageTransition>
+                  <Home />
+                </PageTransition>
+              } />
+              <Route path="/projects" element={
+                <PageTransition>
+                  <Projects />
+                </PageTransition>
+              } />
+              <Route path="/achievements" element={
+                <PageTransition>
+                  <Achievements />
+                </PageTransition>
+              } />
+              <Route path="/education" element={
+                <PageTransition>
+                  <Education />
+                </PageTransition>
+              } />
+              <Route path="/certifications" element={
+                <PageTransition>
+                  <Certifications />
+                </PageTransition>
+              } />
+              <Route path="/contact" element={
+                <PageTransition>
+                  <Contact />
+                </PageTransition>
+              } />
+            </Routes>
+          </AnimatePresence>
         </main>
         <Footer />
       </div>
