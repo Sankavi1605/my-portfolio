@@ -3,11 +3,10 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import FloatingMessageButton from './components/FloatingMessageButton';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
-import Achievements from './pages/Achievements';
 import Education from './pages/Education';
-import Certifications from './pages/Certifications';
 import Contact from './pages/Contact';
 
 // Page transition component
@@ -79,19 +78,9 @@ function App() {
                   <Projects />
                 </PageTransition>
               } />
-              <Route path="/achievements" element={
-                <PageTransition>
-                  <Achievements />
-                </PageTransition>
-              } />
               <Route path="/education" element={
                 <PageTransition>
                   <Education />
-                </PageTransition>
-              } />
-              <Route path="/certifications" element={
-                <PageTransition>
-                  <Certifications />
                 </PageTransition>
               } />
               <Route path="/contact" element={
@@ -103,6 +92,7 @@ function App() {
           </AnimatePresence>
         </main>
         <Footer />
+        <FloatingMessageButton />
       </div>
     </>
   );

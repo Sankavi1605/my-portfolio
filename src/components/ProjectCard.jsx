@@ -30,26 +30,27 @@ export default function ProjectCard({ title, image, tech, description, link }) {
     }, []);
 
     return (
-        <div 
+        <div
             ref={cardRef}
-            className="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-700 hover:border-green-500 group opacity-0 transform translate-y-8 animate-fade-in"
+            className="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-700 hover:border-green-500 group opacity-0 transform translate-y-8 animate-fade-in h-full flex flex-col"
             style={{
                 scrollBehavior: 'smooth'
             }}
         >
             <div className="relative overflow-hidden">
-                <img 
-                    src={image} 
-                    alt={title} 
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
+                <img
+                    src={image}
+                    alt={title}
+                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute top-4 right-4 bg-green-500/90 backdrop-blur-sm px-3 py-1 rounded-full text-white text-xs font-medium transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out">
+                {/* REMOVED LIVE DEMO FUNCTIONALITY ****FOR NOW***** */}
+                {/* <div className="absolute top-4 right-4 bg-green-500/90 backdrop-blur-sm px-3 py-1 rounded-full text-white text-xs font-medium transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out">
                     Live Demo
-                </div>
+                </div> */}
             </div>
-            
-            <div className="p-6 transform group-hover:translate-y-[-4px] transition-transform duration-500 ease-out">
+
+            <div className="p-6 transform group-hover:translate-y-[-4px] transition-transform duration-500 ease-out flex-1 flex flex-col">
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-green-400 transition-colors duration-300 relative">
                     {title}
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-500 ease-out"></span>
@@ -57,11 +58,11 @@ export default function ProjectCard({ title, image, tech, description, link }) {
                 <p className="text-gray-400 text-sm leading-relaxed mb-4 group-hover:text-gray-300 transition-colors duration-300">
                     {description}
                 </p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-4">
                     {tech.map((t, idx) => (
-                        <span 
-                            key={idx} 
+                        <span
+                            key={idx}
                             className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-medium hover:bg-green-500 transition-all duration-300 hover:scale-105 hover:shadow-lg transform hover:-translate-y-0.5"
                             style={{
                                 animationDelay: `${idx * 100}ms`
@@ -71,11 +72,11 @@ export default function ProjectCard({ title, image, tech, description, link }) {
                         </span>
                     ))}
                 </div>
-                
-                <div className="flex items-center justify-between">
-                    <a 
-                        href={link} 
-                        target="_blank" 
+
+                <div className="flex items-center justify-between mt-auto">
+                    <a
+                        href={link}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="text-green-400 text-sm font-medium hover:text-green-300 transition-all duration-300 flex items-center gap-2 group/link relative overflow-hidden"
                         onClick={(e) => {

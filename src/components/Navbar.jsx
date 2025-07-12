@@ -1,13 +1,12 @@
 import { Link, NavLink } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Logo from "../assets/Logo.png"
 
 const navItems = [
     { label: 'Home', path: '/' },
     { label: 'Projects', path: '/projects' },
-    { label: 'Achievements', path: '/achievements' },
     { label: 'Education', path: '/education' },
-    { label: 'Certifications', path: '/certifications' },
     { label: 'Contact', path: '/contact' },
 ];
 
@@ -27,7 +26,7 @@ export default function Navbar() {
 
     const handleNavClick = (path) => {
         setIsMenuOpen(false);
-        
+
         // Smooth scroll to top before navigation
         window.scrollTo({
             top: 0,
@@ -36,12 +35,11 @@ export default function Navbar() {
     };
 
     return (
-        <motion.nav 
-            className={`backdrop-blur-md px-6 py-4 shadow-lg sticky top-0 z-50 border-b transition-all duration-300 ${
-                scrolled 
-                    ? 'bg-gray-900/95 border-gray-700 shadow-xl' 
-                    : 'bg-gray-900/80 border-gray-800'
-            }`}
+        <motion.nav
+            className={`backdrop-blur-md px-6 py-4 shadow-lg sticky top-0 z-50 border-b transition-all duration-300 ${scrolled
+                ? 'bg-gray-900/95 border-gray-700 shadow-xl'
+                : 'bg-gray-900/80 border-gray-800'
+                }`}
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -51,16 +49,16 @@ export default function Navbar() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                 >
-                    <Link 
-                        to="/" 
+                    <Link
+                        to="/"
                         className="text-2xl font-bold text-green-400 hover:text-green-300 transition-all duration-300 relative group"
                         onClick={() => handleNavClick('/')}
                     >
-                        Portfolio
+                        <img src={Logo} alt="Logo" className="w-10 h-10 object-contain" />
                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
                     </Link>
                 </motion.div>
-                
+
                 {/* Desktop Menu */}
                 <div className="hidden md:flex space-x-8">
                     {navItems.map((item, index) => (
@@ -73,10 +71,9 @@ export default function Navbar() {
                             <NavLink
                                 to={item.path}
                                 className={({ isActive }) =>
-                                    `text-sm font-medium transition-all duration-300 relative group ${
-                                        isActive 
-                                            ? 'text-green-400' 
-                                            : 'text-gray-300 hover:text-green-400'
+                                    `text-sm font-medium transition-all duration-300 relative group ${isActive
+                                        ? 'text-green-400'
+                                        : 'text-gray-300 hover:text-green-400'
                                     }`
                                 }
                                 onClick={() => handleNavClick(item.path)}
@@ -108,7 +105,7 @@ export default function Navbar() {
             {/* Mobile Menu */}
             <AnimatePresence>
                 {isMenuOpen && (
-                    <motion.div 
+                    <motion.div
                         className="md:hidden mt-4 pb-4 border-t border-gray-800"
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
@@ -126,10 +123,9 @@ export default function Navbar() {
                                     <NavLink
                                         to={item.path}
                                         className={({ isActive }) =>
-                                            `text-sm font-medium transition-all duration-300 block py-2 ${
-                                                isActive 
-                                                    ? 'text-green-400' 
-                                                    : 'text-gray-300 hover:text-green-400'
+                                            `text-sm font-medium transition-all duration-300 block py-2 ${isActive
+                                                ? 'text-green-400'
+                                                : 'text-gray-300 hover:text-green-400'
                                             }`
                                         }
                                         onClick={() => handleNavClick(item.path)}

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
+import img1 from "../assets/5.png";
+import img2 from "../assets/4.jpg";
 
 const Projects = () => {
     const [filter, setFilter] = useState('all');
@@ -26,71 +28,89 @@ const Projects = () => {
     const projects = [
         {
             id: 1,
-            title: "E-Commerce Platform",
-            description: "A full-stack e-commerce platform with payment integration, user authentication, and admin dashboard.",
-            image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop",
-            tech: ["React", "Node.js", "MongoDB", "Stripe"],
-            link: "#",
-            category: "web"
-        },
-        {
-            id: 2,
-            title: "Task Management App",
-            description: "A collaborative task management application with real-time updates and team features.",
-            image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&h=300&fit=crop",
-            tech: ["React", "Firebase", "TypeScript", "Tailwind"],
-            link: "#",
-            category: "web"
-        },
-        {
-            id: 3,
-            title: "AI Chat Assistant",
-            description: "An intelligent chatbot powered by machine learning for customer support automation.",
-            image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=500&h=300&fit=crop",
-            tech: ["Python", "TensorFlow", "Flask", "NLP"],
-            link: "#",
+            title: "PetConnect",
+            description: "An AI-powered platform to help pet owners diagnose diseases at home and rehome stray pets with ease.",
+            image: "https://images.unsplash.com/photo-1558788353-f76d92427f16?w=500&h=300&fit=crop",
+            tech: ["React", "Node.js", "MongoDB", "Express", "AI API"],
+            link: "https://github.com/Nilina2002/petconnect",
             category: "ai"
         },
         {
+            id: 2,
+            title: "Imgr",
+            description: "A text-to-image generator using AI APIs, built on the MERN stack with Stripe payment integration.",
+            image: "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?w=500&h=300&fit=crop",
+            tech: ["React", "Node.js", "MongoDB", "AI API", "Stripe"],
+            link: "https://github.com/Nilina2002/imgr",
+            category: "ai"
+        },
+        {
+            id: 3,
+            title: "AuditFlow",
+            description: "A robust audit management system with client tracking, expiry alerts",
+            image: img2,
+            tech: ["React", "Node.js", "MongoDB"],
+            link: "https://github.com/Nilina2002/AuditFlowV2",
+            category: "web"
+        },
+        {
             id: 4,
-            title: "Mobile Fitness App",
-            description: "A cross-platform mobile app for tracking workouts and nutrition with social features.",
-            image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=300&fit=crop",
-            tech: ["React Native", "Redux", "Node.js", "MongoDB"],
-            link: "#",
+            title: "SPNDR",
+            description: "A fully functional finance tracker Android app for managing expenses and generating reports.",
+            image: "https://images.unsplash.com/photo-1556740772-1a741367b93e?w=500&h=300&fit=crop",
+            tech: ["Kotlin", "SQLite", "Android Studio"],
+            link: "https://github.com/Nilina2002/SPNDR-Finance-Tracker-App",
             category: "mobile"
         },
         {
             id: 5,
-            title: "Data Analytics Dashboard",
-            description: "Interactive dashboard for visualizing business metrics and KPIs with real-time data.",
-            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop",
-            tech: ["React", "D3.js", "Python", "PostgreSQL"],
-            link: "#",
-            category: "data"
+            title: "To-Do List",
+            description: "A minimalist and fast task manager built using Vite and Tailwind CSS.",
+            image: "https://images.unsplash.com/photo-1506784365847-bbad939e9335?w=500&h=300&fit=crop",
+            tech: ["Vite", "Tailwind", "JavaScript"],
+            link: "https://github.com/Nilina2002/to-do-list",
+            category: "web"
         },
         {
             id: 6,
-            title: "Blockchain Wallet",
-            description: "A secure cryptocurrency wallet with multi-chain support and transaction history.",
-            image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=500&h=300&fit=crop",
-            tech: ["React", "Web3.js", "Solidity", "Ethereum"],
-            link: "#",
-            category: "blockchain"
+            title: "TripSplendor",
+            description: "A travel and tourism management system with booking and itinerary features built using PHP and vanilla web technologies.",
+            image: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=500&h=300&fit=crop",
+            tech: ["HTML", "CSS", "JavaScript", "PHP"],
+            link: "https://github.com/Nilina2002/TravelAndTourismManagementSystem-Trip-Splendor",
+            category: "web"
+        },
+        {
+            id: 7,
+            title: "React Chat App",
+            description: "A real-time chat application using React and Firebase for auth, with Clerk for image uploads and media sharing.",
+            image: img1,
+            tech: ["React", "Firebase Auth", "Clerk", "Tailwind"],
+            link: "https://github.com/Nilina2002/react-chat-app",
+            category: "web"
+        },
+        {
+            id: 8,
+            title: "Spotify Clone",
+            description: "A full-stack music streaming web app inspired by Spotify, built with the MERN stack and Google authentication.",
+            image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&h=300&fit=crop",
+            tech: ["React", "Node.js", "MongoDB", "Express", "Google Auth"],
+            // link: "https://github.com/Nilina2002/spotify-clone", // update if repo name differs
+            category: "web"
         }
     ];
+
 
     const categories = [
         { id: 'all', label: 'All Projects' },
         { id: 'web', label: 'Web Development' },
         { id: 'mobile', label: 'Mobile Apps' },
         { id: 'ai', label: 'AI/ML' },
-        { id: 'data', label: 'Data Analytics' },
-        { id: 'blockchain', label: 'Blockchain' }
+
     ];
 
-    const filteredProjects = filter === 'all' 
-        ? projects 
+    const filteredProjects = filter === 'all'
+        ? projects
         : projects.filter(project => project.category === filter);
 
     const containerVariants = {
@@ -105,13 +125,13 @@ const Projects = () => {
     };
 
     const itemVariants = {
-        hidden: { 
-            opacity: 0, 
+        hidden: {
+            opacity: 0,
             y: 50,
             scale: 0.95
         },
-        visible: { 
-            opacity: 1, 
+        visible: {
+            opacity: 1,
             y: 0,
             scale: 1,
             transition: {
@@ -123,8 +143,8 @@ const Projects = () => {
 
     const filterVariants = {
         hidden: { opacity: 0, y: 20 },
-        visible: { 
-            opacity: 1, 
+        visible: {
+            opacity: 1,
             y: 0,
             transition: {
                 duration: 0.5,
@@ -139,7 +159,7 @@ const Projects = () => {
             top: 0,
             behavior: 'smooth'
         });
-        
+
         // Add a small delay before changing filter for smooth transition
         setTimeout(() => {
             setFilter(newFilter);
@@ -147,7 +167,7 @@ const Projects = () => {
     };
 
     return (
-        <motion.div 
+        <motion.div
             className="max-w-6xl mx-auto px-4"
             style={{ y }}
             initial={{ opacity: 0 }}
@@ -160,7 +180,7 @@ const Projects = () => {
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="text-center space-y-6 mb-16"
             >
-                <motion.h1 
+                <motion.h1
                     className="text-4xl md:text-6xl font-bold text-white"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -168,19 +188,19 @@ const Projects = () => {
                 >
                     My Projects
                 </motion.h1>
-                <motion.p 
+                <motion.p
                     className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                    Here are some of the projects I've worked on. Each one represents a unique challenge 
+                    Here are some of the projects I've worked on. Each one represents a unique challenge
                     and learning opportunity that has shaped my development journey.
                 </motion.p>
             </motion.div>
 
             {/* Filter Buttons */}
-            <motion.div 
+            <motion.div
                 className="flex flex-wrap justify-center gap-4 mb-16"
                 variants={filterVariants}
                 initial="hidden"
@@ -191,11 +211,10 @@ const Projects = () => {
                     <motion.button
                         key={category.id}
                         onClick={() => handleFilterChange(category.id)}
-                        className={`px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 ${
-                            filter === category.id
-                                ? 'bg-green-500 text-white shadow-lg shadow-green-500/25'
-                                : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white border border-gray-700 hover:border-green-500'
-                        }`}
+                        className={`px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 ${filter === category.id
+                            ? 'bg-green-500 text-white shadow-lg shadow-green-500/25'
+                            : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white border border-gray-700 hover:border-green-500'
+                            }`}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         initial={{ opacity: 0, y: 20 }}
@@ -209,21 +228,21 @@ const Projects = () => {
 
             {/* Projects Grid */}
             <motion.div
-                className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
                 key={filter} // Re-trigger animation when filter changes
             >
                 {filteredProjects.map((project, index) => (
-                    <motion.div 
-                        key={project.id} 
+                    <motion.div
+                        key={project.id}
                         variants={itemVariants}
-                        whileHover={{ 
+                        whileHover={{
                             scale: 1.02,
                             transition: { duration: 0.2 }
                         }}
-                        style={{ animationDelay: `${index * 0.1}s` }}
+                        className="h-full flex"
                     >
                         <ProjectCard
                             title={project.title}
@@ -238,7 +257,7 @@ const Projects = () => {
 
             {/* Call to Action */}
             {filteredProjects.length === 0 && (
-                <motion.div 
+                <motion.div
                     className="text-center py-16"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -248,14 +267,14 @@ const Projects = () => {
                 </motion.div>
             )}
 
-            <motion.div 
+            <motion.div
                 className="text-center mt-20"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true, margin: "-100px" }}
             >
-                <motion.h3 
+                <motion.h3
                     className="text-3xl font-bold text-white mb-6"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -264,7 +283,7 @@ const Projects = () => {
                 >
                     Interested in working together?
                 </motion.h3>
-                <motion.p 
+                <motion.p
                     className="text-gray-400 mb-8 text-lg"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -273,8 +292,8 @@ const Projects = () => {
                 >
                     Let's discuss your project and see how I can help bring your ideas to life.
                 </motion.p>
-                <motion.a 
-                    href="/contact" 
+                <motion.a
+                    href="/contact"
                     className="inline-block bg-green-500 hover:bg-green-600 text-white px-10 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-lg"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

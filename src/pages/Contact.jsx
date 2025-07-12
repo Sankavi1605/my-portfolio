@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
 export default function Contact() {
     const [formData, setFormData] = useState({
@@ -10,7 +11,29 @@ export default function Contact() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert('Thank you for your message! I will get back to you soon.');
+
+        // Format the message for email
+        const emailSubject = encodeURIComponent('New Contact Form Message from Portfolio');
+        const emailBody = encodeURIComponent(`Hello,
+
+You have received a new message from your portfolio website:
+
+Name: ${formData.name}
+Email: ${formData.email}
+Message: ${formData.message}
+
+Best regards,
+Your Portfolio Website`);
+
+        // Create email URL
+        const emailUrl = `mailto:nilina610@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+
+        // Open email client in a new tab
+        window.open(emailUrl, '_blank');
+
+        // Show success message
+        alert('Email client opened! I will get back to you soon.');
+
         setFormData({ name: '', email: '', message: '' });
     };
 
@@ -24,7 +47,7 @@ export default function Contact() {
             >
                 <h1 className="text-4xl md:text-5xl font-bold text-white">Get In Touch</h1>
                 <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                    I'm always interested in new opportunities and collaborations. 
+                    I'm always interested in new opportunities and collaborations.
                     Let's discuss how we can work together!
                 </p>
             </motion.div>
@@ -37,7 +60,7 @@ export default function Contact() {
                     transition={{ delay: 0.2 }}
                     className="bg-gray-800 rounded-xl p-8 border border-gray-700"
                 >
-                    <h2 className="text-2xl font-bold text-white mb-6">Send a Message</h2>
+                    <h2 className="text-2xl font-bold text-white mb-6">Send an Email</h2>
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
                             <label className="block text-gray-300 text-sm font-medium mb-2">
@@ -47,13 +70,13 @@ export default function Contact() {
                                 type="text"
                                 name="name"
                                 value={formData.name}
-                                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                 required
                                 className="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-green-500 focus:outline-none transition-colors"
                                 placeholder="Your Name"
                             />
                         </div>
-                        
+
                         <div>
                             <label className="block text-gray-300 text-sm font-medium mb-2">
                                 Email *
@@ -62,13 +85,13 @@ export default function Contact() {
                                 type="email"
                                 name="email"
                                 value={formData.email}
-                                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                 required
                                 className="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-green-500 focus:outline-none transition-colors"
                                 placeholder="your.email@example.com"
                             />
                         </div>
-                        
+
                         <div>
                             <label className="block text-gray-300 text-sm font-medium mb-2">
                                 Message *
@@ -76,18 +99,19 @@ export default function Contact() {
                             <textarea
                                 name="message"
                                 value={formData.message}
-                                onChange={(e) => setFormData({...formData, message: e.target.value})}
+                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                                 required
                                 rows="6"
                                 className="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-green-500 focus:outline-none transition-colors resize-none"
                                 placeholder="Tell me about your project or opportunity..."
                             />
                         </div>
-                        
+
                         <button
                             type="submit"
-                            className="w-full py-3 px-6 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold transition-all duration-200 transform hover:scale-105"
+                            className="w-full py-3 px-6 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 flex items-center justify-center"
                         >
+                            <FaEnvelope className="text-xl mr-2" />
                             Send Message
                         </button>
                     </form>
@@ -105,21 +129,21 @@ export default function Contact() {
                         <div className="space-y-6">
                             <div className="flex items-center space-x-4">
                                 <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
-                                    <span className="text-xl">📧</span>
+                                    <FaEnvelope className="text-xl text-white" />
                                 </div>
                                 <div>
                                     <h3 className="text-white font-semibold">Email</h3>
-                                    <p className="text-gray-400">your.email@example.com</p>
+                                    <p className="text-gray-400">nilina610@gmail.com</p>
                                 </div>
                             </div>
-                            
+
                             <div className="flex items-center space-x-4">
                                 <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
-                                    <span className="text-xl">📍</span>
+                                    <FaMapMarkerAlt className="text-xl text-white" />
                                 </div>
                                 <div>
                                     <h3 className="text-white font-semibold">Location</h3>
-                                    <p className="text-gray-400">San Francisco, CA</p>
+                                    <p className="text-gray-400">Colombo, Sri Lanka</p>
                                 </div>
                             </div>
                         </div>
@@ -129,21 +153,17 @@ export default function Contact() {
                     <div className="bg-gray-800 rounded-xl p-8 border border-gray-700">
                         <h2 className="text-2xl font-bold text-white mb-6">Connect With Me</h2>
                         <div className="grid grid-cols-2 gap-4">
-                            <a href="#" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 hover:text-blue-400">
-                                <span className="text-2xl">💼</span>
-                                <span className="text-white font-medium">LinkedIn</span>
+                            <a href="https://www.linkedin.com/in/nilina-amarathunga-42a112220/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 group">
+                                <FaLinkedin className="text-2xl text-white group-hover:text-green-400 transition-colors duration-200" />
+                                <span className="text-white font-medium group-hover:text-green-400 transition-colors duration-200">LinkedIn</span>
                             </a>
-                            <a href="#" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 hover:text-gray-400">
-                                <span className="text-2xl">🐙</span>
-                                <span className="text-white font-medium">GitHub</span>
+                            <a href="https://github.com/Nilina2002" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 group">
+                                <FaGithub className="text-2xl text-white group-hover:text-green-400 transition-colors duration-200" />
+                                <span className="text-white font-medium group-hover:text-green-400 transition-colors duration-200">GitHub</span>
                             </a>
-                            <a href="#" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 hover:text-blue-400">
-                                <span className="text-2xl">🐦</span>
-                                <span className="text-white font-medium">Twitter</span>
-                            </a>
-                            <a href="mailto:your.email@example.com" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 hover:text-green-400">
-                                <span className="text-2xl">📧</span>
-                                <span className="text-white font-medium">Email</span>
+                            <a href="mailto:nilina610@gmail.com" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 group">
+                                <FaEnvelope className="text-2xl text-white group-hover:text-green-400 transition-colors duration-200" />
+                                <span className="text-white font-medium group-hover:text-green-400 transition-colors duration-200">Email</span>
                             </a>
                         </div>
                     </div>

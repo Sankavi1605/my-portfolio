@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logo from "../assets/Logo.png"
+import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -7,17 +9,16 @@ const Footer = () => {
     const footerLinks = [
         { label: 'Home', path: '/' },
         { label: 'Projects', path: '/projects' },
-        { label: 'Achievements', path: '/achievements' },
+
         { label: 'Education', path: '/education' },
-        { label: 'Certifications', path: '/certifications' },
+
         { label: 'Contact', path: '/contact' },
     ];
 
     const socialLinks = [
-        { name: 'LinkedIn', url: 'https://linkedin.com/in/yourprofile', icon: '💼' },
-        { name: 'GitHub', url: 'https://github.com/yourusername', icon: '🐙' },
-        { name: 'Twitter', url: 'https://twitter.com/yourhandle', icon: '🐦' },
-        { name: 'Email', url: 'mailto:your.email@example.com', icon: '📧' },
+        { name: 'LinkedIn', url: 'https://www.linkedin.com/in/nilina-amarathunga-42a112220/', icon: <FaLinkedin /> },
+        { name: 'GitHub', url: 'https://github.com/Nilina2002', icon: <FaGithub /> },
+        { name: 'Email', url: 'mailto:nilina610@gmail.com', icon: <FaEnvelope /> },
     ];
 
     return (
@@ -27,10 +28,10 @@ const Footer = () => {
                     {/* Brand Section */}
                     <div className="md:col-span-2">
                         <Link to="/" className="text-2xl font-bold text-green-400 hover:text-green-300 transition-colors">
-                            Portfolio
+                            <img src={Logo} alt="Logo" className="w-10 h-10 object-contain" />
                         </Link>
                         <p className="text-gray-400 mt-4 max-w-md">
-                            Full-stack software engineer passionate about creating innovative solutions 
+                            Full-stack software engineer passionate about creating innovative solutions
                             and building impactful digital experiences.
                         </p>
                         <div className="flex space-x-4 mt-6">
@@ -70,9 +71,9 @@ const Footer = () => {
                     <div>
                         <h3 className="text-white font-semibold mb-4">Contact</h3>
                         <div className="space-y-2 text-gray-400">
-                            <p>your.email@example.com</p>
-                            <p>San Francisco, CA</p>
-                            <p>Available for opportunities</p>
+                            <p>nilina610@gmail.com</p>
+                            <p>Colombo, Sri Lanka</p>
+
                         </div>
                     </div>
                 </div>
@@ -80,7 +81,7 @@ const Footer = () => {
                 {/* Bottom Section */}
                 <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
                     <p className="text-gray-400 text-sm">
-                        © {currentYear} Your Name. All rights reserved.
+                        © {currentYear} Nilina Nilaksha. All rights reserved.
                     </p>
                     <div className="flex space-x-6 mt-4 md:mt-0">
                         <a href="/privacy" className="text-gray-400 hover:text-green-400 text-sm transition-colors">
