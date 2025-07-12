@@ -2,13 +2,14 @@ import { Link, NavLink } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Logo from "../assets/Logo.png"
+import { FaHome, FaCode, FaGraduationCap, FaBook, FaEnvelope } from 'react-icons/fa';
 
 const navItems = [
-    { label: 'Home', path: '/' },
-    { label: 'Projects', path: '/projects' },
-    { label: 'Education', path: '/education' },
-    { label: 'Exploring', path: '/learning' },
-    { label: 'Contact', path: '/contact' },
+    { label: 'Home', path: '/', icon: <FaHome /> },
+    { label: 'Projects', path: '/projects', icon: <FaCode /> },
+    { label: 'Education', path: '/education', icon: <FaGraduationCap /> },
+    { label: 'Exploring', path: '/learning', icon: <FaBook /> },
+    { label: 'Contact', path: '/contact', icon: <FaEnvelope /> },
 ];
 
 export default function Navbar() {
@@ -72,14 +73,15 @@ export default function Navbar() {
                             <NavLink
                                 to={item.path}
                                 className={({ isActive }) =>
-                                    `text-sm font-medium transition-all duration-300 relative group ${isActive
+                                    `text-sm font-medium transition-all duration-300 relative group flex items-center space-x-2 ${isActive
                                         ? 'text-green-400'
                                         : 'text-gray-300 hover:text-green-400'
                                     }`
                                 }
                                 onClick={() => handleNavClick(item.path)}
                             >
-                                {item.label}
+                                <span className="text-lg">{item.icon}</span>
+                                <span>{item.label}</span>
                                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
                             </NavLink>
                         </motion.div>
@@ -124,14 +126,15 @@ export default function Navbar() {
                                     <NavLink
                                         to={item.path}
                                         className={({ isActive }) =>
-                                            `text-sm font-medium transition-all duration-300 block py-2 ${isActive
+                                            `text-sm font-medium transition-all duration-300 block py-2 flex items-center space-x-3 ${isActive
                                                 ? 'text-green-400'
                                                 : 'text-gray-300 hover:text-green-400'
                                             }`
                                         }
                                         onClick={() => handleNavClick(item.path)}
                                     >
-                                        {item.label}
+                                        <span className="text-lg">{item.icon}</span>
+                                        <span>{item.label}</span>
                                     </NavLink>
                                 </motion.div>
                             ))}

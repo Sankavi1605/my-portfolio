@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaBook, FaCode, FaRocket, FaGraduationCap, FaLightbulb, FaBrain, FaChartLine, FaLaptopCode } from 'react-icons/fa';
+import { FaBook, FaCode, FaRocket, FaGraduationCap, FaLightbulb, FaBrain, FaChartLine, FaLaptopCode, FaMicrochip } from 'react-icons/fa';
 
 export default function Learning() {
     const [currentLearning, setCurrentLearning] = useState(0);
 
     const learningTopics = [
+        {
+            title: "Arduino & Embedded Systems",
+            description: "Exploring hardware programming, sensors, and IoT applications",
+            progress: 25,
+            icon: <FaMicrochip className="text-3xl" />,
+            color: "from-yellow-500 to-orange-500",
+            skills: ["Arduino", "C/C++", "Sensors", "IoT", "Hardware"]
+        },
         {
             title: "Machine Learning & AI",
             description: "Exploring deep learning, neural networks, and AI applications",
@@ -42,6 +50,12 @@ export default function Learning() {
 
     const goals = [
         {
+            title: "Complete Arduino IoT Project",
+            target: "Aug 2025",
+            status: "In Progress",
+            icon: <FaMicrochip />
+        },
+        {
             title: "Java Script",
             target: "Sept 2025",
             status: "In Progress",
@@ -53,18 +67,8 @@ export default function Learning() {
             status: "Planning",
             icon: <FaRocket />
         },
-        {
-            title: "Master React Native",
-            target: "Sept 2025",
-            status: "Planning",
-            icon: <FaLaptopCode />
-        },
-        {
-            title: "Data Science Project",
-            target: "Oct 2025",
-            status: "Researching",
-            icon: <FaChartLine />
-        }
+
+
     ];
 
     // useEffect(() => {
@@ -199,13 +203,13 @@ export default function Learning() {
                     Learning Goals
                 </motion.h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
                     {goals.map((goal, index) => (
                         <motion.div
                             key={goal.title}
                             variants={itemVariants}
                             whileHover={{ scale: 1.05, y: -5 }}
-                            className="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-green-500/50 transition-all duration-300 h-full flex flex-col justify-between"
+                            className="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-green-500/50 transition-all duration-300 h-full flex flex-col justify-between w-full max-w-xs"
                         >
                             <div className="flex items-start space-x-3 mb-4">
                                 <div className="p-2 bg-green-600 rounded-lg text-white flex-shrink-0">
