@@ -9,9 +9,8 @@ const Footer = () => {
     const footerLinks = [
         { label: 'Home', path: '/' },
         { label: 'Projects', path: '/projects' },
-
         { label: 'Education', path: '/education' },
-
+        { label: 'Exploring', path: '/learning' },
         { label: 'Contact', path: '/contact' },
     ];
 

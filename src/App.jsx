@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import FloatingMessageButton from './components/FloatingMessageButton';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
+import Learning from './pages/Learning';
 import Education from './pages/Education';
 import Contact from './pages/Contact';
 
@@ -76,6 +77,11 @@ function App() {
               <Route path="/projects" element={
                 <PageTransition>
                   <Projects />
+                </PageTransition>
+              } />
+              <Route path="/learning" element={
+                <PageTransition>
+                  <Learning />
                 </PageTransition>
               } />
               <Route path="/education" element={
