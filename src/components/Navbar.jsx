@@ -126,7 +126,7 @@ export default function Navbar() {
                                     <NavLink
                                         to={item.path}
                                         className={({ isActive }) =>
-                                            `text-sm font-medium transition-all duration-300 block py-2 flex items-center space-x-3 ${isActive
+                                            `text-sm font-medium transition-all duration-300 py-2 flex items-center space-x-3 ${isActive
                                                 ? 'text-green-400'
                                                 : 'text-gray-300 hover:text-green-400'
                                             }`

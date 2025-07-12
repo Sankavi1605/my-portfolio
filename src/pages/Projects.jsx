@@ -38,7 +38,7 @@ const Projects = () => {
         {
             id: 2,
             title: "Imgr",
-            description: "A text-to-image generator using AI APIs, built on the MERN stack with Stripe payment integration.",
+            description: "A text-to-image generator using AI APIs, built on the MERN stack (Stripe integration yet to be implemented).",
             image: "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?w=500&h=300&fit=crop",
             tech: ["React", "Node.js", "MongoDB", "AI API", "Stripe"],
             link: "https://github.com/Nilina2002/imgr",
