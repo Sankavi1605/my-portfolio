@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Logo from "../assets/Logo.png"
+import Logo from "../assets/sankavi.png"
 import { FaHome, FaCode, FaGraduationCap, FaBook, FaEnvelope } from 'react-icons/fa';
 
 const navItems = [
