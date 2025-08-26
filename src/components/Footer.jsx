@@ -27,7 +27,7 @@ const Footer = () => {
                     {/* Brand Section */}
                     <div className="md:col-span-2">
                         <Link to="/" className="text-2xl font-bold text-green-400 hover:text-green-300 transition-colors">
-                            <img src={Logo} alt="Logo" className="w-10 h-10 object-contain" />
+                            <img src={Logo} alt="Logo" className="w-20 h-20 object-contain" />
                         </Link>
                         <p className="text-gray-400 mt-4 max-w-md">
                             Full-stack software engineer passionate about creating innovative solutions
