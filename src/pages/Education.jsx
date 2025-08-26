@@ -179,7 +179,7 @@ const Education = () => {
                                 </div>
                                 <div className="mt-4 md:mt-0 md:ml-6">
                                     <span className="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium">
-                                        Ongoing
+                                        Finished
                                     </span>
                                 </div>
                             </div>
