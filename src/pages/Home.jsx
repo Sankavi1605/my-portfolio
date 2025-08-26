@@ -9,7 +9,7 @@ export default function Home() {
     const fullName = "Sankavi Thayaparan";
 
     const skills = [
-        'React', 'JavaScript', 'TypeScript', 'Node.js', 'Python', 'SQL', 'Git', 'MongoDB'
+        'React', 'JavaScript', 'TypeScript', 'Node.js', 'Next.js', 'SQL', 'Git', 'MongoDB' ,'PostgreSQL'
     ];
 
     // Continuous typewriter effect
