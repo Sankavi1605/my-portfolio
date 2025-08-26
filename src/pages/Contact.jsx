@@ -1,40 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt, FaSpinner } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
 
 export default function Contact() {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        message: ''
-    });
+    // A ref for the form element, which EmailJS will use to get the data
+    const form = useRef();
+
+    // State to manage the submission status (e.g., submitting, success, error)
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [statusMessage, setStatusMessage] = useState('');
 
     const handleSubmit = (e) => {
+        // Prevent the default form submission behavior
         e.preventDefault();
+        
+        // Set submitting state to true and clear any previous status message
+        setIsSubmitting(true);
+        setStatusMessage('');
 
-        // Format the message for email
-        const emailSubject = encodeURIComponent('New Contact Form Message from Portfolio');
-        const emailBody = encodeURIComponent(`Hello,
+        // --- IMPORTANT ---
+        // Replace these with your actual IDs from your EmailJS dashboard!
+        const serviceID = 'service_sfqfdbh';
+        const templateID = 'template_166chkl';
+        const publicKey = 'O2wj2pxk_lkJSNgba';
 
-You have received a new message from your portfolio website:
-
-Name: ${formData.name}
-Email: ${formData.email}
-Message: ${formData.message}
-
-Best regards,
-Your Portfolio Website`);
-
-        // Create email URL
-        const emailUrl = `mailto:sankavithayaparan@gmail.com?subject=${emailSubject}&body=${emailBody}`;
-
-        // Open email client in a new tab
-        window.open(emailUrl, '_blank');
-
-        // Show success message
-        alert('Email client opened! I will get back to you soon.');
-
-        setFormData({ name: '', email: '', message: '' });
+        // Use the EmailJS SDK to send the form data
+        emailjs.sendForm(serviceID, templateID, form.current, publicKey)
+            .then((result) => {
+                // This block runs if the email was sent successfully
+                console.log('SUCCESS!', result.text);
+                setStatusMessage('Message sent successfully!');
+                form.current.reset(); // Clear the form fields after successful submission
+            }, (error) => {
+                // This block runs if there was an error
+                console.log('FAILED...', error.text);
+                setStatusMessage('Failed to send message. Please try again.');
+            })
+            .finally(() => {
+                // This block runs regardless of success or failure
+                setIsSubmitting(false); // Reset the submitting state
+                // Hide the status message after 5 seconds
+                setTimeout(() => {
+                    setStatusMessage('');
+                }, 5000);
+            });
     };
 
     return (
@@ -60,17 +70,15 @@ Your Portfolio Website`);
                     transition={{ delay: 0.2 }}
                     className="bg-gray-800 rounded-xl p-8 border border-gray-700"
                 >
-                    <h2 className="text-2xl font-bold text-white mb-6">Send an Email</h2>
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <h2 className="text-2xl font-bold text-white mb-6">Send a Message</h2>
+                    <form ref={form} onSubmit={handleSubmit} className="space-y-6">
                         <div>
                             <label className="block text-gray-300 text-sm font-medium mb-2">
                                 Name *
                             </label>
                             <input
                                 type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                name="name" // MUST match the variable in your EmailJS template, e.g., {{name}}
                                 required
                                 className="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-green-500 focus:outline-none transition-colors"
                                 placeholder="Your Name"
@@ -83,9 +91,7 @@ Your Portfolio Website`);
                             </label>
                             <input
                                 type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                name="email" // MUST match {{email}}
                                 required
                                 className="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-green-500 focus:outline-none transition-colors"
                                 placeholder="your.email@example.com"
@@ -97,9 +103,7 @@ Your Portfolio Website`);
                                 Message *
                             </label>
                             <textarea
-                                name="message"
-                                value={formData.message}
-                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                name="message" // MUST match {{message}}
                                 required
                                 rows="6"
                                 className="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-green-500 focus:outline-none transition-colors resize-none"
@@ -109,15 +113,32 @@ Your Portfolio Website`);
 
                         <button
                             type="submit"
-                            className="w-full py-3 px-6 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 flex items-center justify-center"
+                            disabled={isSubmitting} // Disable button while submitting
+                            className="w-full py-3 px-6 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 flex items-center justify-center disabled:bg-gray-500 disabled:cursor-not-allowed"
                         >
-                            <FaEnvelope className="text-xl mr-2" />
-                            Send Message
+                            {isSubmitting ? (
+                                <>
+                                    <FaSpinner className="animate-spin text-xl mr-2" />
+                                    Sending...
+                                </>
+                            ) : (
+                                <>
+                                    <FaEnvelope className="text-xl mr-2" />
+                                    Send Message
+                                </>
+                            )}
                         </button>
+                        
+                        {/* Display the success or error message to the user */}
+                        {statusMessage && (
+                            <p className={`text-center mt-4 ${statusMessage.includes('successfully') ? 'text-green-400' : 'text-red-400'}`}>
+                                {statusMessage}
+                            </p>
+                        )}
                     </form>
                 </motion.div>
 
-                {/* Contact Information */}
+                {/* Contact Information & Socials Section */}
                 <motion.div
                     initial={{ opacity: 0, x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -136,7 +157,6 @@ Your Portfolio Website`);
                                     <p className="text-gray-400">sankavithayaparan@gmail.com</p>
                                 </div>
                             </div>
-
                             <div className="flex items-center space-x-4">
                                 <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
                                     <FaMapMarkerAlt className="text-xl text-white" />
@@ -149,7 +169,6 @@ Your Portfolio Website`);
                         </div>
                     </div>
 
-                    {/* Social Links */}
                     <div className="bg-gray-800 rounded-xl p-8 border border-gray-700">
                         <h2 className="text-2xl font-bold text-white mb-6">Connect With Me</h2>
                         <div className="grid grid-cols-2 gap-4">
@@ -168,7 +187,6 @@ Your Portfolio Website`);
                         </div>
                     </div>
 
-                    {/* Download Resume */}
                     <div className="bg-gray-800 rounded-xl p-8 border border-gray-700">
                         <h2 className="text-2xl font-bold text-white mb-4">Download Resume</h2>
                         <p className="text-gray-400 mb-6">
