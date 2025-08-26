@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
-import img1 from "../assets/5.png";
-import img2 from "../assets/4.jpg";
+import img1 from "../assets/private_buses_in_sri_lanka.jpg";
+import img2 from "../assets/agromart.jpg";
+import img3 from "../assets/apex.jpeg";
+import img4 from "../assets/sameepa.jpg";
+import img5 from "../assets/login.jpg";
+
 
 const Projects = () => {
     const [filter, setFilter] = useState('all');
@@ -28,76 +32,50 @@ const Projects = () => {
     const projects = [
         {
             id: 1,
-            title: "PetConnect",
-            description: "An AI-powered platform to help pet owners diagnose diseases at home and rehome stray pets with ease.",
-            image: "https://images.unsplash.com/photo-1558788353-f76d92427f16?w=500&h=300&fit=crop",
-            tech: ["React", "Node.js", "MongoDB", "Express", "AI API"],
-            link: "https://github.com/Nilina2002/petconnect",
-            category: "ai"
+            title: "BusHub LK",
+            description: "A full-stack platform to modernize Sri Lanka's public transport system, featuring a web admin dashboard for management and a cross-platform mobile app for passengers with live bus tracking, route searching, and fare calculation.",
+            image:img1,
+            tech: ["React.js", "React Native", "Node.js", "PostgreSQL", "AWS"],
+            link: "https://github.com/MurshidAkram/BusHubLK",
+            category: ["web","mobile"]
         },
         {
             id: 2,
-            title: "Imgr",
-            description: "A text-to-image generator using AI APIs, built on the MERN stack (Stripe integration yet to be implemented).",
-            image: "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?w=500&h=300&fit=crop",
-            tech: ["React", "Node.js", "MongoDB", "AI API", "Stripe"],
-            link: "https://github.com/Nilina2002/imgr",
-            category: "ai"
+            title: "AgroMart E-commerce Platform",
+            description: "A full-stack MERN e-commerce site featuring a secure RESTful API to manage products, users, and orders. Integrates JWT for authentication and the Stripe API for seamless payment processing.",
+            image:img2,
+            tech: ["React", "Node.js", "Express.js", "MongoDB", "Stripe API", "JWT"],
+            link: "https://github.com/lagithan/AgroMart1",
+            category: "web"
         },
         {
             id: 3,
-            title: "AuditFlow",
-            description: "A robust audit management system with client tracking, expiry alerts",
-            image: img2,
-            tech: ["React", "Node.js", "MongoDB"],
-            link: "https://github.com/Nilina2002/AuditFlowV2",
-            category: "web"
+            title: "Secure Login & Authorization API",
+            description: "A secure, stateless backend API using Spring Boot for user authentication and authorization. Implements Spring Security, JWT for session management, and Role-Based Access Control (RBAC).",
+            image: img5,
+            tech: ["Java", "Spring Boot", "Spring Security", "JWT", "Maven", "H2"],
+            link: "https://github.com/Sankavi1605/Loginpage_springboot",
+            category: "backend"
         },
         {
             id: 4,
-            title: "SPNDR",
-            description: "A fully functional finance tracker Android app for managing expenses and generating reports.",
-            image: "https://images.unsplash.com/photo-1556740772-1a741367b93e?w=500&h=300&fit=crop",
-            tech: ["Kotlin", "SQLite", "Android Studio"],
-            link: "https://github.com/Nilina2002/SPNDR-Finance-Tracker-App",
-            category: "mobile"
+            title: "Apex Finance",
+            description: "A full-stack personal finance dashboard to securely manage and visualize financial data, featuring a responsive front-end with data visualization and a secure back-end with NextAuth.js authentication.",
+            image: img3,
+            tech: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "NextAuth.js", "SQLite"],
+            link: "https://github.com/Sankavi1605/Apex-Finance",
+            category: "web"
         },
         {
             id: 5,
-            title: "To-Do List",
-            description: "A minimalist and fast task manager built using Vite and Tailwind CSS.",
-            image: "https://images.unsplash.com/photo-1506784365847-bbad939e9335?w=500&h=300&fit=crop",
-            tech: ["Vite", "Tailwind", "JavaScript"],
-            link: "https://github.com/Nilina2002/to-do-list",
+            title: "Sameepa",
+            description: "A full-stack platform to digitize operations in closed residential communities, featuring role-based access for facility booking, visitor management, maintenance requests, and community forums.",
+            image: img4,
+            tech: ["PHP", "MySQL", "JavaScript", "HTML", "CSS"],
+            link: "https://github.com/MurshidAkram/sameepa",
             category: "web"
         },
-        {
-            id: 6,
-            title: "TripSplendor",
-            description: "A travel and tourism management system with booking and itinerary features built using PHP and vanilla web technologies.",
-            image: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=500&h=300&fit=crop",
-            tech: ["HTML", "CSS", "JavaScript", "PHP"],
-            link: "https://github.com/Nilina2002/TravelAndTourismManagementSystem-Trip-Splendor",
-            category: "web"
-        },
-        {
-            id: 7,
-            title: "React Chat App",
-            description: "A real-time chat application using React and Firebase for auth, with Clerk for image uploads and media sharing.",
-            image: img1,
-            tech: ["React", "Firebase Auth", "Clerk", "Tailwind"],
-            link: "https://github.com/Nilina2002/react-chat-app",
-            category: "web"
-        },
-        {
-            id: 8,
-            title: "Spotify Clone",
-            description: "A full-stack music streaming web app inspired by Spotify, built with the MERN stack and Google authentication.",
-            image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&h=300&fit=crop",
-            tech: ["React", "Node.js", "MongoDB", "Express", "Google Auth"],
-            // link: "https://github.com/Nilina2002/spotify-clone", // update if repo name differs
-            category: "web"
-        }
+       
     ];
 
 
@@ -105,13 +83,21 @@ const Projects = () => {
         { id: 'all', label: 'All Projects' },
         { id: 'web', label: 'Web Development' },
         { id: 'mobile', label: 'Mobile Apps' },
-        { id: 'ai', label: 'AI/ML' },
+        { id: 'backend', label: 'Backend Development' },
 
     ];
 
+    // UPDATED FILTERING LOGIC
     const filteredProjects = filter === 'all'
         ? projects
-        : projects.filter(project => project.category === filter);
+        : projects.filter(project => {
+            // Check if the category is an array and includes the filter
+            if (Array.isArray(project.category)) {
+                return project.category.includes(filter);
+            }
+            // Fallback for categories that are still strings
+            return project.category === filter;
+        });
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -212,8 +198,8 @@ const Projects = () => {
                         key={category.id}
                         onClick={() => handleFilterChange(category.id)}
                         className={`px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 ${filter === category.id
-                            ? 'bg-green-500 text-white shadow-lg shadow-green-500/25'
-                            : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white border border-gray-700 hover:border-green-500'
+                                ? 'bg-green-500 text-white shadow-lg shadow-green-500/25'
+                                : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white border border-gray-700 hover:border-green-500'
                             }`}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}

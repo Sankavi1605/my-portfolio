@@ -7,20 +7,12 @@ export default function Learning() {
 
     const learningTopics = [
         {
-            title: "Arduino & Embedded Systems",
-            description: "Exploring hardware programming, sensors, and IoT applications",
-            progress: 25,
-            icon: <FaMicrochip className="text-3xl" />,
-            color: "from-yellow-500 to-orange-500",
-            skills: ["Arduino", "C/C++", "Sensors", "IoT", "Hardware"]
-        },
-        {
-            title: "Machine Learning & AI",
-            description: "Exploring deep learning, neural networks, and AI applications",
-            progress: 15,
-            icon: <FaBrain className="text-3xl" />,
-            color: "from-purple-500 to-pink-500",
-            skills: ["TensorFlow", "PyTorch", "Scikit-learn", "Computer Vision"]
+            title: "Full-Stack Web Development",
+            description: "Mastering front-end and back-end technologies",
+            progress: 80,
+            icon: <FaCode className="text-3xl" />,
+            color: "from-red-500 to-orange-500",
+            skills: ["HTML", "CSS", "JavaScript", "React", "Node.js", "Express.js", "MongoDB"]
         },
         {
             title: "Advanced React",
@@ -30,18 +22,11 @@ export default function Learning() {
             color: "from-blue-500 to-cyan-500",
             skills: ["React Hooks", "Context API", "Performance", "Testing"]
         },
-        {
-            title: "Data Science",
-            description: "Learning data analysis, visualization, and statistical modeling",
-            progress: 20,
-            icon: <FaChartLine className="text-3xl" />,
-            color: "from-green-500 to-emerald-500",
-            skills: ["Pandas", "NumPy", "Matplotlib", "Statistics"]
-        },
+    
         {
             title: "Mobile Development",
             description: "Building cross-platform mobile apps with React Native",
-            progress: 85,
+            progress: 60,
             icon: <FaLaptopCode className="text-3xl" />,
             color: "from-orange-500 to-red-500",
             skills: ["React Native", "Expo", "Mobile UI", "APIs"]
@@ -49,12 +34,7 @@ export default function Learning() {
     ];
 
     const goals = [
-        {
-            title: "Complete Arduino IoT Project",
-            target: "Aug 2025",
-            status: "In Progress",
-            icon: <FaMicrochip />
-        },
+        
         {
             title: "Java Script",
             target: "Sept 2025",

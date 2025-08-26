@@ -26,7 +26,7 @@ Best regards,
 Your Portfolio Website`);
 
         // Create email URL
-        const emailUrl = `mailto:nilina610@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+        const emailUrl = `mailto:sankavithayaparan@gmail.com?subject=${emailSubject}&body=${emailBody}`;
 
         // Open email client in a new tab
         window.open(emailUrl, '_blank');
@@ -133,7 +133,7 @@ Your Portfolio Website`);
                                 </div>
                                 <div>
                                     <h3 className="text-white font-semibold">Email</h3>
-                                    <p className="text-gray-400">nilina610@gmail.com</p>
+                                    <p className="text-gray-400">sankavithayaparan@gmail.com</p>
                                 </div>
                             </div>
 
@@ -153,15 +153,15 @@ Your Portfolio Website`);
                     <div className="bg-gray-800 rounded-xl p-8 border border-gray-700">
                         <h2 className="text-2xl font-bold text-white mb-6">Connect With Me</h2>
                         <div className="grid grid-cols-2 gap-4">
-                            <a href="https://www.linkedin.com/in/nilina-amarathunga-42a112220/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 group">
+                            <a href="https://www.linkedin.com/in/sankavi-thayaparan-b257392a0/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 group">
                                 <FaLinkedin className="text-2xl text-white group-hover:text-green-400 transition-colors duration-200" />
                                 <span className="text-white font-medium group-hover:text-green-400 transition-colors duration-200">LinkedIn</span>
                             </a>
-                            <a href="https://github.com/Nilina2002" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 group">
+                            <a href="https://github.com/Sankavi1605" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 group">
                                 <FaGithub className="text-2xl text-white group-hover:text-green-400 transition-colors duration-200" />
                                 <span className="text-white font-medium group-hover:text-green-400 transition-colors duration-200">GitHub</span>
                             </a>
-                            <a href="mailto:nilina610@gmail.com" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 group">
+                            <a href="mailto:sankavithayaparan@gmail.com" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 group">
                                 <FaEnvelope className="text-2xl text-white group-hover:text-green-400 transition-colors duration-200" />
                                 <span className="text-white font-medium group-hover:text-green-400 transition-colors duration-200">Email</span>
                             </a>
@@ -175,7 +175,7 @@ Your Portfolio Website`);
                             Get a detailed overview of my experience, skills, and achievements.
                         </p>
                         <a
-                            href="/resume.pdf"
+                            href="/SankaviThayaparan_SE.pdf"
                             download
                             className="inline-flex items-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105"
                         >

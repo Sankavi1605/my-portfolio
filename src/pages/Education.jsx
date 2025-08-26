@@ -3,30 +3,17 @@ import { motion } from 'framer-motion';
 
 const Education = () => {
     const education = [
-        {
-            id: 2,
-            degree: "Bachelor of Science in Data Science (Hons)",
-            institution: "Sri Lanka Institute of Information Technology (SLIIT)",
-            period: "2022 - Present",
-            gpa: "3.69/4.0", // Adjust as needed
-            description: "Specializing in Software Engineering with hands-on experience in MERN stack, Android development, and AI-powered applications. Built and deployed several production-grade projects.",
-            courses: ["Web Application Development", "Mobile Application Development", "Probability and Statistics", "DSA"],
-            achievements: [
-                "AuditFlow (MERN + AI)",
-                "Built FlowerAI - Real-time flower image classifier using TensorFlow",
-            ]
-        },
+       
         {
             id: 1,
-            degree: "Bachelor of Science in Physical Science ICT",
-            institution: "University of Sri Jayewardenepura (USJ)",
-            period: "2022 - Present",
-            gpa: "3.01/4.0", // Adjust as needed
-            description: "Focused on Mathematics, Physics, and ICT, exploring how these disciplines interconnect. Includes rigorous lab practicals in both math and physics, enhancing theoretical understanding with hands-on experience.",
-            courses: ["Linear Algebra", "Statistical Physics", "Mathematics for AI", "Physics Lab Practicals"],
-            achievements: [
+            degree: "Bachelor of Science in Computer Science",
+            institution: "University of Colombo School of Computing",
+            period: "2023 - Present",
+            gpa: "3.06/4.0", // Adjust as needed
+            description:"Focused on software development principles, algorithms, and data structures. Engaged in hands-on projects to apply theoretical knowledge.",
+            courses: ["Rapid Application Development(React)", "Advanced Computer Architecture", "Software Engineering Principles", "Database", "Data Structure and Algorithms"],
+            achievements:[
                 "Successfully balanced interdisciplinary coursework",
-                "RunnersUp - Futurum AI based project (PetConnect MobileApp- Prototype)",
                 "High performance in lab-based modules",
                 "Actively engaged in ICT-related student projects",
             ]
@@ -35,15 +22,38 @@ const Education = () => {
 
 
 
-
     const onlineCourses = [
         {
             id: 1,
-            title: "JavaScript Mastery",
-            platform: "Udemy",
+            title: "HTML, CSS, and JavaScript for Web Developers ",
+            platform: "Coursera",
             duration: "Self-Paced",
-            completion: "Ongoing",
-            description: "Demonstrates expertise in JavaScript"
+            completion: "Finished",
+            description: "Demonstrates expertise in JavaScript, HTML, and CSS."
+        },
+        {
+            id: 2,
+            title: "Next.js Essential Training",
+            platform: "LinkedIn Learning",
+            duration: "Self-Paced",
+            completion: "Finished",
+            description: "Demonstrates expertise in Next.js and server-side rendering."
+        },
+        {
+            id: 3,
+            title: "Machine Learning with Python: Foundations",
+            platform: "LinkedIn Learning",
+            duration: "Self-Paced",
+            completion: "Finished",
+            description: "Demonstrates expertise in machine learning concepts and Python programming."
+        },
+        {
+            id: 4,
+            title: "Front End Development Libraries",
+            platform: "freeCodeCamp",
+            duration: "Self-Paced",
+            completion: "Finished",
+            description: "Demonstrates and projects expertise in front-end development libraries."
         }
     ];
 

@@ -15,9 +15,9 @@ const Footer = () => {
     ];
 
     const socialLinks = [
-        { name: 'LinkedIn', url: 'https://www.linkedin.com/in/nilina-amarathunga-42a112220/', icon: <FaLinkedin /> },
-        { name: 'GitHub', url: 'https://github.com/Nilina2002', icon: <FaGithub /> },
-        { name: 'Email', url: 'mailto:nilina610@gmail.com', icon: <FaEnvelope /> },
+        { name: 'LinkedIn', url: 'https://www.linkedin.com/in/sankavi-thayaparan-b257392a0/', icon: <FaLinkedin /> },
+        { name: 'GitHub', url: 'https://github.com/Sankavi1605', icon: <FaGithub /> },
+        { name: 'Email', url: 'mailto:sankavithayaparan@gmail.com', icon: <FaEnvelope /> },
     ];
 
     return (
@@ -70,7 +70,7 @@ const Footer = () => {
                     <div>
                         <h3 className="text-white font-semibold mb-4">Contact</h3>
                         <div className="space-y-2 text-gray-400">
-                            <p>nilina610@gmail.com</p>
+                            <p>sankavithayaparan@gmail.com</p>
                             <p>Colombo, Sri Lanka</p>
 
                         </div>
@@ -80,7 +80,7 @@ const Footer = () => {
                 {/* Bottom Section */}
                 <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
                     <p className="text-gray-400 text-sm">
-                        © {currentYear} Nilina Nilaksha. All rights reserved.
+                        © {currentYear} Sankavi Thayaparan. All rights reserved.
                     </p>
                     <div className="flex space-x-6 mt-4 md:mt-0">
                         <a href="/privacy" className="text-gray-400 hover:text-green-400 text-sm transition-colors">

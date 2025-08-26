@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
-import myImage from "../assets/myImage.png"
+import myImage from "../assets/me.jpg"
 
 export default function Home() {
     const [displayText, setDisplayText] = useState('');
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
-    const fullName = "Nilina Nilaksha";
+    const fullName = "Sankavi Thayaparan";
 
     const skills = [
         'React', 'JavaScript', 'TypeScript', 'Node.js', 'Python', 'SQL', 'Git', 'MongoDB'
@@ -132,7 +132,7 @@ export default function Home() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4 }}
                             >
-                                Aspiring Data Science student and Web Developer
+                                Aspiring Computer Science student and Web Developer
                             </motion.p>
                             <motion.p
                                 className="text-xl text-gray-300 leading-relaxed font-light tracking-wide"
@@ -180,12 +180,12 @@ export default function Home() {
                     <div className="space-y-6">
                         <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">About Me</h2>
                         <p className="text-gray-300 text-lg leading-relaxed font-light tracking-wide">
-                            I'm a passionate and driven software engineering student pursuing dual degrees at SLIIT and the University of Sri Jayewardenepura. With hands-on experience in full-stack development, AI, and mobile applications, I specialize in building scalable, user-focused solutions using technologies like MERN stack, TensorFlow, and Kotlin. From leading university projects like AuditFlow to experimenting with real-time machine learning models like FlowerAI, I’m always eager to bridge theory and practice in creative, impactful ways.
+                            I am a dedicated Computer Science undergraduate from the University of Colombo School of Computing with a strong passion for full-stack development. My experience is centered on building modern, scalable, and user-centric applications using the React ecosystem. Proficient in developing seamless experiences across web and mobile platforms with technologies like React, Next.js, and React Native, I am always eager to apply my academic knowledge to solve real-world challenges and contribute to building innovative solutions
                         </p>
 
                         <div className="flex gap-4">
                             <a
-                                href="/resume.pdf"
+                                href="/SankaviThayaparan_SE.pdf"
                                 download
                                 className="text-green-400 hover:text-green-300 font-semibold flex items-center gap-2"
                             >
