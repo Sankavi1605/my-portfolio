@@ -6,7 +6,7 @@ import img2 from "../assets/agromart.jpg";
 import img3 from "../assets/apex.jpeg";
 import img4 from "../assets/sameepa.jpg";
 import img5 from "../assets/login.jpg";
-
+import img6 from "../assets/terrasafe.jpg"; // <-- Add your TerraSafe image here
 
 const Projects = () => {
     const [filter, setFilter] = useState('all');
@@ -75,27 +75,31 @@ const Projects = () => {
             link: "https://github.com/MurshidAkram/sameepa",
             category: "web"
         },
-       
+        { // --- UPDATED PROJECT DETAILS ---
+            id: 6,
+            title: "TerraSafe - Safe Place Finder",
+            description: "A Flutter-based mobile app to find nearby safe places like police stations and hospitals using Google Maps. Features custom markers, a slide-up detail sheet with location info, and an in-app chatbot for assistance.",
+            image: img6,
+            tech: ["Flutter", "Dart", "Google Maps API", "Google Places API", "Dio"],
+            link: "https://github.com/Sankavi1605/terrasafe",
+            category: "mobile"
+        },
+        
     ];
-
 
     const categories = [
         { id: 'all', label: 'All Projects' },
         { id: 'web', label: 'Web Development' },
         { id: 'mobile', label: 'Mobile Apps' },
         { id: 'backend', label: 'Backend Development' },
-
     ];
 
-    // UPDATED FILTERING LOGIC
     const filteredProjects = filter === 'all'
         ? projects
         : projects.filter(project => {
-            // Check if the category is an array and includes the filter
             if (Array.isArray(project.category)) {
                 return project.category.includes(filter);
             }
-            // Fallback for categories that are still strings
             return project.category === filter;
         });
 
@@ -140,13 +144,10 @@ const Projects = () => {
     };
 
     const handleFilterChange = (newFilter) => {
-        // Smooth scroll to top when changing filters
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
-
-        // Add a small delay before changing filter for smooth transition
         setTimeout(() => {
             setFilter(newFilter);
         }, 300);
