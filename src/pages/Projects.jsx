@@ -1,106 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
-import img1 from "../assets/private_buses_in_sri_lanka.jpg";
-import img2 from "../assets/agromart.jpg";
-import img3 from "../assets/apex.jpeg";
-import img4 from "../assets/sameepa.jpg";
-import img5 from "../assets/login.jpg";
-import img6 from "../assets/terrasafe.jpg"; // <-- Add your TerraSafe image here
+import { projects } from '../data/projects';
 
 const Projects = () => {
     const [filter, setFilter] = useState('all');
-    const [isScrolling, setIsScrolling] = useState(false);
     const { scrollY } = useScroll();
     const y = useTransform(scrollY, [0, 1000], [0, -100]);
 
-    useEffect(() => {
-        let timeoutId;
-        const handleScroll = () => {
-            setIsScrolling(true);
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => setIsScrolling(false), 150);
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            clearTimeout(timeoutId);
-        };
-    }, []);
-
-    const projects = [
-        {
-            id: 1,
-            title: "BusHub LK",
-            description: "A full-stack platform to modernize Sri Lanka's public transport system, featuring a web admin dashboard for management and a cross-platform mobile app for passengers with live bus tracking, route searching, and fare calculation.",
-            image:img1,
-            tech: ["React.js", "React Native", "Node.js", "PostgreSQL", "AWS"],
-            link: "https://github.com/MurshidAkram/BusHubLK",
-            category: ["web","mobile"]
-        },
-        {
-            id: 2,
-            title: "AgroMart E-commerce Platform",
-            description: "A full-stack MERN e-commerce site featuring a secure RESTful API to manage products, users, and orders. Integrates JWT for authentication and the Stripe API for seamless payment processing.",
-            image:img2,
-            tech: ["React", "Node.js", "Express.js", "MongoDB", "Stripe API", "JWT"],
-            link: "https://github.com/lagithan/AgroMart1",
-            category: "web"
-        },
-        {
-            id: 3,
-            title: "Secure Login & Authorization API",
-            description: "A secure, stateless backend API using Spring Boot for user authentication and authorization. Implements Spring Security, JWT for session management, and Role-Based Access Control (RBAC).",
-            image: img5,
-            tech: ["Java", "Spring Boot", "Spring Security", "JWT", "Maven", "H2"],
-            link: "https://github.com/Sankavi1605/Loginpage_springboot",
-            category: "backend"
-        },
-        {
-            id: 4,
-            title: "Apex Finance",
-            description: "A full-stack personal finance dashboard to securely manage and visualize financial data, featuring a responsive front-end with data visualization and a secure back-end with NextAuth.js authentication.",
-            image: img3,
-            tech: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "NextAuth.js", "SQLite"],
-            link: "https://github.com/Sankavi1605/Apex-Finance",
-            category: "web"
-        },
-        {
-            id: 5,
-            title: "Sameepa",
-            description: "A full-stack platform to digitize operations in closed residential communities, featuring role-based access for facility booking, visitor management, maintenance requests, and community forums.",
-            image: img4,
-            tech: ["PHP", "MySQL", "JavaScript", "HTML", "CSS"],
-            link: "https://github.com/MurshidAkram/sameepa",
-            category: "web"
-        },
-        { // --- UPDATED PROJECT DETAILS ---
-            id: 6,
-            title: "TerraSafe - Safe Place Finder",
-            description: "A Flutter-based mobile app to find nearby safe places like police stations and hospitals using Google Maps. Features custom markers, a slide-up detail sheet with location info, and an in-app chatbot for assistance.",
-            image: img6,
-            tech: ["Flutter", "Dart", "Google Maps API", "Google Places API", "Dio"],
-            link: "https://github.com/Sankavi1605/terrasafe",
-            category: "mobile"
-        },
-        
-    ];
-
     const categories = [
         { id: 'all', label: 'All Projects' },
-        { id: 'web', label: 'Web Development' },
-        { id: 'mobile', label: 'Mobile Apps' },
-        { id: 'backend', label: 'Backend Development' },
+        { id: 'fullstack', label: 'Full Stack' },
+        { id: 'web', label: 'Web' },
+        { id: 'mobile', label: 'Mobile' },
+        { id: 'backend', label: 'Backend' },
     ];
 
     const filteredProjects = filter === 'all'
         ? projects
         : projects.filter(project => {
-            if (Array.isArray(project.category)) {
-                return project.category.includes(filter);
+            if (Array.isArray(project.categories)) {
+                return project.categories.includes(filter);
             }
-            return project.category === filter;
+            return project.categories === filter;
         });
 
     const containerVariants = {
@@ -233,10 +155,14 @@ const Projects = () => {
                     >
                         <ProjectCard
                             title={project.title}
+                            subtitle={project.subtitle}
+                            status={project.status}
                             description={project.description}
+                            highlights={project.highlights}
                             image={project.image}
                             tech={project.tech}
-                            link={project.link}
+                                link={project.link}
+                                liveUrl={project.liveUrl}
                         />
                     </motion.div>
                 ))}
