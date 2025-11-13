@@ -97,3 +97,71 @@ body {
   transform: translateY(-4px);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
+
+/* Glass background helper */
+.glass {
+  background: rgba(17, 24, 39, 0.6);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* Button shine effect */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  height: 100%;
+  width: 150%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 70%);
+  transform: skewX(-20deg);
+}
+.btn-shine:hover::before {
+  transition: left 0.8s ease;
+  left: 150%;
+}
+
+/* Skeleton shimmer */
+.skeleton {
+  position: relative;
+  background: #1f2937;
+  overflow: hidden;
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, rgba(31,41,55,0) 0%, rgba(255,255,255,0.06) 50%, rgba(31,41,55,0) 100%);
+  animation: shimmer 1.6s infinite;
+}
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+/* Card gradient border on hover */
+.card-gradient {
+  position: relative;
+}
+.card-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem; /* matches rounded-xl */
+  padding: 1px; /* border width */
+  background: linear-gradient(135deg, rgba(16,185,129,0.6), rgba(59,130,246,0.4));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.card-gradient:hover::before,
+.card-gradient:focus-visible::before {
+  opacity: 1;
+}

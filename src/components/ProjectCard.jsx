@@ -1,7 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function ProjectCard({ title, subtitle, status, image, tech, description, highlights = [], link, liveUrl }) {
+export default function ProjectCard({ title, subtitle, status, image, tech, description, highlights = [], link, liveUrl, slug, keyMetric, tags = [] }) {
     const cardRef = useRef(null);
+    const navigate = useNavigate();
+    const [imgLoaded, setImgLoaded] = useState(false);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -32,18 +35,34 @@ export default function ProjectCard({ title, subtitle, status, image, tech, desc
     return (
         <div
             ref={cardRef}
-            className="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-700 hover:border-green-500 group opacity-0 transform translate-y-8 animate-fade-in h-full flex flex-col"
+            className="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-700 group card-gradient opacity-0 transform translate-y-8 animate-fade-in h-full flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
             style={{
                 scrollBehavior: 'smooth'
             }}
+            tabIndex={0}
+            role="article"
+            onKeyDown={(e) => {
+                if (slug && (e.key === 'Enter' || e.key === ' ')) {
+                    e.preventDefault();
+                    navigate(`/projects/${slug}`);
+                }
+            }}
         >
             <div className="relative overflow-hidden">
+                <div className={`w-full h-48 ${imgLoaded ? '' : 'skeleton'}`} />
                 <img
                     src={image}
                     alt={title}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    loading="lazy"
+                    onLoad={() => setImgLoaded(true)}
+                    className={`absolute inset-0 w-full h-48 object-cover transition-transform duration-700 ease-out ${imgLoaded ? 'opacity-100 group-hover:scale-110' : 'opacity-0'}`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                {keyMetric && (
+                    <div className="absolute bottom-3 left-3 px-3 py-1 rounded-md bg-green-600/20 text-green-300 text-xs border border-green-700/40">
+                        {keyMetric}
+                    </div>
+                )}
                 {/* REMOVED LIVE DEMO FUNCTIONALITY ****FOR NOW***** */}
                 {/* <div className="absolute top-4 right-4 bg-green-500/90 backdrop-blur-sm px-3 py-1 rounded-full text-white text-xs font-medium transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out">
                     Live Demo
@@ -71,6 +90,14 @@ export default function ProjectCard({ title, subtitle, status, image, tech, desc
                     {description}
                 </p>
 
+                {tags && tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        {tags.map((t, i) => (
+                            <span key={i} className="px-2 py-0.5 rounded-full text-xs bg-gray-700 text-gray-200 border border-gray-600">{t}</span>
+                        ))}
+                    </div>
+                )}
+
                 {highlights.length > 0 && (
                     <ul className="space-y-2 text-gray-300 text-sm mb-5">
                         {highlights.map((point, index) => (
@@ -97,6 +124,17 @@ export default function ProjectCard({ title, subtitle, status, image, tech, desc
                 </div>
 
                 <div className="flex flex-wrap items-center gap-3 mt-auto">
+                    {slug && (
+                        <Link
+                            to={`/projects/${slug}`}
+                            className="inline-flex items-center gap-2 rounded-lg bg-gray-700/80 px-4 py-2 text-sm font-semibold text-white transition-colors duration-300 hover:bg-gray-700"
+                        >
+                            Case Study
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                        </Link>
+                    )}
                     {liveUrl && (
                         <a
                             href={liveUrl}

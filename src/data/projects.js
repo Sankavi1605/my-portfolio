@@ -8,6 +8,7 @@ import imgTerraSafe from "../assets/terrasafe.jpg";
 export const projects = [
     {
         id: 1,
+        slug: "bus-hub-lk",
         title: "BusHub LK",
         subtitle: "Full Stack Public Transport Management System",
         status: "2025 Launch",
@@ -22,10 +23,33 @@ export const projects = [
         link: "https://github.com/MurshidAkram/BusHubLK",
         liveUrl: "https://bus-hub-lk.vercel.app/",
         categories: ["web", "mobile", "fullstack"],
+        tags: ["transport", "maps", "realtime", "admin"],
+        role: "Full‑stack engineer",
+        teamSize: 3,
+        timeline: "2024–2025",
+        keyMetric: null,
+        impact: "Digitised bus operations and passenger experience with a unified platform.",
+        caseStudy: {
+            problem: "Paper-based workflows and fragmented tools slowed down dispatching and rider information.",
+            approach: [
+                "Built a web admin console for routes, schedules, and fleet visibility.",
+                "Shipped a React Native rider app with search, fares, and live location.",
+                "Hosted APIs on AWS with CI/CD and basic observability in place."
+            ],
+            impact: [
+                "Centralised operations; reduced manual steps for common tasks.",
+                "Improved rider self‑service via route lookups and fare estimation."
+            ],
+            lessons: [
+                "Structured API contracts early to parallelise frontend and backend work.",
+                "Added feature flags to iterate on live location safely."
+            ]
+        },
         image: imgBusHub,
     },
     {
         id: 2,
+        slug: "apex-finance",
         title: "Apex Finance",
         subtitle: "Full-Stack Personal Finance Dashboard",
         status: "2025",
@@ -38,6 +62,28 @@ export const projects = [
         tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Prisma", "NextAuth.js", "SQLite", "Framer Motion", "Recharts"],
         link: "https://github.com/Sankavi1605/Apex-Finance",
         categories: ["web", "fullstack"],
+        tags: ["finance", "dashboard", "charts", "auth"],
+        role: "Frontend & API",
+        teamSize: 2,
+        timeline: "2025",
+        keyMetric: null,
+        impact: "Gives users a clear view of spending and trends with smooth UX.",
+        caseStudy: {
+            problem: "Users needed a private, simple way to understand spending patterns.",
+            approach: [
+                "Built Next.js UI with animated navigation and responsive charts.",
+                "Implemented protected API routes with NextAuth and Prisma models.",
+                "Added categories, notes, and basic search across transactions."
+            ],
+            impact: [
+                "Reduced friction to track expenses and inspect categories.",
+                "Clearer trend insights through animated charts."
+            ],
+            lessons: [
+                "Kept data modelling simple to ensure fast iteration.",
+                "Invested in empty states and loading skeletons for perceived speed."
+            ]
+        },
         image: imgApex,
     },
     {
@@ -58,6 +104,7 @@ export const projects = [
     },
     {
         id: 4,
+        slug: "terrasafe",
         title: "TerraSafe - Safe Place Finder",
         subtitle: "Mobile App Development",
         status: "2025",
@@ -70,6 +117,27 @@ export const projects = [
         tech: ["Flutter", "Dart", "Google Maps API", "Google Places API", "Dio", "Geolocator"],
         link: "https://github.com/Sankavi1605/terrasafe",
         categories: ["mobile"],
+        tags: ["safety", "maps", "flutter"],
+        role: "Mobile engineer",
+        teamSize: 1,
+        timeline: "2025",
+        keyMetric: null,
+        impact: "Helps users quickly discover safe locations nearby with guidance.",
+        caseStudy: {
+            problem: "Finding safe nearby spots during stressful moments is hard.",
+            approach: [
+                "Integrated Maps and Places APIs; added custom markers and detail sheets.",
+                "Embedded a lightweight chatbot for guidance tied to location.",
+                "Handled permissions, errors, and offline messaging."
+            ],
+            impact: [
+                "Faster discovery with clear markers and concise detail views."
+            ],
+            lessons: [
+                "Early attention to permission states simplified edge cases.",
+                "Kept animations subtle to maintain clarity under stress."
+            ]
+        },
         image: imgTerraSafe,
     },
     {
