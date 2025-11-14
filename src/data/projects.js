@@ -8,10 +8,12 @@ import imgTerraSafe from "../assets/terrasafe.jpg";
 export const projects = [
     {
         id: 1,
-        slug: "bus-hub-lk",
         title: "BusHub LK",
         subtitle: "Full Stack Public Transport Management System",
         status: "2025 Launch",
+        badge: "Flagship Mobility Track",
+        duration: "12-month build",
+        region: "Sri Lanka • Remote",
         description:
             "Dual-platform solution modernizing the Sri Lanka Transport Board with real-time operations visibility and passenger tooling.",
         highlights: [
@@ -22,37 +24,18 @@ export const projects = [
         tech: ["Node.js", "React.js", "React Native", "PostgreSQL", "AWS", "Git/GitHub"],
         link: "https://github.com/MurshidAkram/BusHubLK",
         liveUrl: "https://bus-hub-lk.vercel.app/",
+        programFocus: "Reimagining national mobility digitally.",
         categories: ["web", "mobile", "fullstack"],
-        tags: ["transport", "maps", "realtime", "admin"],
-        role: "Full‑stack engineer",
-        teamSize: 3,
-        timeline: "2024–2025",
-        keyMetric: null,
-        impact: "Digitised bus operations and passenger experience with a unified platform.",
-        caseStudy: {
-            problem: "Paper-based workflows and fragmented tools slowed down dispatching and rider information.",
-            approach: [
-                "Built a web admin console for routes, schedules, and fleet visibility.",
-                "Shipped a React Native rider app with search, fares, and live location.",
-                "Hosted APIs on AWS with CI/CD and basic observability in place."
-            ],
-            impact: [
-                "Centralised operations; reduced manual steps for common tasks.",
-                "Improved rider self‑service via route lookups and fare estimation."
-            ],
-            lessons: [
-                "Structured API contracts early to parallelise frontend and backend work.",
-                "Added feature flags to iterate on live location safely."
-            ]
-        },
         image: imgBusHub,
     },
     {
         id: 2,
-        slug: "apex-finance",
         title: "Apex Finance",
         subtitle: "Full-Stack Personal Finance Dashboard",
         status: "2025",
+        badge: "Financial Intelligence Track",
+        duration: "10-week sprint",
+        region: "Remote-first",
         description:
             "Secure dashboard experience for tracking and visualising personal finances with rich motion design.",
         highlights: [
@@ -61,29 +44,8 @@ export const projects = [
         ],
         tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Prisma", "NextAuth.js", "SQLite", "Framer Motion", "Recharts"],
         link: "https://github.com/Sankavi1605/Apex-Finance",
+        programFocus: "Humanising financial wellness with secure tooling.",
         categories: ["web", "fullstack"],
-        tags: ["finance", "dashboard", "charts", "auth"],
-        role: "Frontend & API",
-        teamSize: 2,
-        timeline: "2025",
-        keyMetric: null,
-        impact: "Gives users a clear view of spending and trends with smooth UX.",
-        caseStudy: {
-            problem: "Users needed a private, simple way to understand spending patterns.",
-            approach: [
-                "Built Next.js UI with animated navigation and responsive charts.",
-                "Implemented protected API routes with NextAuth and Prisma models.",
-                "Added categories, notes, and basic search across transactions."
-            ],
-            impact: [
-                "Reduced friction to track expenses and inspect categories.",
-                "Clearer trend insights through animated charts."
-            ],
-            lessons: [
-                "Kept data modelling simple to ensure fast iteration.",
-                "Invested in empty states and loading skeletons for perceived speed."
-            ]
-        },
         image: imgApex,
     },
     {
@@ -91,6 +53,9 @@ export const projects = [
         title: "Secure Login & Authorization API",
         subtitle: "Backend Security Services",
         status: "2025",
+        badge: "Security Platform Track",
+        duration: "6-week build",
+        region: "Global",
         description:
             "Stateless authentication and authorization service hardened with Spring Security and JWT flows.",
         highlights: [
@@ -99,15 +64,18 @@ export const projects = [
         ],
         tech: ["Java", "Spring Boot", "Spring Security", "JWT", "Maven", "H2", "REST"],
         link: "https://github.com/Sankavi1605/Loginpage_springboot",
+        programFocus: "Scaling trust for modern platforms.",
         categories: ["backend", "fullstack"],
         image: imgSecureLogin,
     },
     {
         id: 4,
-        slug: "terrasafe",
         title: "TerraSafe - Safe Place Finder",
         subtitle: "Mobile App Development",
         status: "2025",
+        badge: "Safety & Resilience",
+        duration: "8-week iteration",
+        region: "Global",
         description:
             "Location-aware Flutter application that surfaces nearby safe zones with contextual assistance.",
         highlights: [
@@ -116,28 +84,8 @@ export const projects = [
         ],
         tech: ["Flutter", "Dart", "Google Maps API", "Google Places API", "Dio", "Geolocator"],
         link: "https://github.com/Sankavi1605/terrasafe",
+        programFocus: "Guiding communities to safe decisions in moments that matter.",
         categories: ["mobile"],
-        tags: ["safety", "maps", "flutter"],
-        role: "Mobile engineer",
-        teamSize: 1,
-        timeline: "2025",
-        keyMetric: null,
-        impact: "Helps users quickly discover safe locations nearby with guidance.",
-        caseStudy: {
-            problem: "Finding safe nearby spots during stressful moments is hard.",
-            approach: [
-                "Integrated Maps and Places APIs; added custom markers and detail sheets.",
-                "Embedded a lightweight chatbot for guidance tied to location.",
-                "Handled permissions, errors, and offline messaging."
-            ],
-            impact: [
-                "Faster discovery with clear markers and concise detail views."
-            ],
-            lessons: [
-                "Early attention to permission states simplified edge cases.",
-                "Kept animations subtle to maintain clarity under stress."
-            ]
-        },
         image: imgTerraSafe,
     },
     {
@@ -145,6 +93,9 @@ export const projects = [
         title: "Sameepa",
         subtitle: "Closed Community Management Platform",
         status: "2024",
+        badge: "Community Experience",
+        duration: "Semester collaboration",
+        region: "Hybrid",
         description:
             "Digitised resident, admin, and staff collaboration with streamlined workflows for gated communities.",
         highlights: [
@@ -153,6 +104,7 @@ export const projects = [
         ],
         tech: ["PHP", "MySQL", "JavaScript", "HTML", "CSS", "Apache", "Git/GitHub", "Figma"],
         link: "https://github.com/MurshidAkram/sameepa",
+        programFocus: "Designing belonging and operational clarity.",
         categories: ["web", "fullstack"],
         image: imgSameepa,
     },
@@ -161,6 +113,9 @@ export const projects = [
         title: "AgroMart E-commerce Platform",
         subtitle: "Full-Stack Development",
         status: "2024",
+        badge: "Digital Commerce",
+        duration: "12-week build",
+        region: "Sri Lanka",
         description:
             "End-to-end MERN commerce experience with secure payments and administrative tooling.",
         highlights: [
@@ -169,6 +124,7 @@ export const projects = [
         ],
         tech: ["Node.js", "Express.js", "React", "MongoDB", "Stripe API", "JWT"],
         link: "https://github.com/lagithan/AgroMart1",
+        programFocus: "Elevating farmers with direct-to-market tooling.",
         categories: ["web", "fullstack"],
         image: imgAgroMart,
     },

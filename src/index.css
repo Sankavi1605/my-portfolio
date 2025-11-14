@@ -165,3 +165,165 @@ body {
 .card-gradient:focus-visible::before {
   opacity: 1;
 }
+
+/* Glass buttons */
+.btn-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: #e5e7eb; /* gray-200 */
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: border-color .2s ease, color .2s ease, background-color .2s ease, transform .2s ease;
+}
+.btn-glass:hover, .btn-glass:focus-visible {
+  border-color: rgba(255,255,255,0.3);
+  color: #fff;
+}
+.btn-glass:active {
+  transform: translateY(1px);
+}
+
+.pill-glass {
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  color: #e5e7eb;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.pill-glass-active {
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.10);
+  color: #fff;
+}
+
+/* Tilt and shine for cards */
+.tilt {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 150ms ease;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+}
+
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.card-shine::after {
+  content: "";
+  position: absolute;
+  inset: -30% -60% auto -60%;
+  height: 200%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.0) 20%, rgba(255,255,255,0.12) 40%, rgba(255,255,255,0.0) 60%);
+  transform: translateX(-100%) rotate(10deg);
+  transition: transform 700ms ease;
+  pointer-events: none;
+}
+.card-shine:hover::after,
+.card-shine:focus-within::after {
+  transform: translateX(120%) rotate(10deg);
+}
+
+/* Aurora full-page gradient background */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  background: #000; /* pure black base */
+}
+.aurora::before,
+.aurora::after {
+  content: "";
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  filter: blur(60px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+.aurora::before {
+  top: -10%;
+  left: -10%;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(16,185,129,0.55) 0%, rgba(16,185,129,0.0) 70%);
+  animation: floatA 22s ease-in-out infinite;
+}
+.aurora::after {
+  bottom: -10%;
+  right: -15%;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(59,130,246,0.55) 0%, rgba(59,130,246,0.0) 70%);
+  animation: floatB 26s ease-in-out infinite;
+}
+@keyframes floatA {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(8%, -4%) scale(1.1); }
+}
+@keyframes floatB {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(-6%, 6%) scale(1.08); }
+}
+
+/* Simple marquee for tech stack */
+.marquee {
+  display: flex;
+  gap: 2rem;
+  will-change: transform;
+  animation: marquee 30s linear infinite;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Avatar: circular with animated gradient ring and feathered edge */
+.avatar-gradient {
+  position: relative;
+  border-radius: 9999px;
+}
+.avatar-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  padding: 2px; /* ring width */
+  background: conic-gradient(from 0deg, rgba(16,185,129,0.7), rgba(59,130,246,0.6), rgba(16,185,129,0.7));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  animation: avatarRing 18s linear infinite;
+}
+.avatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  object-fit: cover;
+  -webkit-mask-image: radial-gradient(circle closest-side, #000 90%, rgba(0,0,0,0) 100%);
+          mask-image: radial-gradient(circle closest-side, #000 90%, rgba(0,0,0,0) 100%);
+}
+@keyframes avatarRing { to { transform: rotate(360deg); } }
+
+/* Simple avatar frame (no color), pure black with subtle border */
+.avatar-frame {
+  position: relative;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 50% 55%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 35%, #000 100%);
+  border: 1px solid rgba(255,255,255,0.12);
+  overflow: hidden;
+}
+.avatar-shadow {
+  filter: drop-shadow(0 25px 40px rgba(0,0,0,0.55));
+}
+.avatar-blur {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  filter: blur(32px);
+  transform: scale(1.2);
+  opacity: 0.25;
+}

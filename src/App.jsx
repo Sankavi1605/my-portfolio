@@ -10,7 +10,6 @@ import ProjectDetails from './pages/ProjectDetails';
 import Learning from './pages/Learning';
 import Education from './pages/Education';
 import Contact from './pages/Contact';
-import Particles2D from './components/Particles2D';
 
 // Page transition component
 const PageTransition = ({ children }) => {
@@ -66,10 +65,8 @@ function App() {
   return (
     <>
       <ScrollToTop />
-      {/* Global full-page background behind all routes */}
-      <div className="fixed inset-0 -z-10 overflow-hidden">
-        <Particles2D className="absolute inset-0 pointer-events-none" background="#000000" color="#7CFFCB" particleSize={1.0} density={0.00006} />
-      </div>
+      {/* Global full-page aurora background behind all routes */}
+      <div className="aurora" />
       <div className="relative z-10 min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-grow px-6 py-8">
