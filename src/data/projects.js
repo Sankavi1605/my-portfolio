@@ -1,3 +1,4 @@
+import imgAlphintra from "../assets/4.jpg";
 import imgBusHub from "../assets/private_buses_in_sri_lanka.jpg";
 import imgAgroMart from "../assets/agromart.jpg";
 import imgApex from "../assets/apex.jpeg";
@@ -6,6 +7,29 @@ import imgSecureLogin from "../assets/login.jpg";
 import imgTerraSafe from "../assets/terrasafe.jpg";
 
 export const projects = [
+    {
+        id: 7,
+        title: "Alphintra: AI Algorithmic Trading Bot",
+        subtitle: "Cloud-Native Algorithmic Trading Platform",
+        status: "2025 — In progress",
+        badge: "AI Trading Track",
+        duration: "May 2025 – Present",
+        region: "Remote collaboration",
+        description:
+            "Machine-learning powered trading platform that lets quants design, backtest, and deploy automated strategies with no-code and IDE workflows.",
+        highlights: [
+            "Co-architected a microservices platform so traders can publish strategies through a no-code builder or custom IDE pipelines.",
+            "Developed and backtested Python ML models to forecast market movement and emit automated trading signals.",
+            "Integrated Binance APIs into a Spring Boot wallet service for secure, real-time asset management and order execution.",
+            "Built a trading engine microservice that ingests market data, loads plug-in strategies, and dispatches buy/stop signals back to Binance.",
+        ],
+        tech: ["Java", "Python", "Spring Boot", "FastAPI", "Next.js", "Redis", "PostgreSQL", "Docker", "Microservices", "Machine Learning"],
+        link: "https://github.com/Subithan/Alphintra",
+        liveUrl: "http://alphintra.com/",
+        programFocus: "Automating trading with AI-driven execution.",
+        categories: ["backend", "ai", "fullstack"],
+        image: imgAlphintra,
+    },
     {
         id: 1,
         title: "BusHub LK",
@@ -130,4 +154,4 @@ export const projects = [
     },
 ];
 
-export const featuredProjectIds = [1, 2, 4];
+export const featuredProjectIds = [7, 1, 2, 4];

@@ -9,6 +9,7 @@ import BenefitHighlights from '../components/BenefitHighlights';
 import FAQAccordion from '../components/FAQAccordion';
 import StoryCard from '../components/StoryCard';
 import Starfield from '../components/Starfield';
+import ParticleAnimation from '../components/ParticleAnimation';
 import { featuredProjectIds, projects } from '../data/projects';
 
 export default function Home() {
@@ -22,7 +23,7 @@ export default function Home() {
     const stats = [
         {
             label: 'Projects',
-            value: '06',
+            value: '07',
             description: 'Full-stack applications deployed in production.',
         },
         {
@@ -204,6 +205,9 @@ export default function Home() {
             {/* Three.js Starfield Background */}
             <Starfield />
             
+            {/* Particle Animations */}
+            <ParticleAnimation />
+            
             <div className="fixed inset-0 -z-10 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-black"></div>
                 <div className="absolute -top-32 left-1/2 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-green-500/10 blur-3xl"></div>
@@ -245,7 +249,7 @@ export default function Home() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 }}
                             >
-                                I build web and mobile applications for transport, finance, and safety sectors. Currently working on BusHub LK for Sri Lanka's public transport system.
+                                I build web and mobile applications for transport, finance, and safety sectors. Currently leading BusHub LK and Alphintra to production.
                             </motion.p>
 
                             <motion.div

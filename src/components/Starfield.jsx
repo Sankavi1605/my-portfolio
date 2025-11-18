@@ -4,6 +4,7 @@ import * as THREE from 'three';
 export default function Starfield() {
     const mountRef = useRef(null);
     const scrollRef = useRef(0);
+    const mouseRef = useRef({ x: 0, y: 0 });
 
     useEffect(() => {
         if (!mountRef.current) return;
@@ -28,7 +29,7 @@ export default function Starfield() {
 
         // Create stars
         const starGeometry = new THREE.BufferGeometry();
-        const starCount = 3000;
+        const starCount = 2000; // Reduced from 3000 for better performance
         const positions = new Float32Array(starCount * 3);
         const colors = new Float32Array(starCount * 3);
         const sizes = new Float32Array(starCount);
@@ -38,7 +39,7 @@ export default function Starfield() {
             new THREE.Color(0x4ade80), // green-400
             new THREE.Color(0x22c55e), // green-500
             new THREE.Color(0x86efac), // green-300
-            new THREE.Color(0xbbf7d0), // green-200
+            new THREE.Color(0xdbeafe), // light blue-white
             new THREE.Color(0xffffff), // white for variation
         ];
 
@@ -83,7 +84,7 @@ export default function Starfield() {
 
         // Add some larger glowing stars
         const glowStarGeometry = new THREE.BufferGeometry();
-        const glowStarCount = 100;
+        const glowStarCount = 80; // Reduced from 100
         const glowPositions = new Float32Array(glowStarCount * 3);
         const glowColors = new Float32Array(glowStarCount * 3);
 
@@ -124,7 +125,16 @@ export default function Starfield() {
             scrollRef.current = window.scrollY;
         };
 
+        // Handle mouse move
+        const handleMouseMove = (e) => {
+            mouseRef.current = {
+                x: (e.clientX / window.innerWidth - 0.5) * 0.5,
+                y: (e.clientY / window.innerHeight - 0.5) * 0.5,
+            };
+        };
+
         window.addEventListener('scroll', handleScroll);
+        window.addEventListener('mousemove', handleMouseMove);
 
         // Handle resize
         const handleResize = () => {
@@ -139,24 +149,31 @@ export default function Starfield() {
         let time = 0;
         const animate = () => {
             requestAnimationFrame(animate);
-            time += 0.001;
+            time += 0.0003; // Even slower time progression
 
-            // Slow rotation of star field
-            stars.rotation.y = time * 0.05;
-            stars.rotation.x = time * 0.02;
+            // Very slow rotation of star field
+            stars.rotation.y = time * 0.015; // Slower rotation
+            stars.rotation.x = time * 0.008;
 
             // Glow stars rotate slightly faster
-            glowStars.rotation.y = time * 0.08;
-            glowStars.rotation.x = time * 0.03;
+            glowStars.rotation.y = time * 0.025;
+            glowStars.rotation.x = time * 0.012;
 
             // Gentle camera movement based on scroll
-            camera.position.z = 5 - scrollRef.current * 0.002;
-            camera.rotation.z = scrollRef.current * 0.0001;
+            const targetZ = 5 - scrollRef.current * 0.0008;
+            camera.position.z += (targetZ - camera.position.z) * 0.05; // Smooth interpolation
 
-            // Twinkling effect
+            // Mouse parallax effect - smooth and subtle
+            const targetRotationY = mouseRef.current.x * 0.15;
+            const targetRotationX = -mouseRef.current.y * 0.15;
+            
+            camera.rotation.y += (targetRotationY - camera.rotation.y) * 0.05;
+            camera.rotation.x += (targetRotationX - camera.rotation.x) * 0.05;
+
+            // Twinkling effect - slower and more subtle
             const sizes = starGeometry.attributes.size.array;
             for (let i = 0; i < starCount; i++) {
-                sizes[i] = Math.abs(Math.sin(time * 2 + i * 0.1)) * 2 + 0.5;
+                sizes[i] = Math.abs(Math.sin(time * 1 + i * 0.05)) * 1.5 + 0.8; // Slower, subtler twinkle
             }
             starGeometry.attributes.size.needsUpdate = true;
 
@@ -168,7 +185,7 @@ export default function Starfield() {
         // Cleanup
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('mousemove', handleMouseMove);
             if (mountRef.current && renderer.domElement) {
                 mountRef.current.removeChild(renderer.domElement);
             }
