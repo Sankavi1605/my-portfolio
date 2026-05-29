@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
 import { projects } from '../data/projects';
 
+const categories = [
+    { id: 'all', label: 'All Projects' },
+    { id: 'fullstack', label: 'Full Stack' },
+    { id: 'web', label: 'Web' },
+    { id: 'mobile', label: 'Mobile' },
+    { id: 'backend', label: 'Backend' },
+];
+
 const Projects = () => {
     const [filter, setFilter] = useState('all');
-    const { scrollY } = useScroll();
-    const y = useTransform(scrollY, [0, 1000], [0, -100]);
-
-    const categories = [
-        { id: 'all', label: 'All Projects' },
-        { id: 'fullstack', label: 'Full Stack' },
-        { id: 'web', label: 'Web' },
-        { id: 'mobile', label: 'Mobile' },
-        { id: 'backend', label: 'Backend' },
-    ];
 
     const filteredProjects = filter === 'all'
         ? projects
@@ -25,134 +23,51 @@ const Projects = () => {
             return project.categories === filter;
         });
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.15,
-                delayChildren: 0.1
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: {
-            opacity: 0,
-            y: 50,
-            scale: 0.95
-        },
-        visible: {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            transition: {
-                duration: 0.6,
-                ease: "easeOut"
-            }
-        }
-    };
-
-    const filterVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.5,
-                ease: "easeOut"
-            }
-        }
-    };
-
-    const handleFilterChange = (newFilter) => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-        setTimeout(() => {
-            setFilter(newFilter);
-        }, 300);
-    };
-
     return (
-        <motion.div
-            className="max-w-6xl mx-auto px-4"
-            style={{ y }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-        >
+        <div className="page-shell">
             <motion.div
-                initial={{ opacity: 0, y: 50 }}
+                className="page-hero"
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-center space-y-6 mb-16"
+                transition={{ duration: 0.6 }}
             >
-                <motion.h1
-                    className="text-4xl md:text-6xl font-bold text-white"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                    My Projects
-                </motion.h1>
-                <motion.p
-                    className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                >
-                    Here are some of the projects I've worked on. Each one represents a unique challenge
-                    and learning opportunity that has shaped my development journey.
-                </motion.p>
+                <span className="section-label section-label-centered">Projects</span>
+                <h1>Selected work across web, backend, and mobile development.</h1>
+                <p>
+                    These case studies reflect the types of products I like to build: useful, technically grounded, and designed around real user needs.
+                </p>
             </motion.div>
 
-            {/* Filter Buttons */}
             <motion.div
-                className="flex flex-wrap justify-center gap-4 mb-16"
-                variants={filterVariants}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 0.6 }}
+                className="mb-12 flex flex-wrap justify-center gap-3"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.1 }}
             >
-                {categories.map((category, index) => (
-                    <motion.button
+                {categories.map((category) => (
+                    <button
                         key={category.id}
-                        onClick={() => handleFilterChange(category.id)}
-                        className={`px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 ${filter === category.id
-                                ? 'bg-green-500 text-white shadow-lg shadow-green-500/25'
-                                : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white border border-gray-700 hover:border-green-500'
-                            }`}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.8 + index * 0.1 }}
+                        onClick={() => setFilter(category.id)}
+                        className={`rounded-full px-5 py-3 text-sm font-medium transition-all duration-200 ${
+                            filter === category.id
+                                ? 'bg-[#0a66c2] text-white shadow-[0_8px_18px_rgba(10,102,194,0.18)]'
+                                : 'border border-[#d9e0e6] bg-white text-[#5f6b7a] hover:border-[#0a66c2] hover:text-[#0a66c2]'
+                        }`}
                     >
                         {category.label}
-                    </motion.button>
+                    </button>
                 ))}
             </motion.div>
 
-            {/* Projects Grid */}
             <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr"
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                key={filter} // Re-trigger animation when filter changes
+                className="grid grid-cols-1 gap-8 pb-8 md:grid-cols-2 lg:grid-cols-3"
+                key={filter}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
             >
-                {filteredProjects.map((project, index) => (
-                    <motion.div
-                        key={project.id}
-                        variants={itemVariants}
-                        whileHover={{
-                            scale: 1.02,
-                            transition: { duration: 0.2 }
-                        }}
-                        className="h-full flex"
-                    >
+                {filteredProjects.map((project) => (
+                    <div key={project.id} className="flex h-full">
                         <ProjectCard
                             title={project.title}
                             subtitle={project.subtitle}
@@ -161,64 +76,32 @@ const Projects = () => {
                             highlights={project.highlights}
                             image={project.image}
                             tech={project.tech}
-                                link={project.link}
-                                liveUrl={project.liveUrl}
+                            link={project.link}
+                            liveUrl={project.liveUrl}
+                            slug={project.slug}
                         />
-                    </motion.div>
+                    </div>
                 ))}
             </motion.div>
 
-            {/* Call to Action */}
             {filteredProjects.length === 0 && (
-                <motion.div
-                    className="text-center py-16"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <p className="text-gray-400 text-lg">No projects found in this category.</p>
-                </motion.div>
+                <div className="py-12 text-center text-slate-400">
+                    No projects match this category yet.
+                </div>
             )}
 
-            <motion.div
-                className="text-center mt-20"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true, margin: "-100px" }}
-            >
-                <motion.h3
-                    className="text-3xl font-bold text-white mb-6"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                >
-                    Interested in working together?
-                </motion.h3>
-                <motion.p
-                    className="text-gray-400 mb-8 text-lg"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    viewport={{ once: true }}
-                >
-                    Let's discuss your project and see how I can help bring your ideas to life.
-                </motion.p>
-                <motion.a
-                    href="/contact"
-                    className="inline-block bg-green-500 hover:bg-green-600 text-white px-10 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-lg"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                    viewport={{ once: true }}
-                >
-                    Get In Touch
-                </motion.a>
-            </motion.div>
-        </motion.div>
+            <div className="section-shell px-0">
+                <div className="panel mx-auto max-w-4xl rounded-[2rem] px-8 py-12 text-center">
+                    <h2 className="text-3xl font-semibold text-[#191919]">Interested in building something together?</h2>
+                    <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-[#5f6b7a]">
+                        If your team needs a developer who can contribute across product thinking, implementation, and delivery, I would be glad to talk.
+                    </p>
+                    <a href="/contact" className="btn-primary mt-8">
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+        </div>
     );
 };
 

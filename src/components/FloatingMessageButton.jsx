@@ -24,7 +24,7 @@ const FloatingMessageButton = () => {
             {/* Floating Button */}
             <motion.button
                 onClick={() => setIsOpen(true)}
-                className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg z-50 transition-all duration-200 transform hover:scale-110"
+                className="fixed bottom-6 right-6 z-50 rounded-full border border-white/10 bg-[#112033] p-4 text-white shadow-lg shadow-black/30 transition-all duration-200 hover:border-emerald-400/30 hover:bg-[#13263c]"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, scale: 0 }}
@@ -40,7 +40,7 @@ const FloatingMessageButton = () => {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        className="fixed inset-0 backdrop-blur-sm z-50"
+                        className="fixed inset-0 z-50 bg-[#020817]/45 backdrop-blur-sm"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -48,7 +48,7 @@ const FloatingMessageButton = () => {
                     >
                         {/* Modal Content - Positioned in lower right */}
                         <motion.div
-                            className="absolute bottom-6 right-6 bg-gray-800 rounded-lg p-6 w-full max-w-md shadow-2xl border border-gray-700"
+                            className="panel absolute bottom-6 right-6 w-full max-w-md rounded-[1.5rem] p-6 shadow-2xl"
                             initial={{ opacity: 0, scale: 0.8, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -58,7 +58,7 @@ const FloatingMessageButton = () => {
                                 <h3 className="text-xl font-bold text-white">Send a Message</h3>
                                 <button
                                     onClick={() => setIsOpen(false)}
-                                    className="text-gray-400 hover:text-white transition-colors"
+                                    className="text-slate-400 transition-colors hover:text-white"
                                 >
                                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -68,7 +68,7 @@ const FloatingMessageButton = () => {
 
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div>
-                                    <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+                                    <label htmlFor="name" className="mb-1 block text-sm font-medium text-slate-300">
                                         Name
                                     </label>
                                     <input
@@ -76,14 +76,14 @@ const FloatingMessageButton = () => {
                                         id="name"
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
-                                        className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                        className="input-field"
                                         placeholder="Your name"
                                         required
                                     />
                                 </div>
 
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+                                    <label htmlFor="email" className="mb-1 block text-sm font-medium text-slate-300">
                                         Email
                                     </label>
                                     <input
@@ -91,14 +91,14 @@ const FloatingMessageButton = () => {
                                         id="email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                        className="input-field"
                                         placeholder="your.email@example.com"
                                         required
                                     />
                                 </div>
 
                                 <div>
-                                    <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
+                                    <label htmlFor="message" className="mb-1 block text-sm font-medium text-slate-300">
                                         Message
                                     </label>
                                     <textarea
@@ -106,7 +106,7 @@ const FloatingMessageButton = () => {
                                         value={message}
                                         onChange={(e) => setMessage(e.target.value)}
                                         rows={4}
-                                        className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none"
+                                        className="input-field resize-none"
                                         placeholder="Your message..."
                                         required
                                     />
@@ -115,14 +115,14 @@ const FloatingMessageButton = () => {
                                 <div className="flex gap-3">
                                     <button
                                         type="submit"
-                                        className="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg font-semibold transition-colors duration-200"
+                                        className="btn-primary flex-1"
                                     >
                                         Send Message
                                     </button>
                                     <button
                                         type="button"
                                         onClick={() => setIsOpen(false)}
-                                        className="px-4 py-2 border border-gray-600 text-gray-300 hover:text-white hover:border-gray-500 rounded-lg transition-colors duration-200"
+                                        className="btn-secondary px-4"
                                     >
                                         Cancel
                                     </button>

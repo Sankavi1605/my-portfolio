@@ -1,329 +1,528 @@
 @import "tailwindcss";
 
-body {
-  @apply bg-gray-900 text-white;
-  font-family: 'Inter', sans-serif;
+:root {
+  color-scheme: light;
+  --page-bg: #f4f2ee;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+  --border: #d9e0e6;
+  --text: #191919;
+  --text-muted: #5f6b7a;
+  --heading: #000000;
+  --accent: #0a66c2;
+  --accent-strong: #004182;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+html {
   scroll-behavior: smooth;
 }
 
-/* Custom animations */
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--page-bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root,
+.site-shell {
+  min-height: 100vh;
+}
+
+.page-shell,
+.section-shell {
+  width: min(1128px, calc(100vw - 2rem));
+  margin: 0 auto;
+}
+
+.section-shell {
+  padding: 3rem 0;
+}
+
+.section-divider {
+  border-top: 1px solid var(--border);
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.section-label::before {
+  content: "";
+  width: 1.5rem;
+  height: 1px;
+  background: #8eb4da;
+}
+
+.section-label-centered::before {
+  display: none;
+}
+
+.section-heading {
+  margin: 0;
+  color: var(--heading);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  line-height: 1.12;
+  font-weight: 700;
+}
+
+.section-copy,
+.linkedin-body-copy {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.panel,
+.panel-muted {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.7rem;
+  border-radius: 999px;
+  padding: 0.7rem 1.15rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-strong);
+}
+
+.btn-secondary {
+  border: 1px solid #8eb4da;
+  color: var(--accent);
+  background: #fff;
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-strong);
+  color: var(--accent-strong);
+}
+
+.input-field {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  padding: 0.85rem 1rem;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.12);
+}
+
+.page-hero {
+  padding: 2rem 0 0.5rem;
+  text-align: left;
+}
+
+.page-hero h1 {
+  margin: 0;
+  color: var(--heading);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.page-hero p {
+  max-width: 44rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.linkedin-page-shell {
+  padding: 1.5rem 0 3rem;
+}
+
+.linkedin-layout {
+  width: min(1128px, calc(100vw - 2rem));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.linkedin-main-column,
+.linkedin-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.linkedin-card {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.linkedin-profile-card {
+  padding-bottom: 1.5rem;
+}
+
+.linkedin-cover {
+  background: #eef2f5;
+  border-bottom: 1px solid #edf1f5;
+}
+
+.linkedin-cover-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.linkedin-profile-body {
+  padding: 0 1.5rem;
+  margin-top: -1.25rem;
+}
+
+.linkedin-avatar {
+  width: 152px;
+  height: 152px;
+  margin-top: -76px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  object-fit: cover;
+  object-position: top;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.linkedin-profile-header {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.linkedin-profile-copy {
+  min-width: 0;
+}
+
+.linkedin-profile-header h1,
+.linkedin-section-header h2,
+.linkedin-featured-content h3,
+.linkedin-timeline-item h3,
+.linkedin-faq-item h3,
+.linkedin-education-card h3 {
+  margin: 0;
+  color: var(--heading);
+}
+
+.linkedin-profile-header h1 {
+  font-size: 2rem;
+  line-height: 1.15;
+}
+
+.linkedin-headline {
+  margin: 0.45rem 0 0;
+  color: var(--text);
+  font-size: 1.06rem;
+  line-height: 1.5;
+}
+
+.linkedin-meta {
+  margin: 0.7rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.linkedin-meta-dot {
+  color: #9aa6b2;
+}
+
+.linkedin-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: stretch;
+  justify-self: end;
+  padding-top: 0.25rem;
+}
+
+.linkedin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.6rem;
+  border-radius: 999px;
+  padding: 0.72rem 1.25rem;
+  font-weight: 600;
+}
+
+.linkedin-btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.linkedin-btn-secondary {
+  border: 1px solid #8eb4da;
+  color: var(--accent);
+}
+
+.linkedin-highlight-row,
+.linkedin-tag-row,
+.linkedin-link-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.linkedin-highlight-row {
+  margin-top: 1.1rem;
+}
+
+.linkedin-chip,
+.linkedin-tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: #eef3f8;
+  color: #35516b;
+  padding: 0.45rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+.linkedin-section-card {
+  padding: 1.4rem 1.5rem;
+}
+
+.linkedin-section-header {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.linkedin-inline-link,
+.linkedin-sidebar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.linkedin-featured-list,
+.linkedin-faq-list,
+.linkedin-sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.linkedin-featured-item {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid #edf1f5;
+}
+
+.linkedin-featured-item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.linkedin-featured-image {
+  width: 100%;
+  height: 132px;
+  border-radius: 0.75rem;
+  object-fit: cover;
+}
+
+.linkedin-item-subtitle {
+  margin: 0.25rem 0 0.7rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.linkedin-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.linkedin-timeline-item {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.linkedin-timeline-marker {
+  width: 14px;
+  height: 14px;
+  margin-top: 0.35rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 5px #e8f3ff;
+}
+
+.linkedin-skill-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.linkedin-skill-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid #edf1f5;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.linkedin-skill-item span {
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.linkedin-faq-item {
+  border-top: 1px solid #edf1f5;
+  padding-top: 1rem;
+}
+
+.linkedin-faq-item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.linkedin-sidebar-points {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--text-muted);
+}
+
+.linkedin-sidebar-points li + li {
+  margin-top: 0.85rem;
+}
+
+.linkedin-education-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes slideInFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-.animate-fade-in {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.animate-slide-in {
-  animation: slideInFromRight 0.6s ease-out forwards;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.5s ease-out forwards;
-}
-
-.animate-pulse-slow {
-  animation: pulse 2s ease-in-out infinite;
-}
-
-/* Smooth scrolling for all elements */
-* {
-  scroll-behavior: smooth;
-}
-
-/* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1f2937;
+  background: #edf1f5;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #10b981;
-  border-radius: 4px;
+  background: #b8c6d3;
+  border-radius: 999px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #059669;
+@media (max-width: 920px) {
+  .linkedin-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .linkedin-sidebar {
+    order: -1;
+  }
 }
 
-/* Hover effects for better interactivity */
-.hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+@media (max-width: 720px) {
+  .section-shell {
+    padding: 2rem 0;
+  }
 
-.hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
+  .linkedin-page-shell {
+    padding-top: 1rem;
+  }
 
-/* Glass background helper */
-.glass {
-  background: rgba(17, 24, 39, 0.6);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-}
+  .linkedin-cover {
+    min-height: 0;
+  }
 
-/* Button shine effect */
-.btn-shine {
-  position: relative;
-  overflow: hidden;
-}
-.btn-shine::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -150%;
-  height: 100%;
-  width: 150%;
-  background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 70%);
-  transform: skewX(-20deg);
-}
-.btn-shine:hover::before {
-  transition: left 0.8s ease;
-  left: 150%;
-}
+  .linkedin-avatar {
+    width: 120px;
+    height: 120px;
+    margin-top: -60px;
+  }
 
-/* Skeleton shimmer */
-.skeleton {
-  position: relative;
-  background: #1f2937;
-  overflow: hidden;
-}
-.skeleton::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  transform: translateX(-100%);
-  background: linear-gradient(90deg, rgba(31,41,55,0) 0%, rgba(255,255,255,0.06) 50%, rgba(31,41,55,0) 100%);
-  animation: shimmer 1.6s infinite;
-}
-@keyframes shimmer {
-  100% { transform: translateX(100%); }
-}
+  .linkedin-profile-header {
+    grid-template-columns: 1fr;
+  }
 
-/* Card gradient border on hover */
-.card-gradient {
-  position: relative;
-}
-.card-gradient::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 0.75rem; /* matches rounded-xl */
-  padding: 1px; /* border width */
-  background: linear-gradient(135deg, rgba(16,185,129,0.6), rgba(59,130,246,0.4));
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-.card-gradient:hover::before,
-.card-gradient:focus-visible::before {
-  opacity: 1;
-}
+  .linkedin-actions {
+    justify-self: start;
+    width: 100%;
+  }
 
-/* Glass buttons */
-.btn-glass {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1rem;
-  border-radius: 0.75rem;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.06);
-  color: #e5e7eb; /* gray-200 */
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  transition: border-color .2s ease, color .2s ease, background-color .2s ease, transform .2s ease;
-}
-.btn-glass:hover, .btn-glass:focus-visible {
-  border-color: rgba(255,255,255,0.3);
-  color: #fff;
-}
-.btn-glass:active {
-  transform: translateY(1px);
-}
+  .linkedin-featured-item {
+    grid-template-columns: 1fr;
+  }
 
-.pill-glass {
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.05);
-  color: #e5e7eb;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-}
-.pill-glass-active {
-  border: 1px solid rgba(255,255,255,0.35);
-  background: rgba(255,255,255,0.10);
-  color: #fff;
-}
-
-/* Tilt and shine for cards */
-.tilt {
-  transform-style: preserve-3d;
-  will-change: transform;
-  transition: transform 150ms ease;
-  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-}
-
-.card-shine {
-  position: relative;
-  overflow: hidden;
-}
-.card-shine::after {
-  content: "";
-  position: absolute;
-  inset: -30% -60% auto -60%;
-  height: 200%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.0) 20%, rgba(255,255,255,0.12) 40%, rgba(255,255,255,0.0) 60%);
-  transform: translateX(-100%) rotate(10deg);
-  transition: transform 700ms ease;
-  pointer-events: none;
-}
-.card-shine:hover::after,
-.card-shine:focus-within::after {
-  transform: translateX(120%) rotate(10deg);
-}
-
-/* Aurora full-page gradient background */
-.aurora {
-  position: fixed;
-  inset: 0;
-  z-index: -10;
-  overflow: hidden;
-  background: #000; /* pure black base */
-}
-.aurora::before,
-.aurora::after {
-  content: "";
-  position: absolute;
-  width: 60vw;
-  height: 60vw;
-  filter: blur(60px);
-  opacity: 0.45;
-  pointer-events: none;
-}
-.aurora::before {
-  top: -10%;
-  left: -10%;
-  background: radial-gradient(50% 50% at 50% 50%, rgba(16,185,129,0.55) 0%, rgba(16,185,129,0.0) 70%);
-  animation: floatA 22s ease-in-out infinite;
-}
-.aurora::after {
-  bottom: -10%;
-  right: -15%;
-  background: radial-gradient(50% 50% at 50% 50%, rgba(59,130,246,0.55) 0%, rgba(59,130,246,0.0) 70%);
-  animation: floatB 26s ease-in-out infinite;
-}
-@keyframes floatA {
-  0%,100% { transform: translate(0,0) scale(1); }
-  50% { transform: translate(8%, -4%) scale(1.1); }
-}
-@keyframes floatB {
-  0%,100% { transform: translate(0,0) scale(1); }
-  50% { transform: translate(-6%, 6%) scale(1.08); }
-}
-
-/* Simple marquee for tech stack */
-.marquee {
-  display: flex;
-  gap: 2rem;
-  will-change: transform;
-  animation: marquee 30s linear infinite;
-}
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* Avatar: circular with animated gradient ring and feathered edge */
-.avatar-gradient {
-  position: relative;
-  border-radius: 9999px;
-}
-.avatar-gradient::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 9999px;
-  padding: 2px; /* ring width */
-  background: conic-gradient(from 0deg, rgba(16,185,129,0.7), rgba(59,130,246,0.6), rgba(16,185,129,0.7));
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  pointer-events: none;
-  animation: avatarRing 18s linear infinite;
-}
-.avatar {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 9999px;
-  object-fit: cover;
-  -webkit-mask-image: radial-gradient(circle closest-side, #000 90%, rgba(0,0,0,0) 100%);
-          mask-image: radial-gradient(circle closest-side, #000 90%, rgba(0,0,0,0) 100%);
-}
-@keyframes avatarRing { to { transform: rotate(360deg); } }
-
-/* Simple avatar frame (no color), pure black with subtle border */
-.avatar-frame {
-  position: relative;
-  border-radius: 9999px;
-  background: radial-gradient(circle at 50% 55%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 35%, #000 100%);
-  border: 1px solid rgba(255,255,255,0.12);
-  overflow: hidden;
-}
-.avatar-shadow {
-  filter: drop-shadow(0 25px 40px rgba(0,0,0,0.55));
-}
-.avatar-blur {
-  position: absolute;
-  inset: 0;
-  border-radius: 9999px;
-  filter: blur(32px);
-  transform: scale(1.2);
-  opacity: 0.25;
+  .linkedin-skill-item {
+    flex-direction: column;
+  }
 }

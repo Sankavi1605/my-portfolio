@@ -4,203 +4,173 @@ import { FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt, FaSpinner } from 'rea
 import emailjs from '@emailjs/browser';
 
 export default function Contact() {
-    // A ref for the form element, which EmailJS will use to get the data
     const form = useRef();
-
-    // State to manage the submission status (e.g., submitting, success, error)
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [statusMessage, setStatusMessage] = useState('');
 
     const handleSubmit = (e) => {
-        // Prevent the default form submission behavior
         e.preventDefault();
-        
-        // Set submitting state to true and clear any previous status message
         setIsSubmitting(true);
         setStatusMessage('');
 
-        // --- IMPORTANT ---
-        // Replace these with your actual IDs from your EmailJS dashboard!
         const serviceID = 'service_sfqfdbh';
         const templateID = 'template_166chkl';
         const publicKey = 'O2wj2pxk_lkJSNgba';
 
-        // Use the EmailJS SDK to send the form data
         emailjs.sendForm(serviceID, templateID, form.current, publicKey)
-            .then((result) => {
-                // This block runs if the email was sent successfully
-                console.log('SUCCESS!', result.text);
-                setStatusMessage('Message sent successfully!');
-                form.current.reset(); // Clear the form fields after successful submission
-            }, (error) => {
-                // This block runs if there was an error
-                console.log('FAILED...', error.text);
+            .then(() => {
+                setStatusMessage('Message sent successfully.');
+                form.current.reset();
+            }, () => {
                 setStatusMessage('Failed to send message. Please try again.');
             })
             .finally(() => {
-                // This block runs regardless of success or failure
-                setIsSubmitting(false); // Reset the submitting state
-                // Hide the status message after 5 seconds
-                setTimeout(() => {
-                    setStatusMessage('');
-                }, 5000);
+                setIsSubmitting(false);
+                setTimeout(() => setStatusMessage(''), 5000);
             });
     };
 
     return (
-        <div className="max-w-6xl mx-auto">
+        <div className="page-shell">
             <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                className="page-hero"
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="text-center space-y-6 mb-12"
             >
-                <h1 className="text-4xl md:text-5xl font-bold text-white">Get In Touch</h1>
-                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                    I'm always interested in new opportunities and collaborations.
-                    Let's discuss how we can work together!
+                <span className="section-label section-label-centered">Contact</span>
+                <h1>Let&apos;s discuss the right opportunity.</h1>
+                <p>
+                    I&apos;m open to internships, graduate software roles, and practical product work where I can contribute across development and delivery.
                 </p>
             </motion.div>
 
-            <div className="grid lg:grid-cols-2 gap-12">
-                {/* Contact Form */}
+            <div className="grid gap-8 pb-8 lg:grid-cols-[1.2fr_0.8fr]">
                 <motion.div
-                    initial={{ opacity: 0, x: -30 }}
+                    initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="bg-gray-800 rounded-xl p-8 border border-gray-700"
+                    transition={{ delay: 0.15 }}
+                    className="panel rounded-[1.75rem] p-8"
                 >
-                    <h2 className="text-2xl font-bold text-white mb-6">Send a Message</h2>
-                    <form ref={form} onSubmit={handleSubmit} className="space-y-6">
+                    <h2 className="text-2xl font-semibold text-white">Send a message</h2>
+                    <p className="mt-3 text-sm leading-7 text-slate-400">
+                        Share a role, project, or collaboration idea and I&apos;ll get back to you as soon as possible.
+                    </p>
+                    <form ref={form} onSubmit={handleSubmit} className="mt-8 space-y-6">
                         <div>
-                            <label className="block text-gray-300 text-sm font-medium mb-2">
-                                Name *
-                            </label>
+                            <label className="mb-2 block text-sm font-medium text-slate-300">Name</label>
                             <input
                                 type="text"
-                                name="name" // MUST match the variable in your EmailJS template, e.g., {{name}}
+                                name="name"
                                 required
-                                className="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-green-500 focus:outline-none transition-colors"
-                                placeholder="Your Name"
+                                className="input-field"
+                                placeholder="Your name"
                             />
                         </div>
 
                         <div>
-                            <label className="block text-gray-300 text-sm font-medium mb-2">
-                                Email *
-                            </label>
+                            <label className="mb-2 block text-sm font-medium text-slate-300">Email</label>
                             <input
                                 type="email"
-                                name="email" // MUST match {{email}}
+                                name="email"
                                 required
-                                className="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-green-500 focus:outline-none transition-colors"
+                                className="input-field"
                                 placeholder="your.email@example.com"
                             />
                         </div>
 
                         <div>
-                            <label className="block text-gray-300 text-sm font-medium mb-2">
-                                Message *
-                            </label>
+                            <label className="mb-2 block text-sm font-medium text-slate-300">Message</label>
                             <textarea
-                                name="message" // MUST match {{message}}
+                                name="message"
                                 required
                                 rows="6"
-                                className="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-green-500 focus:outline-none transition-colors resize-none"
-                                placeholder="Tell me about your project or opportunity..."
+                                className="input-field resize-none"
+                                placeholder="Tell me about the role, team, or project."
                             />
                         </div>
 
                         <button
                             type="submit"
-                            disabled={isSubmitting} // Disable button while submitting
-                            className="w-full py-3 px-6 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 flex items-center justify-center disabled:bg-gray-500 disabled:cursor-not-allowed"
+                            disabled={isSubmitting}
+                            className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-70"
                         >
                             {isSubmitting ? (
                                 <>
-                                    <FaSpinner className="animate-spin text-xl mr-2" />
+                                    <FaSpinner className="animate-spin text-xl" />
                                     Sending...
                                 </>
                             ) : (
                                 <>
-                                    <FaEnvelope className="text-xl mr-2" />
+                                    <FaEnvelope className="text-lg" />
                                     Send Message
                                 </>
                             )}
                         </button>
-                        
-                        {/* Display the success or error message to the user */}
+
                         {statusMessage && (
-                            <p className={`text-center mt-4 ${statusMessage.includes('successfully') ? 'text-green-400' : 'text-red-400'}`}>
+                            <p className={`text-center text-sm ${statusMessage.includes('successfully') ? 'text-emerald-200' : 'text-red-300'}`}>
                                 {statusMessage}
                             </p>
                         )}
                     </form>
                 </motion.div>
 
-                {/* Contact Information & Socials Section */}
                 <motion.div
-                    initial={{ opacity: 0, x: 30 }}
+                    initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 }}
+                    transition={{ delay: 0.25 }}
                     className="space-y-8"
                 >
-                    <div className="bg-gray-800 rounded-xl p-8 border border-gray-700">
-                        <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
-                        <div className="space-y-6">
-                            <div className="flex items-center space-x-4">
-                                <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
-                                    <FaEnvelope className="text-xl text-white" />
+                    <div className="panel rounded-[1.75rem] p-8">
+                        <h2 className="text-2xl font-semibold text-white">Contact details</h2>
+                        <div className="mt-6 space-y-5">
+                            <div className="flex items-start gap-4">
+                                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-400/10 text-emerald-200">
+                                    <FaEnvelope />
                                 </div>
                                 <div>
-                                    <h3 className="text-white font-semibold">Email</h3>
-                                    <p className="text-gray-400">sankavithayaparan@gmail.com</p>
+                                    <h3 className="font-medium text-white">Email</h3>
+                                    <p className="text-sm text-slate-400">sankavithayaparan@gmail.com</p>
                                 </div>
                             </div>
-                            <div className="flex items-center space-x-4">
-                                <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
-                                    <FaMapMarkerAlt className="text-xl text-white" />
+                            <div className="flex items-start gap-4">
+                                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-400/10 text-emerald-200">
+                                    <FaMapMarkerAlt />
                                 </div>
                                 <div>
-                                    <h3 className="text-white font-semibold">Location</h3>
-                                    <p className="text-gray-400">Colombo, Sri Lanka</p>
+                                    <h3 className="font-medium text-white">Location</h3>
+                                    <p className="text-sm text-slate-400">Colombo, Sri Lanka</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-gray-800 rounded-xl p-8 border border-gray-700">
-                        <h2 className="text-2xl font-bold text-white mb-6">Connect With Me</h2>
-                        <div className="grid grid-cols-2 gap-4">
-                            <a href="https://www.linkedin.com/in/sankavi-thayaparan-b257392a0/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 group">
-                                <FaLinkedin className="text-2xl text-white group-hover:text-green-400 transition-colors duration-200" />
-                                <span className="text-white font-medium group-hover:text-green-400 transition-colors duration-200">LinkedIn</span>
+                    <div className="panel rounded-[1.75rem] p-8">
+                        <h2 className="text-2xl font-semibold text-white">Profiles</h2>
+                        <div className="mt-6 grid gap-4">
+                            <a href="https://www.linkedin.com/in/sankavi-thayaparan-b257392a0/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl border border-white/8 bg-white/4 p-4 text-slate-300 transition-colors hover:text-white">
+                                <FaLinkedin className="text-xl text-emerald-200" />
+                                <span>LinkedIn</span>
                             </a>
-                            <a href="https://github.com/Sankavi1605" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 group">
-                                <FaGithub className="text-2xl text-white group-hover:text-green-400 transition-colors duration-200" />
-                                <span className="text-white font-medium group-hover:text-green-400 transition-colors duration-200">GitHub</span>
+                            <a href="https://github.com/Sankavi1605" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl border border-white/8 bg-white/4 p-4 text-slate-300 transition-colors hover:text-white">
+                                <FaGithub className="text-xl text-emerald-200" />
+                                <span>GitHub</span>
                             </a>
-                            <a href="mailto:sankavithayaparan@gmail.com" className="flex items-center space-x-3 p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 group">
-                                <FaEnvelope className="text-2xl text-white group-hover:text-green-400 transition-colors duration-200" />
-                                <span className="text-white font-medium group-hover:text-green-400 transition-colors duration-200">Email</span>
+                            <a href="mailto:sankavithayaparan@gmail.com" className="flex items-center gap-3 rounded-2xl border border-white/8 bg-white/4 p-4 text-slate-300 transition-colors hover:text-white">
+                                <FaEnvelope className="text-xl text-emerald-200" />
+                                <span>Email</span>
                             </a>
                         </div>
                     </div>
 
-                    <div className="bg-gray-800 rounded-xl p-8 border border-gray-700">
-                        <h2 className="text-2xl font-bold text-white mb-4">Download Resume</h2>
-                        <p className="text-gray-400 mb-6">
-                            Get a detailed overview of my experience, skills, and achievements.
+                    <div className="panel rounded-[1.75rem] p-8">
+                        <h2 className="text-2xl font-semibold text-white">Resume</h2>
+                        <p className="mt-3 text-sm leading-7 text-slate-400">
+                            Download a concise overview of my projects, technical stack, and software engineering background.
                         </p>
-                        <a
-                            href="/SankaviThayaparan_SE.pdf"
-                            download
-                            className="inline-flex items-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105"
-                        >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                            <span>Download PDF</span>
+                        <a href="/SankaviThayaparan_SE.pdf" download className="btn-secondary mt-6 w-fit">
+                            Download PDF
                         </a>
                     </div>
                 </motion.div>

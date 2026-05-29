@@ -1,16 +1,14 @@
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Logo from "../assets/sankavi.png"
-import { FaCompass, FaRoute, FaGlobe, FaQuestionCircle, FaEnvelope, FaLayerGroup } from 'react-icons/fa';
 
 const navItems = [
-    { label: 'Overview', type: 'anchor', targetId: 'overview', icon: <FaCompass /> },
-    { label: 'Program Tracks', type: 'anchor', targetId: 'tracks', icon: <FaLayerGroup /> },
-    { label: 'Journey', type: 'anchor', targetId: 'journey', icon: <FaRoute /> },
-    { label: 'Stories', type: 'anchor', targetId: 'stories', icon: <FaGlobe /> },
-    { label: 'FAQs', type: 'anchor', targetId: 'faqs', icon: <FaQuestionCircle /> },
-    { label: 'Contact', type: 'route', path: '/contact', icon: <FaEnvelope /> },
+    { label: 'About', type: 'anchor', targetId: 'overview' },
+    { label: 'Featured', type: 'anchor', targetId: 'tracks' },
+    { label: 'Workflow', type: 'anchor', targetId: 'journey' },
+    { label: 'Skills', type: 'anchor', targetId: 'stories' },
+    { label: 'FAQ', type: 'anchor', targetId: 'faqs' },
+    { label: 'Contact', type: 'route', path: '/contact' },
 ];
 
 export default function Navbar() {
@@ -20,11 +18,7 @@ export default function Navbar() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const handleScroll = () => {
-            const isScrolled = window.scrollY > 10;
-            setScrolled(isScrolled);
-        };
-
+        const handleScroll = () => setScrolled(window.scrollY > 8);
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -44,112 +38,108 @@ export default function Navbar() {
             } else {
                 scrollToTarget(item.targetId);
             }
-        } else if (item.type === 'route' && item.path) {
+            return;
+        }
+        if (item.path) {
             navigate(item.path);
         }
     };
 
     return (
         <motion.nav
-            className="px-6 py-2 sticky top-0 z-50 backdrop-blur-md"
-            initial={{ y: -20, opacity: 0 }}
+            className={`sticky top-0 z-50 border-b transition-colors ${
+                scrolled ? 'border-[#d9e0e6] bg-white/95 backdrop-blur' : 'border-transparent bg-white'
+            }`}
+            initial={{ y: -18, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.35 }}
         >
-            <div className="max-w-7xl mx-auto flex justify-between items-center">
+            <div className="page-shell flex min-h-[4rem] items-center justify-between gap-4">
                 <Link
                     to="/"
-                    className="text-2xl font-bold text-white/90 hover:text-white transition-all duration-300"
+                    className="flex items-center gap-3 text-[#191919]"
                     onClick={() => handleNavClick({ type: 'anchor', targetId: 'overview' })}
                 >
-                    <img src={Logo} alt="Logo" className="w-16 h-16 object-contain drop-shadow-lg" />
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#0a66c2] to-[#004182] text-base font-bold text-white shadow-[0_8px_18px_rgba(10,102,194,0.22)]">
+                        S
+                    </span>
+                    <div className="hidden sm:block">
+                        <span className="block text-sm font-semibold text-[#0a66c2]">Sankavi Thayaparan</span>
+                        <span className="block text-xs text-[#5f6b7a]">Portfolio profile</span>
+                    </div>
                 </Link>
 
-                {/* Desktop Menu */}
-                <div className="hidden md:flex gap-3">
-                    {navItems.map((item, index) => (
-                        <div key={item.label}>
-                            {item.type === 'route' ? (
-                                <NavLink
-                                    to={item.path}
-                                    className={({ isActive }) =>
-                                        `px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-2 ${isActive
-                                            ? 'bg-green-500/20 text-white border border-green-500/30'
-                                            : 'bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white border border-white/10 hover:border-white/20'
-                                        }`
-                                    }
-                                    onClick={() => handleNavClick(item)}
-                                >
-                                    <span className="text-base">{item.icon}</span>
-                                    <span>{item.label}</span>
-                                </NavLink>
-                            ) : (
-                                <button
-                                    type="button"
-                                    className="px-4 py-2 rounded-lg text-sm font-medium bg-white/5 text-gray-300 transition-all duration-300 flex items-center gap-2 hover:bg-white/10 hover:text-white border border-white/10 hover:border-white/20"
-                                    onClick={() => handleNavClick(item)}
-                                >
-                                    <span className="text-base">{item.icon}</span>
-                                    <span>{item.label}</span>
-                                </button>
-                            )}
-                        </div>
+                <div className="hidden items-center gap-2 md:flex">
+                    {navItems.map((item) => (
+                        item.type === 'route' ? (
+                            <NavLink
+                                key={item.label}
+                                to={item.path}
+                                className={({ isActive }) =>
+                                    `rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                                        isActive ? 'bg-[#0a66c2] text-white' : 'text-[#52616f] hover:bg-[#edf3f8] hover:text-[#0a66c2]'
+                                    }`
+                                }
+                                onClick={() => handleNavClick(item)}
+                            >
+                                {item.label}
+                            </NavLink>
+                        ) : (
+                            <button
+                                key={item.label}
+                                type="button"
+                                className="rounded-full px-4 py-2 text-sm font-medium text-[#52616f] transition-colors hover:bg-[#edf3f8] hover:text-[#0a66c2]"
+                                onClick={() => handleNavClick(item)}
+                            >
+                                {item.label}
+                            </button>
+                        )
                     ))}
                 </div>
 
-                {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden p-2 rounded-lg bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white transition-all border border-white/10"
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    type="button"
+                    className="rounded-full border border-[#d9e0e6] px-3 py-2 text-sm text-[#52616f] md:hidden"
+                    onClick={() => setIsMenuOpen((value) => !value)}
                 >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        {isMenuOpen ? (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        ) : (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                        )}
-                    </svg>
+                    Menu
                 </button>
             </div>
 
-            {/* Mobile Menu */}
             <AnimatePresence>
                 {isMenuOpen && (
                     <motion.div
-                        className="md:hidden mt-3"
+                        className="page-shell pb-4 md:hidden"
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.25 }}
                     >
-                        <div className="flex flex-col gap-2 pt-3 border-t border-white/10">
+                        <div className="rounded-2xl border border-[#d9e0e6] bg-white p-2 shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
                             {navItems.map((item) => (
-                                <div key={item.label}>
-                                    {item.type === 'route' ? (
-                                        <NavLink
-                                            to={item.path}
-                                            className={({ isActive }) =>
-                                                `px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-3 ${isActive
-                                                    ? 'bg-green-500/20 text-white border border-green-500/30'
-                                                    : 'bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white border border-white/10'
-                                                }`
-                                            }
-                                            onClick={() => handleNavClick(item)}
-                                        >
-                                            <span className="text-base">{item.icon}</span>
-                                            <span>{item.label}</span>
-                                        </NavLink>
-                                    ) : (
-                                        <button
-                                            type="button"
-                                            className="px-4 py-2.5 rounded-lg text-sm font-medium bg-white/5 text-gray-300 transition-all duration-300 flex items-center gap-3 hover:bg-white/10 hover:text-white border border-white/10 w-full text-left"
-                                            onClick={() => handleNavClick(item)}
-                                        >
-                                            <span className="text-base">{item.icon}</span>
-                                            <span>{item.label}</span>
-                                        </button>
-                                    )}
-                                </div>
+                                item.type === 'route' ? (
+                                    <NavLink
+                                        key={item.label}
+                                        to={item.path}
+                                        className={({ isActive }) =>
+                                            `block rounded-xl px-4 py-3 text-sm ${
+                                                isActive ? 'bg-[#0a66c2] text-white' : 'text-[#52616f]'
+                                            }`
+                                        }
+                                        onClick={() => handleNavClick(item)}
+                                    >
+                                        {item.label}
+                                    </NavLink>
+                                ) : (
+                                    <button
+                                        key={item.label}
+                                        type="button"
+                                        className="block w-full rounded-xl px-4 py-3 text-left text-sm text-[#52616f]"
+                                        onClick={() => handleNavClick(item)}
+                                    >
+                                        {item.label}
+                                    </button>
+                                )
                             ))}
                         </div>
                     </motion.div>

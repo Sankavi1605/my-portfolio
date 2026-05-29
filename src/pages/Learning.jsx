@@ -1,309 +1,155 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { FaBook, FaCode, FaRocket, FaGraduationCap, FaLightbulb, FaBrain, FaChartLine, FaLaptopCode, FaMicrochip } from 'react-icons/fa';
+import { FaCode, FaRocket, FaGraduationCap, FaLightbulb, FaLaptopCode } from 'react-icons/fa';
 
 export default function Learning() {
-    const [currentLearning, setCurrentLearning] = useState(0);
-
     const learningTopics = [
         {
-            title: "Full-Stack Web Development",
-            description: "Mastering front-end and back-end technologies",
+            title: 'Full-Stack Web Development',
+            description: 'Strengthening end-to-end product development across frontend, backend, and deployment.',
             progress: 80,
             icon: <FaCode className="text-3xl" />,
-            color: "from-red-500 to-orange-500",
-            skills: ["HTML", "CSS", "JavaScript", "React", "Node.js", "Express.js", "MongoDB"]
+            skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js', 'Express.js', 'MongoDB'],
         },
         {
-            title: "Advanced React",
-            description: "Mastering React hooks, context, and performance optimization",
+            title: 'Advanced React',
+            description: 'Improving component architecture, state management, and performance decisions in modern React apps.',
             progress: 65,
             icon: <FaCode className="text-3xl" />,
-            color: "from-blue-500 to-cyan-500",
-            skills: ["React Hooks", "Context API", "Performance", "Testing"]
+            skills: ['React Hooks', 'Context API', 'Performance', 'Testing'],
         },
-    
         {
-            title: "Mobile Development",
-            description: "Building cross-platform mobile apps with React Native",
+            title: 'Mobile Development',
+            description: 'Building stronger mobile product skills through cross-platform development workflows.',
             progress: 60,
             icon: <FaLaptopCode className="text-3xl" />,
-            color: "from-orange-500 to-red-500",
-            skills: ["React Native", "Expo", "Mobile UI", "APIs"]
-        }
+            skills: ['Flutter', 'React Native', 'Mobile UI', 'APIs'],
+        },
     ];
 
     const goals = [
-        
         {
-            title: "Java Script",
-            target: "Sept 2025",
-            status: "In Progress",
-            icon: <FaGraduationCap />
+            title: 'Strengthen JavaScript depth',
+            target: '2026',
+            status: 'In Progress',
+            icon: <FaGraduationCap />,
         },
         {
-            title: "Build and Train an AI Model",
-            target: "Oct 2025",
-            status: "Planning",
-            icon: <FaRocket />
+            title: 'Develop an applied AI project',
+            target: '2026',
+            status: 'Planned',
+            icon: <FaRocket />,
         },
-
-
     ];
 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         setCurrentLearning((prev) => (prev + 1) % learningTopics.length);
-    //     }, 4000);
-
-    //     return () => clearInterval(interval);
-    // }, []);
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0 }
-    };
-
     return (
-        <div className="max-w-6xl mx-auto">
-            {/* Hero Section */}
+        <div className="page-shell">
             <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                className="page-hero"
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-center space-y-6 mb-16"
+                transition={{ duration: 0.6 }}
             >
-                {/* <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                    className="inline-block p-4 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mb-6" */}
-
-                {/* <FaBook className="text-4xl text-white" /> */}
-                {/* </motion.div> */}
-                <h1 className="text-4xl md:text-6xl font-bold text-white">
-                    Currently <span className="text-green-400">Learning</span>
-                </h1>
-                {/* <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                    I'm constantly expanding my skills and knowledge. Here's what I'm currently focused on learning and my goals for the future.
-                </p> */}
+                <span className="section-label section-label-centered">Learning</span>
+                <h1>What I am actively improving right now.</h1>
+                <p>
+                    I treat learning as part of engineering practice. These are the areas I am currently developing to become a stronger product-minded developer.
+                </p>
             </motion.div>
 
-            {/* Current Learning Section */}
             <motion.section
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                className="mb-16"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="pb-10"
             >
-                {/* <motion.h2
-                    variants={itemVariants}
-                    className="text-3xl font-bold text-white mb-8 text-center"
-                >
-                    What I'm Learning Now
-                </motion.h2> */}
-
-                <div className="grid md:grid-cols-2 gap-8">
-                    {learningTopics.map((topic, index) => (
-                        <motion.div
-                            key={topic.title}
-                            variants={itemVariants}
-                            whileHover={{ scale: 1.02 }}
-                            className={`relative overflow-hidden rounded-2xl p-8 border border-gray-700 bg-gray-800/50 backdrop-blur-sm ${index === currentLearning ? '' : ''
-                                }`}
-                        >
-                            {/* Animated Background */}
-                            <div className={`absolute inset-0 bg-gradient-to-br ${topic.color} opacity-10 blur-xl`}></div>
-
-                            <div className="relative z-10">
-                                <div className="flex items-center space-x-4 mb-4">
-                                    <div className={`p-3 rounded-xl bg-gradient-to-br ${topic.color} text-white`}>
-                                        {topic.icon}
-                                    </div>
-                                    <div>
-                                        <h3 className="text-xl font-bold text-white">{topic.title}</h3>
-                                        <p className="text-gray-400 text-sm">{topic.description}</p>
-                                    </div>
+                <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+                    {learningTopics.map((topic) => (
+                        <div key={topic.title} className="panel rounded-[1.75rem] p-8">
+                            <div className="flex items-center gap-4">
+                                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-400/10 text-emerald-200">
+                                    {topic.icon}
                                 </div>
-
-                                {/* Progress Bar */}
-                                <div className="mb-4">
-                                    <div className="flex justify-between items-center mb-2">
-                                        <span className="text-sm text-gray-400">Progress</span>
-                                        <span className="text-sm font-semibold text-green-400">{topic.progress}%</span>
-                                    </div>
-                                    <div className="w-full bg-gray-700 rounded-full h-2">
-                                        <motion.div
-                                            className="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full"
-                                            initial={{ width: 0 }}
-                                            animate={{ width: `${topic.progress}%` }}
-                                            transition={{ duration: 1, delay: 0.5 }}
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Skills */}
-                                <div className="flex flex-wrap gap-2">
-                                    {topic.skills.map((skill) => (
-                                        <span
-                                            key={skill}
-                                            className="px-3 py-1 bg-gray-700 text-green-400 text-xs rounded-full border border-gray-600"
-                                        >
-                                            {skill}
-                                        </span>
-                                    ))}
+                                <div>
+                                    <h3 className="text-xl font-semibold text-white">{topic.title}</h3>
+                                    <p className="text-sm text-slate-400">{topic.description}</p>
                                 </div>
                             </div>
-                        </motion.div>
+
+                            <div className="mt-6">
+                                <div className="mb-2 flex items-center justify-between text-sm">
+                                    <span className="text-slate-400">Progress</span>
+                                    <span className="font-semibold text-emerald-200">{topic.progress}%</span>
+                                </div>
+                                <div className="h-2 rounded-full bg-white/8">
+                                    <motion.div
+                                        className="h-2 rounded-full bg-emerald-400"
+                                        initial={{ width: 0 }}
+                                        animate={{ width: `${topic.progress}%` }}
+                                        transition={{ duration: 0.8 }}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="mt-6 flex flex-wrap gap-2">
+                                {topic.skills.map((skill) => (
+                                    <span key={skill} className="rounded-full border border-white/8 bg-white/4 px-3 py-1 text-xs text-slate-300">
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
                     ))}
                 </div>
             </motion.section>
 
-            {/* Learning Goals Section */}
-            <motion.section
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                className="mb-16"
-            >
-                <motion.h2
-                    variants={itemVariants}
-                    className="text-3xl font-bold text-white mb-8 text-center"
-                >
-                    Learning Goals
-                </motion.h2>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
-                    {goals.map((goal, index) => (
-                        <motion.div
-                            key={goal.title}
-                            variants={itemVariants}
-                            whileHover={{ scale: 1.05, y: -5 }}
-                            className="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-green-500/50 transition-all duration-300 h-full flex flex-col justify-between w-full max-w-xs"
-                        >
-                            <div className="flex items-start space-x-3 mb-4">
-                                <div className="p-2 bg-green-600 rounded-lg text-white flex-shrink-0">
+            <section className="section-divider py-12">
+                <h2 className="mb-8 text-center text-3xl font-semibold text-white">Current learning goals</h2>
+                <div className="grid gap-6 md:grid-cols-2">
+                    {goals.map((goal) => (
+                        <div key={goal.title} className="panel rounded-[1.5rem] p-6">
+                            <div className="flex items-start gap-4">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-400/10 text-emerald-200">
                                     {goal.icon}
                                 </div>
-                                <div className="flex-1 min-w-0">
-                                    <h3 className="text-white font-semibold text-sm leading-tight mb-1">{goal.title}</h3>
-                                    <p className="text-gray-400 text-xs">{goal.target}</p>
+                                <div className="flex-1">
+                                    <h3 className="text-lg font-semibold text-white">{goal.title}</h3>
+                                    <p className="mt-1 text-sm text-slate-400">Target: {goal.target}</p>
                                 </div>
-                            </div>
-                            <div className="flex items-center justify-between mt-auto">
-                                <span className="text-xs text-gray-400">Status</span>
-                                <span className="text-xs px-2 py-1 bg-green-600/20 text-green-400 rounded-full">
+                                <span className="rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-200">
                                     {goal.status}
                                 </span>
                             </div>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
-            </motion.section>
+            </section>
 
-            {/* How I Stand Out Section */}
-            <motion.section
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700"
-            >
-                <div className="max-w-4xl mx-auto">
-                    {/* Header */}
-                    <div className="text-center mb-8">
-                        <motion.div
-                            initial={{ scale: 0 }}
-                            whileInView={{ scale: 1 }}
-                            transition={{ delay: 0.2, type: "spring" }}
-                            className="inline-block p-4 bg-green-600 rounded-full mb-4"
-                        >
-                            <FaLightbulb className="text-3xl text-white" />
-                        </motion.div>
-                        <h2 className="text-3xl font-bold text-white mb-4">How I Stand Out</h2>
-                        <div className="w-20 h-1 bg-green-500 mx-auto rounded-full"></div>
+            <section className="section-divider py-12">
+                <div className="panel rounded-[1.75rem] p-8">
+                    <div className="text-center">
+                        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-400/10 text-emerald-200">
+                            <FaLightbulb className="text-3xl" />
+                        </div>
+                        <h2 className="mt-4 text-3xl font-semibold text-white">How I approach growth</h2>
                     </div>
 
-                    {/* Main Content */}
-                    <div className="grid md:grid-cols-2 gap-8 mb-8">
-                        {/* Left Column */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.3 }}
-                            className="space-y-6"
-                        >
-                            <div className="flex items-start space-x-4">
-                                <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                    <span className="text-white font-bold text-lg">1</span>
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-semibold text-white mb-3">Theoretical Foundation</h3>
-                                    <p className="text-gray-300 leading-relaxed text-base">
-                                        My strong background in physics and mathematics gives me a deep understanding of the science behind technology. This allows me to approach problems with analytical thinking and creative solutions.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="flex items-start space-x-4">
-                                <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                    <span className="text-white font-bold text-lg">2</span>
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-semibold text-white mb-3">Practical Experience</h3>
-                                    <p className="text-gray-300 leading-relaxed text-base">
-                                        Hands-on experience in software engineering and data science means I can bridge theory with real-world applications, creating impactful solutions that actually work.
-                                    </p>
-                                </div>
-                            </div>
-                        </motion.div>
-
-                        {/* Right Column */}
-                        <motion.div
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.4 }}
-                            className="space-y-6"
-                        >
-                            <div className="flex items-start space-x-4">
-                                <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                    <span className="text-white font-bold text-lg">3</span>
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-semibold text-white mb-3">Discipline & Focus</h3>
-                                    <p className="text-gray-300 leading-relaxed text-base">
-                                        Balancing double degrees has taught me exceptional time management and the ability to handle complex projects without losing focus or quality.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="flex items-start space-x-4">
-                                <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                    <span className="text-white font-bold text-lg">4</span>
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-semibold text-white mb-3">Innovation Mindset</h3>
-                                    <p className="text-gray-300 leading-relaxed text-base">
-                                        I'm not just about learning new tech — I'm passionate about applying knowledge practically to build solutions that bridge theory and real-world impact.
-                                    </p>
-                                </div>
-                            </div>
-                        </motion.div>
+                    <div className="mt-8 grid gap-8 md:grid-cols-2">
+                        <div>
+                            <h3 className="text-xl font-semibold text-white">Build around fundamentals</h3>
+                            <p className="mt-3 text-sm leading-7 text-slate-300">
+                                I focus on improving the fundamentals behind good software: clear problem framing, strong JavaScript and React habits, and better engineering judgment.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-semibold text-white">Learn through execution</h3>
+                            <p className="mt-3 text-sm leading-7 text-slate-300">
+                                New concepts become valuable when they show up in real code. I try to turn every learning goal into something I can apply through a project or feature.
+                            </p>
+                        </div>
                     </div>
-
-
                 </div>
-            </motion.section>
+            </section>
         </div>
     );
-} 
+}

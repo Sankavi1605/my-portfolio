@@ -41,35 +41,15 @@ const ScrollToTop = () => {
 
 function App() {
   useEffect(() => {
-    // Enable smooth scrolling for the entire app
     document.documentElement.style.scrollBehavior = 'smooth';
-    
-    // Add custom scroll behavior
-    const handleScroll = () => {
-      const scrolled = window.scrollY;
-      const parallax = document.querySelectorAll('.parallax');
-      
-      parallax.forEach(element => {
-        const speed = element.dataset.speed || 0.5;
-        element.style.transform = `translateY(${scrolled * speed}px)`;
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
   }, []);
 
   return (
-    <>
+    <div className="site-shell">
       <ScrollToTop />
-      {/* Global full-page aurora background behind all routes */}
-      <div className="aurora" />
-      <div className="relative z-10 min-h-screen flex flex-col">
+      <div className="relative z-10 flex min-h-screen flex-col">
         <Navbar />
-        <main className="flex-grow px-6 py-8">
+        <main className="flex-1">
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={
@@ -108,7 +88,7 @@ function App() {
         <Footer />
         <FloatingMessageButton />
       </div>
-    </>
+    </div>
   );
 }
 
