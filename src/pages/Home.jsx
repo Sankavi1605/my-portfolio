@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaExternalLinkAlt, FaGithub, FaLinkedin, FaMapMarkerAlt } from 'react-icons/fa';
 import bgImage from '../assets/bg_image.png';
@@ -60,11 +60,105 @@ const profileHighlights = [
 ];
 
 export default function Home() {
+    const [frameIndex, setFrameIndex] = useState(0);
+    const [primaryFrame, setPrimaryFrame] = useState(bgImage);
+    const [secondaryFrame, setSecondaryFrame] = useState(bgImage);
+    const [activeLayer, setActiveLayer] = useState('primary');
+    const backgroundImageUrl = 'https://pub-123450a9a48c40ae9b57bf4deb9d37e2.r2.dev/ezgif-87a96875df3d6c4c-png-split';
+    const totalFrames = 40;
     const featuredProjects = projects.filter((project) => featuredProjectIds.includes(project.id));
+    const frameUrls = useMemo(
+        () => Array.from({ length: totalFrames }, (_, index) => {
+            const frameNumber = String(index + 1).padStart(3, '0');
+            return `${backgroundImageUrl}/ezgif-frame-${frameNumber}.png`;
+        }),
+        []
+    );
+
+    useEffect(() => {
+        frameUrls.forEach((url) => {
+            const image = new Image();
+            image.src = url;
+        });
+    }, [frameUrls]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollableHeight = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+            const progress = Math.min(Math.max(window.scrollY / scrollableHeight, 0), 1);
+            const nextFrame = Math.min(totalFrames - 1, Math.floor(progress * (totalFrames - 1)));
+            setFrameIndex(nextFrame);
+        };
+
+        handleScroll();
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        const nextFrame = frameUrls[frameIndex] || bgImage;
+        const currentVisibleFrame = activeLayer === 'primary' ? primaryFrame : secondaryFrame;
+
+        if (nextFrame === currentVisibleFrame) {
+            return undefined;
+        }
+
+        const preloadImage = new Image();
+        preloadImage.src = nextFrame;
+        preloadImage.onload = () => {
+            if (activeLayer === 'primary') {
+                setSecondaryFrame(nextFrame);
+                setActiveLayer('secondary');
+            } else {
+                setPrimaryFrame(nextFrame);
+                setActiveLayer('primary');
+            }
+        };
+        preloadImage.onerror = () => {
+            if (activeLayer === 'primary') {
+                setSecondaryFrame(bgImage);
+                setActiveLayer('secondary');
+            } else {
+                setPrimaryFrame(bgImage);
+                setActiveLayer('primary');
+            }
+        };
+
+        return () => {
+            preloadImage.onload = null;
+            preloadImage.onerror = null;
+        };
+    }, [activeLayer, frameIndex, frameUrls, primaryFrame, secondaryFrame]);
 
     return (
-        <div className="linkedin-page-shell">
-            <div className="linkedin-layout">
+        <div className="linkedin-page-shell home-page-bg">
+            <div className="home-page-media" aria-hidden="true">
+                <img
+                    src={primaryFrame}
+                    alt=""
+                    className={`projects-page-media-image ${activeLayer === 'primary' ? 'is-active' : ''}`}
+                    onError={(event) => {
+                        event.currentTarget.onerror = null;
+                        event.currentTarget.src = bgImage;
+                    }}
+                />
+                <img
+                    src={secondaryFrame}
+                    alt=""
+                    className={`projects-page-media-image ${activeLayer === 'secondary' ? 'is-active' : ''}`}
+                    onError={(event) => {
+                        event.currentTarget.onerror = null;
+                        event.currentTarget.src = bgImage;
+                    }}
+                />
+                <div className="home-page-media-overlay" />
+            </div>
+            <div className="linkedin-layout home-page-layout">
                 <div className="linkedin-main-column">
                     <motion.section
                         id="overview"
