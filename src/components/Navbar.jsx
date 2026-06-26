@@ -47,8 +47,8 @@ export default function Navbar() {
 
     return (
         <motion.nav
-            className={`sticky top-0 z-50 border-b transition-colors ${
-                scrolled ? 'border-[#d9e0e6] bg-white/95 backdrop-blur' : 'border-transparent bg-white'
+            className={`fixed top-0 left-0 right-0 z-50 transition-colors ${
+                scrolled ? 'bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/10' : 'bg-transparent border-transparent'
             }`}
             initial={{ y: -18, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -57,15 +57,15 @@ export default function Navbar() {
             <div className="page-shell flex min-h-[4rem] items-center justify-between gap-4">
                 <Link
                     to="/"
-                    className="flex items-center gap-3 text-[#191919]"
+                    className="flex items-center gap-3 text-white"
                     onClick={() => handleNavClick({ type: 'anchor', targetId: 'overview' })}
                 >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#0a66c2] to-[#004182] text-base font-bold text-white shadow-[0_8px_18px_rgba(10,102,194,0.22)]">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] text-base font-bold text-white shadow-[0_8px_18px_rgba(0,0,0,0.5)] border border-white/10">
                         S
                     </span>
                     <div className="hidden sm:block">
-                        <span className="block text-sm font-semibold text-[#0a66c2]">Sankavi Thayaparan</span>
-                        <span className="block text-xs text-[#5f6b7a]">Portfolio profile</span>
+                        <span className="block text-sm font-semibold text-white">Sankavi Thayaparan</span>
+                        <span className="block text-xs text-[#d1d5db]">Portfolio profile</span>
                     </div>
                 </Link>
 
@@ -77,7 +77,7 @@ export default function Navbar() {
                                 to={item.path}
                                 className={({ isActive }) =>
                                     `rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                                        isActive ? 'bg-[#0a66c2] text-white' : 'text-[#52616f] hover:bg-[#edf3f8] hover:text-[#0a66c2]'
+                                        isActive ? 'text-white' : 'text-[#d1d5db] hover:text-white'
                                     }`
                                 }
                                 onClick={() => handleNavClick(item)}
@@ -88,7 +88,7 @@ export default function Navbar() {
                             <button
                                 key={item.label}
                                 type="button"
-                                className="rounded-full px-4 py-2 text-sm font-medium text-[#52616f] transition-colors hover:bg-[#edf3f8] hover:text-[#0a66c2]"
+                                className="rounded-full px-4 py-2 text-sm font-medium text-[#d1d5db] transition-colors hover:text-white"
                                 onClick={() => handleNavClick(item)}
                             >
                                 {item.label}
@@ -99,7 +99,7 @@ export default function Navbar() {
 
                 <button
                     type="button"
-                    className="rounded-full border border-[#d9e0e6] px-3 py-2 text-sm text-[#52616f] md:hidden"
+                    className="rounded-full border border-white/20 px-3 py-2 text-sm text-[#d1d5db] md:hidden"
                     onClick={() => setIsMenuOpen((value) => !value)}
                 >
                     Menu
@@ -115,7 +115,7 @@ export default function Navbar() {
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.25 }}
                     >
-                        <div className="rounded-2xl border border-[#d9e0e6] bg-white p-2 shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
+                        <div className="rounded-2xl border border-white/20 bg-[#1a1a1a]/95 backdrop-blur p-2 shadow-[0_8px_24px_rgba(0,0,0,0.5)]">
                             {navItems.map((item) => (
                                 item.type === 'route' ? (
                                     <NavLink
@@ -123,7 +123,7 @@ export default function Navbar() {
                                         to={item.path}
                                         className={({ isActive }) =>
                                             `block rounded-xl px-4 py-3 text-sm ${
-                                                isActive ? 'bg-[#0a66c2] text-white' : 'text-[#52616f]'
+                                                isActive ? 'bg-white/10 text-white' : 'text-[#d1d5db] hover:text-white'
                                             }`
                                         }
                                         onClick={() => handleNavClick(item)}
@@ -134,7 +134,7 @@ export default function Navbar() {
                                     <button
                                         key={item.label}
                                         type="button"
-                                        className="block w-full rounded-xl px-4 py-3 text-left text-sm text-[#52616f]"
+                                        className="block w-full rounded-xl px-4 py-3 text-left text-sm text-[#d1d5db] hover:text-white"
                                         onClick={() => handleNavClick(item)}
                                     >
                                         {item.label}

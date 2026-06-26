@@ -1,4 +1,4 @@
-import imgAlphintra from "../assets/4.jpg";
+import imgCipherLux from "../assets/cipherlux.jpg";
 import imgBusHub from "../assets/private_buses_in_sri_lanka.jpg";
 import imgAgroMart from "../assets/agromart.jpg";
 import imgApex from "../assets/apex.jpeg";
@@ -9,27 +9,27 @@ import imgTerraSafe from "../assets/terrasafe.jpg";
 export const projects = [
     {
         id: 7,
-        slug: "alphintra-ai-trading-bot",
-        title: "Alphintra: AI Algorithmic Trading Bot",
-        subtitle: "Cloud-Native Algorithmic Trading Platform",
-        status: "2025 - In Progress",
-        badge: "AI Trading Track",
-        duration: "May 2025 - Present",
-        region: "Remote collaboration",
+        slug: "cipherlux-crypto-exchange",
+        title: "CipherLux",
+        subtitle: "Professional Crypto Exchange Platform",
+        status: "2025 - Live",
+        badge: "Fintech Track",
+        duration: "Ongoing",
+        region: "Remote",
         description:
-            "Machine-learning trading platform for designing, backtesting, and deploying automated strategies through no-code and developer-oriented workflows.",
+            "Full-featured cryptocurrency exchange platform for trading Bitcoin, Ethereum, and 350+ digital assets with a fast matching engine, real-time market data, and AI-powered trading workflows.",
         highlights: [
-            "Co-architected a microservices platform so traders can publish strategies through a no-code builder or custom IDE pipelines.",
-            "Developed and backtested Python ML models to forecast market movement and generate trading signals.",
-            "Integrated Binance APIs into a Spring Boot wallet service for secure, real-time asset management and order execution.",
-            "Built a trading engine microservice that ingests market data, loads plug-in strategies, and dispatches buy and stop signals back to Binance.",
+            "Built a professional-grade exchange UI with real-time price feeds, order books, and trading pairs.",
+            "Implemented secure authentication, portfolio tracking, and multi-asset wallet management.",
+            "Integrated AI-driven trading features with automated strategy execution and market analysis.",
+            "Designed for scalability with modern cloud infrastructure and low-latency architecture.",
         ],
-        tech: ["Java", "Python", "Spring Boot", "FastAPI", "Next.js", "Redis", "PostgreSQL", "Docker", "Microservices", "Machine Learning"],
-        link: "https://github.com/Subithan/Alphintra",
-        liveUrl: "http://alphintra.com/",
-        programFocus: "Automating trading with AI-driven execution.",
-        categories: ["backend", "ai", "fullstack"],
-        image: imgAlphintra,
+        tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Redis", "WebSocket", "REST API", "AI/ML"],
+        link: "",
+        liveUrl: "https://app.cipherlux.com/",
+        programFocus: "Building the future of crypto trading with speed, security, and intelligence.",
+        categories: ["web", "fullstack", "ai"],
+        image: imgCipherLux,
     },
     {
         id: 1,

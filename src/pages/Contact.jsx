@@ -45,20 +45,20 @@ export default function Contact() {
                 </p>
             </motion.div>
 
-            <div className="grid gap-8 pb-8 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="contact-layout">
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.15 }}
-                    className="panel rounded-[1.75rem] p-8"
+                    className="panel contact-form-card"
                 >
-                    <h2 className="text-2xl font-semibold text-white">Send a message</h2>
-                    <p className="mt-3 text-sm leading-7 text-slate-400">
+                    <h2 className="section-heading">Send a message</h2>
+                    <p className="section-copy" style={{ marginTop: '0.5rem' }}>
                         Share a role, project, or collaboration idea and I&apos;ll get back to you as soon as possible.
                     </p>
-                    <form ref={form} onSubmit={handleSubmit} className="mt-8 space-y-6">
-                        <div>
-                            <label className="mb-2 block text-sm font-medium text-slate-300">Name</label>
+                    <form ref={form} onSubmit={handleSubmit} className="contact-form">
+                        <div className="form-group">
+                            <label className="form-label">Name</label>
                             <input
                                 type="text"
                                 name="name"
@@ -68,8 +68,8 @@ export default function Contact() {
                             />
                         </div>
 
-                        <div>
-                            <label className="mb-2 block text-sm font-medium text-slate-300">Email</label>
+                        <div className="form-group">
+                            <label className="form-label">Email</label>
                             <input
                                 type="email"
                                 name="email"
@@ -79,12 +79,12 @@ export default function Contact() {
                             />
                         </div>
 
-                        <div>
-                            <label className="mb-2 block text-sm font-medium text-slate-300">Message</label>
+                        <div className="form-group">
+                            <label className="form-label">Message</label>
                             <textarea
                                 name="message"
                                 required
-                                rows="6"
+                                rows="5"
                                 className="input-field resize-none"
                                 placeholder="Tell me about the role, team, or project."
                             />
@@ -93,23 +93,24 @@ export default function Contact() {
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-70"
+                            className="btn-primary contact-submit"
+                            style={{ width: '100%' }}
                         >
                             {isSubmitting ? (
                                 <>
-                                    <FaSpinner className="animate-spin text-xl" />
+                                    <FaSpinner className="animate-spin" />
                                     Sending...
                                 </>
                             ) : (
                                 <>
-                                    <FaEnvelope className="text-lg" />
+                                    <FaEnvelope />
                                     Send Message
                                 </>
                             )}
                         </button>
 
                         {statusMessage && (
-                            <p className={`text-center text-sm ${statusMessage.includes('successfully') ? 'text-emerald-200' : 'text-red-300'}`}>
+                            <p className={`contact-status ${statusMessage.includes('successfully') ? 'contact-status--success' : 'contact-status--error'}`}>
                                 {statusMessage}
                             </p>
                         )}
@@ -120,56 +121,56 @@ export default function Contact() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.25 }}
-                    className="space-y-8"
+                    className="contact-sidebar"
                 >
-                    <div className="panel rounded-[1.75rem] p-8">
-                        <h2 className="text-2xl font-semibold text-white">Contact details</h2>
-                        <div className="mt-6 space-y-5">
-                            <div className="flex items-start gap-4">
-                                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-400/10 text-emerald-200">
+                    <div className="panel contact-info-card">
+                        <h2 className="section-heading">Contact details</h2>
+                        <div className="contact-info-list">
+                            <div className="contact-info-item">
+                                <div className="contact-info-icon">
                                     <FaEnvelope />
                                 </div>
                                 <div>
-                                    <h3 className="font-medium text-white">Email</h3>
-                                    <p className="text-sm text-slate-400">sankavithayaparan@gmail.com</p>
+                                    <h3>Email</h3>
+                                    <p>sankavithayaparan1605@gmail.com</p>
                                 </div>
                             </div>
-                            <div className="flex items-start gap-4">
-                                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-400/10 text-emerald-200">
+                            <div className="contact-info-item">
+                                <div className="contact-info-icon">
                                     <FaMapMarkerAlt />
                                 </div>
                                 <div>
-                                    <h3 className="font-medium text-white">Location</h3>
-                                    <p className="text-sm text-slate-400">Colombo, Sri Lanka</p>
+                                    <h3>Location</h3>
+                                    <p>Colombo, Sri Lanka</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="panel rounded-[1.75rem] p-8">
-                        <h2 className="text-2xl font-semibold text-white">Profiles</h2>
-                        <div className="mt-6 grid gap-4">
-                            <a href="https://www.linkedin.com/in/sankavi-thayaparan-b257392a0/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl border border-white/8 bg-white/4 p-4 text-slate-300 transition-colors hover:text-white">
-                                <FaLinkedin className="text-xl text-emerald-200" />
+                    <div className="panel contact-info-card">
+                        <h2 className="section-heading">Profiles</h2>
+                        <div className="contact-links">
+                            <a href="https://www.linkedin.com/in/sankavi-thayaparan-b257392a0/" target="_blank" rel="noopener noreferrer" className="contact-link-card">
+                                <FaLinkedin />
                                 <span>LinkedIn</span>
                             </a>
-                            <a href="https://github.com/Sankavi1605" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl border border-white/8 bg-white/4 p-4 text-slate-300 transition-colors hover:text-white">
-                                <FaGithub className="text-xl text-emerald-200" />
+                            <a href="https://github.com/Sankavi1605" target="_blank" rel="noopener noreferrer" className="contact-link-card">
+                                <FaGithub />
                                 <span>GitHub</span>
                             </a>
-                            <a href="mailto:sankavithayaparan@gmail.com" className="flex items-center gap-3 rounded-2xl border border-white/8 bg-white/4 p-4 text-slate-300 transition-colors hover:text-white">
-                                <FaEnvelope className="text-xl text-emerald-200" />
+                            <a href="mailto:sankavithayaparan1605@gmail.com" className="contact-link-card">
+                                <FaEnvelope />
                                 <span>Email</span>
                             </a>
                         </div>
                     </div>
 
-                    <div className="panel rounded-[1.75rem] p-8">
-                        <h2 className="text-2xl font-semibold text-white">Resume</h2>
-                        <p className="mt-3 text-sm leading-7 text-slate-400">
+                    <div className="panel contact-info-card">
+                        <h2 className="section-heading">Resume</h2>
+                        <p className="section-copy" style={{ marginTop: '0.5rem' }}>
                             Download a concise overview of my projects, technical stack, and software engineering background.
                         </p>
-                        <a href="/SankaviThayaparan_SE.pdf" download className="btn-secondary mt-6 w-fit">
+                        <a href="/SankaviThayaparan_SE.pdf" download className="btn-secondary" style={{ marginTop: '1rem', display: 'inline-flex' }}>
                             Download PDF
                         </a>
                     </div>
