@@ -11,29 +11,29 @@ const quickFacts = [
 ];
 
 const strengths = [
-    'React and Next.js frontend development',
-    'Spring Boot and Node.js backend services',
-    'Flutter mobile application development',
-    'Database design with PostgreSQL, MySQL, MongoDB',
-    'Deployment workflows with AWS and Vercel',
+    'Frontend Architecture with React & Next.js',
+    'Backend Systems with Spring Boot & Node.js',
+    'Cross-Platform Mobile Development via Flutter',
+    'Data Modeling & Database Administration',
+    'Cloud Deployment & DevOps workflows',
 ];
 
 const workflow = [
     {
-        title: 'Discover',
-        description: 'Clarify the problem, users, constraints, and what a successful release should actually improve.',
+        title: 'Discover & Define',
+        description: 'We begin by analyzing the core problem, understanding user needs, and establishing clear technical constraints to ensure our solution delivers tangible value.',
     },
     {
-        title: 'Design',
-        description: 'Plan the interface, data flow, and technical shape so the product is practical before implementation starts.',
+        title: 'Architect & Design',
+        description: 'Next, we blueprint the system architecture and design intuitive interfaces, mapping out data flows to guarantee a scalable and practical foundation.',
     },
     {
-        title: 'Build',
-        description: 'Develop in small increments, validate the core experience, and keep the codebase maintainable.',
+        title: 'Develop & Iterate',
+        description: 'Development proceeds in agile increments, focusing on code quality, maintainability, and continuous validation of the core user experience.',
     },
     {
-        title: 'Ship',
-        description: 'Deploy, review feedback, and keep improving the product after launch instead of treating release as the end.',
+        title: 'Deploy & Scale',
+        description: 'Finally, we deploy the product, monitor real-world feedback, and continuously refine the system to support long-term growth and stability.',
     },
 ];
 
@@ -137,13 +137,13 @@ export default function Home() {
             <section id="hero" style={{ opacity: heroOpacity }}>
                 <div className="gradient-overlay"></div>
                 <div className="content">
-                    <p className="subtitle">My Focus:</p>
+                    <p className="subtitle">Engineering the Future</p>
                     <h1>
-                        Instantly craft immersive
+                        Crafting scalable software products
                         <br />
-                        <span className="underlined"><span className="line"></span><span>software products</span></span>
+                        <span className="underlined"><span className="line"></span><span>with immersive experiences</span></span>
                         <br />
-                        on the web.
+                        on the web & mobile.
                     </h1>
                     <div className="ctas">
                         <div className="hero-meta text-white" style={{ background: 'rgba(26,26,26,0.6)', padding: '0.875rem 2rem', borderRadius: '0.5rem', border: '1px solid rgba(55,65,81,0.5)' }}>
@@ -171,7 +171,7 @@ export default function Home() {
                 <div className="grid" ref={cardsGridRef}>
                     <div className="card">
                         <h3>About Me</h3>
-                        <p>I build software that is meant to be used in the real world, not only shown in a portfolio. My work spans public transport, finance, safety, and community-focused systems, with attention to clean interfaces and reliable backend implementation.</p>
+                        <p>I architect robust software solutions designed for real-world impact. From dynamic public transit platforms to secure fintech applications, I specialize in bridging intuitive frontend interfaces with resilient backend architectures.</p>
                     </div>
                     <div className="card">
                         <h3>Core Skills</h3>
