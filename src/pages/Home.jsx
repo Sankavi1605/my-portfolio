@@ -136,23 +136,30 @@ export default function Home() {
             {/* Section 1: Hero */}
             <section id="hero" style={{ opacity: heroOpacity }}>
                 <div className="gradient-overlay"></div>
-                <div className="content">
-                    <p className="subtitle">Engineering the Future</p>
-                    <h1>
-                        Crafting scalable software products
-                        <br />
-                        <span className="underlined"><span className="line"></span><span>with immersive experiences</span></span>
-                        <br />
-                        on the web & mobile.
-                    </h1>
-                    <div className="ctas">
-                        <div className="hero-meta text-white" style={{ background: 'rgba(26,26,26,0.6)', padding: '0.875rem 2rem', borderRadius: '0.5rem', border: '1px solid rgba(55,65,81,0.5)' }}>
-                            <FaMapMarkerAlt />
-                            Colombo, Sri Lanka
-                            <span className="hero-meta-dot">•</span>
-                            Open to work
+                <div className="content max-w-7xl mx-auto w-full">
+                    <div className="flex flex-col md:flex-row items-center justify-between w-full gap-12">
+                        <div className="flex flex-col items-start text-left md:w-3/5">
+                            <p className="subtitle">Engineering the Future</p>
+                            <h1 className="text-left">
+                                Crafting scalable software products
+                                <br />
+                                <span className="underlined"><span className="line"></span><span>with immersive experiences</span></span>
+                                <br />
+                                on the web & mobile.
+                            </h1>
+                            <div className="ctas justify-start">
+                                <div className="hero-meta text-white" style={{ background: 'rgba(26,26,26,0.6)', padding: '0.875rem 2rem', borderRadius: '0.5rem', border: '1px solid rgba(55,65,81,0.5)' }}>
+                                    <FaMapMarkerAlt />
+                                    Colombo, Sri Lanka
+                                    <span className="hero-meta-dot">•</span>
+                                    Open to work
+                                </div>
+                                <a href="/contact" className="btn-primary" style={{ height: 'auto', padding: '0.875rem 2rem', borderRadius: '0.5rem' }}>Contact <span>&rarr;</span></a>
+                            </div>
                         </div>
-                        <a href="/contact" className="btn-primary" style={{ height: 'auto', padding: '0.875rem 2rem', borderRadius: '0.5rem' }}>Contact <span>&rarr;</span></a>
+                        <div className="hidden md:flex md:w-2/5 justify-end">
+                            <img src={myImage} alt="Sankavi Thayaparan" className="w-[340px] h-[340px] object-cover rounded-full shadow-2xl" style={{ border: 'none' }} />
+                        </div>
                     </div>
                 </div>
                 <div className="bounce-arrow">
