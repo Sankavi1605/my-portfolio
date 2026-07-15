@@ -17,38 +17,15 @@ class Conf {
     constructor() { }
 
     init() {
-        const gui = new Pane()
-        gui.registerPlugin(EssentialsPlugin);
-
-        const stats = gui.addFolder({
-            title: "stats",
-            expanded: false,
-        });
-        this.fpsGraph = stats.addBlade({
-            view: 'fpsgraph',
-            label: 'fps',
-            rows: 2,
-        });
-
-        /*const settings = gui.addFolder({
-            title: "settings",
-            expanded: false,
-        });*/
-        //settings.addBinding(this, "wireframe");
-        //settings.addBinding(this, "iridescence", { min: 0.01, max: 1.0, step: 0.01 });
-        //settings.addBinding(this, "iridescenceIOR", { min: 1.00, max: 2.33, step: 0.01 });
-
-        this.gui = gui;
+        // Tweakpane disabled
     }
 
     update() {
     }
 
     begin() {
-        this.fpsGraph.begin();
     }
     end() {
-        this.fpsGraph.end();
     }
 
 }
