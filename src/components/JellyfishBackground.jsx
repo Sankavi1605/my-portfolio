@@ -60,20 +60,20 @@ const JellyfishBackground = () => {
 
             // Define camera and target paths for scrollytelling
             const cameraPoints = [
-                new THREE.Vector3(0, 0, 15),      // Hero
-                new THREE.Vector3(-12, -4, 12),   // About
-                new THREE.Vector3(12, -8, 10),    // Projects 1
-                new THREE.Vector3(-8, -12, 14),   // Projects 2
-                new THREE.Vector3(8, -16, 12),    // FAQ
-                new THREE.Vector3(0, -20, 15)     // Contact
+                new THREE.Vector3(0, 0, 18),      // Hero: Zoomed out, overview
+                new THREE.Vector3(0, 2, 4),       // About: Extreme Zoom In, look down
+                new THREE.Vector3(20, -5, 25),    // Projects 1: Extreme Zoom Out & Pan right
+                new THREE.Vector3(-6, -8, 6),     // Projects 2: Zoom In close & Pan left
+                new THREE.Vector3(0, -12, 28),    // FAQ: Extreme Zoom Out straight back
+                new THREE.Vector3(0, -16, 7)      // Contact: Zoom In for the finale
             ];
             const targetPoints = [
                 new THREE.Vector3(0, 0, 0),
-                new THREE.Vector3(0, -2, 0),
                 new THREE.Vector3(0, -4, 0),
-                new THREE.Vector3(0, -6, 0),
+                new THREE.Vector3(0, -4, 0),
                 new THREE.Vector3(0, -8, 0),
-                new THREE.Vector3(0, -10, 0)
+                new THREE.Vector3(0, -12, 0),
+                new THREE.Vector3(0, -14, 0)
             ];
             
             const cameraPath = new THREE.CatmullRomCurve3(cameraPoints);
