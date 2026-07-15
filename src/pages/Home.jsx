@@ -53,8 +53,8 @@ const faqs = [
 ];
 
 const BigCard = ({ children, id }) => (
-    <div id={id} className="w-full min-h-[90vh] flex flex-col items-center justify-center py-20 snap-start">
-        <div className="w-full max-w-5xl p-10 md:p-16 liquid-glass-strong rounded-3xl shadow-2xl flex flex-col gap-8">
+    <div id={id} className="w-full min-h-screen flex flex-col items-center justify-center p-4 snap-start snap-always">
+        <div className="w-full max-w-5xl p-8 md:p-12 liquid-glass-strong rounded-3xl shadow-2xl flex flex-col gap-6">
             {children}
         </div>
     </div>
@@ -78,7 +78,7 @@ export default function Home() {
         <div id="content" className="flex flex-col w-full px-4 md:px-8">
             
             {/* Hero Section */}
-            <div className="w-full min-h-screen flex flex-col items-center justify-center snap-start relative">
+            <div className="w-full min-h-screen flex flex-col items-center justify-center snap-start snap-always relative">
                 <div className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-between gap-12 z-10 p-8 liquid-glass rounded-3xl mt-20">
                     <div className="flex flex-col items-start text-left md:w-3/5">
                         <p className="text-gray-300 tracking-widest uppercase text-sm mb-4 font-semibold">Engineering the Future</p>
