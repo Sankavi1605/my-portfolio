@@ -15,15 +15,19 @@ const JellyfishBackground = () => {
         let clock;
         let appInstance;
 
+        let isInitialized = false;
+
         const init = async () => {
+            if (isInitialized) return;
+            isInitialized = true;
+
             if (!navigator.gpu) {
                 console.error("Your device does not support WebGPU.");
                 return;
             }
 
             renderer = new THREE.WebGPURenderer({
-                antialias: true,
-                alpha: true
+                antialias: true
             });
             renderer.setPixelRatio(window.devicePixelRatio);
             renderer.setSize(window.innerWidth, window.innerHeight);
@@ -84,9 +88,15 @@ const JellyfishBackground = () => {
                 window.removeEventListener("resize", handleResize);
                 window.removeEventListener("scroll", handleScroll);
                 cancelAnimationFrame(animationFrameId);
-                if (containerRef.current && renderer) {
+                if (containerRef.current && renderer && renderer.domElement) {
                     containerRef.current.removeChild(renderer.domElement);
                 }
+                
+                // Cleanup Tweakpane and info elements from document body if they exist
+                const infoElem = document.getElementById("info");
+                if (infoElem) infoElem.remove();
+                const tpElems = document.querySelectorAll(".tp-dfwv");
+                tpElems.forEach(el => el.remove());
             };
         };
 
