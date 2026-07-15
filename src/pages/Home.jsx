@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaExternalLinkAlt, FaGithub, FaLinkedin, FaMapMarkerAlt } from 'react-icons/fa';
 import myImage from '../assets/me.jpg';
@@ -52,266 +52,188 @@ const faqs = [
     },
 ];
 
-const profileHighlights = [
-    '7+ portfolio projects across transport, finance, safety, and community systems',
-    'Full-stack and mobile product development experience',
-    'Based in Colombo, Sri Lanka',
-];
+const BigCard = ({ children, id }) => (
+    <div id={id} className="w-full min-h-[90vh] flex flex-col items-center justify-center py-20 snap-start">
+        <div className="w-full max-w-5xl p-10 md:p-16 liquid-glass-strong rounded-3xl shadow-2xl flex flex-col gap-8">
+            {children}
+        </div>
+    </div>
+);
 
 export default function Home() {
     const featuredProjects = projects.filter((project) => featuredProjectIds.includes(project.id));
     
-    // Veldara Scroll Effects Logic
-    const [heroOpacity, setHeroOpacity] = useState(1);
-    const fixedCardsRef = useRef(null);
-    const cardsGridRef = useRef(null);
-    const triggerRef = useRef(null);
-    const sectionThreeInnerRef = useRef(null);
-
     useEffect(() => {
-        const handleScroll = () => {
-            // Hero fade
-            const fade = Math.max(0, 1 - window.scrollY / (window.innerHeight * 0.3));
-            setHeroOpacity(fade);
-
-            // Fixed Cards
-            if (fixedCardsRef.current && triggerRef.current && cardsGridRef.current) {
-                const rect = triggerRef.current.getBoundingClientRect();
-                const triggerTop = rect.top + window.scrollY;
-                const triggerHeight = rect.height;
-                const scrollY = window.scrollY;
-                const vh = window.innerHeight;
-
-                const start = triggerTop - vh * 0.5;
-                const end = triggerTop + triggerHeight - vh * 0.3;
-                const range = end - start;
-
-                let progress = range > 0 ? (scrollY - start) / range : 0;
-                progress = Math.max(0, Math.min(1, progress));
-
-                const isActive = scrollY >= start - vh * 0.2 && scrollY <= end + vh * 0.3;
-                const fadeIn = Math.min(1, Math.max(0, (scrollY - (start - vh * 0.2)) / (vh * 0.2)));
-                const fadeOut = Math.min(1, Math.max(0, (end + vh * 0.3 - scrollY) / (vh * 0.3)));
-                const containerOpacity = isActive ? Math.min(fadeIn, fadeOut) : 0;
-
-                fixedCardsRef.current.style.opacity = containerOpacity;
-                fixedCardsRef.current.style.pointerEvents = containerOpacity > 0.1 ? 'auto' : 'none';
-
-                const isMobile = window.innerWidth < 768;
-                const revealPct = progress * 130;
-                if (isMobile) {
-                    cardsGridRef.current.style.maskImage = `linear-gradient(to bottom, black ${revealPct}%, transparent ${revealPct + 20}%)`;
-                    cardsGridRef.current.style.webkitMaskImage = `linear-gradient(to bottom, black ${revealPct}%, transparent ${revealPct + 20}%)`;
-                } else {
-                    cardsGridRef.current.style.maskImage = `linear-gradient(to right, black ${revealPct}%, transparent ${revealPct + 15}%)`;
-                    cardsGridRef.current.style.webkitMaskImage = `linear-gradient(to right, black ${revealPct}%, transparent ${revealPct + 15}%)`;
-                }
-            }
+        // Enable scroll snapping for the home page
+        document.documentElement.style.scrollSnapType = 'y mandatory';
+        document.body.style.scrollSnapType = 'y mandatory';
+        
+        return () => {
+            document.documentElement.style.scrollSnapType = 'none';
+            document.body.style.scrollSnapType = 'none';
         };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll();
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    useEffect(() => {
-        // Section 3 Intersection Observer
-        const currentRef = sectionThreeInnerRef.current;
-        if (!currentRef) return;
-
-        const observer = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) {
-                currentRef.classList.add('visible');
-                observer.unobserve(currentRef);
-            }
-        }, { threshold: 0.15 });
-
-        observer.observe(currentRef);
-
-        return () => observer.disconnect();
     }, []);
 
     return (
-        <div id="content">
-            {/* Section 1: Hero */}
-            <section id="hero" style={{ opacity: heroOpacity }}>
-                <div className="gradient-overlay"></div>
-                <div className="content max-w-7xl mx-auto w-full">
-                    <div className="flex flex-col md:flex-row items-center justify-between w-full gap-12">
-                        <div className="flex flex-col items-start text-left md:w-3/5">
-                            <p className="subtitle">Engineering the Future</p>
-                            <h1 className="text-left">
-                                Crafting scalable software products
-                                <br />
-                                <span className="underlined"><span className="line"></span><span>with immersive experiences</span></span>
-                                <br />
-                                on the web & mobile.
-                            </h1>
-                            <div className="ctas justify-start">
-                                <div className="hero-meta text-white liquid-glass" style={{ padding: '0.875rem 2rem', borderRadius: '0.5rem' }}>
-                                    <FaMapMarkerAlt />
-                                    Colombo, Sri Lanka
-                                    <span className="hero-meta-dot">•</span>
-                                    Open to work
-                                </div>
-                                <a href="/contact" className="btn-primary liquid-glass-strong" style={{ height: 'auto', padding: '0.875rem 2rem', borderRadius: '0.5rem', background: 'transparent' }}>Contact <span>&rarr;</span></a>
+        <div id="content" className="flex flex-col w-full px-4 md:px-8">
+            
+            {/* Hero Section */}
+            <div className="w-full min-h-screen flex flex-col items-center justify-center snap-start relative">
+                <div className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-between gap-12 z-10 p-8 liquid-glass rounded-3xl mt-20">
+                    <div className="flex flex-col items-start text-left md:w-3/5">
+                        <p className="text-gray-300 tracking-widest uppercase text-sm mb-4 font-semibold">Engineering the Future</p>
+                        <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-8">
+                            Crafting scalable software products
+                            <br />
+                            <span className="italic text-gray-200">with immersive experiences</span>
+                            <br />
+                            on the web & mobile.
+                        </h1>
+                        <div className="flex flex-wrap items-center gap-6">
+                            <div className="flex items-center gap-3 text-white liquid-glass px-6 py-4 rounded-xl">
+                                <FaMapMarkerAlt />
+                                <span>Colombo, Sri Lanka</span>
+                                <span className="text-gray-400">•</span>
+                                <span>Open to work</span>
                             </div>
-                        </div>
-                        <div className="hidden md:flex md:w-2/5 justify-end">
-                            <img src={myImage} alt="Sankavi Thayaparan" className="w-[340px] h-[340px] object-cover rounded-full shadow-2xl" style={{ border: 'none' }} />
+                            <a href="#contact-section" className="btn-primary liquid-glass-strong px-8 py-4 rounded-xl border border-white/20 text-lg transition-transform hover:scale-105">
+                                Contact &rarr;
+                            </a>
                         </div>
                     </div>
-                </div>
-                <div className="bounce-arrow">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
-                </div>
-            </section>
-
-            {/* Spacer */}
-            <div style={{ height: '150vh' }}></div>
-
-            {/* Fixed Cards Trigger Zone */}
-            <div id="cards-trigger" ref={triggerRef} style={{ height: '200vh' }}></div>
-
-            {/* Fixed Cards */}
-            <div id="fixed-cards" ref={fixedCardsRef}>
-                <div className="grid" ref={cardsGridRef}>
-                    <div className="card liquid-glass">
-                        <h3>About Me</h3>
-                        <p>I architect robust software solutions designed for real-world impact. From dynamic public transit platforms to secure fintech applications, I specialize in bridging intuitive frontend interfaces with resilient backend architectures.</p>
+                    <div className="hidden md:flex md:w-2/5 justify-end">
+                        <img src={myImage} alt="Sankavi Thayaparan" className="w-[380px] h-[380px] object-cover rounded-full shadow-[0_0_50px_rgba(255,255,255,0.1)] border border-white/20" />
                     </div>
-                    <div className="card liquid-glass">
-                        <h3>Core Skills</h3>
-                        <div className="flex flex-col gap-2 mt-2">
+                </div>
+                
+                <div className="absolute bottom-10 animate-bounce text-white/50">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-8 h-8"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                </div>
+            </div>
+
+            {/* About & Skills Card */}
+            <BigCard id="about-section">
+                <h2 className="text-4xl font-bold mb-4">About Me & Skills</h2>
+                <div className="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <p className="text-lg text-gray-200 leading-relaxed">
+                            I architect robust software solutions designed for real-world impact. From dynamic public transit platforms to secure fintech applications, I specialize in bridging intuitive frontend interfaces with resilient backend architectures.
+                        </p>
+                        <h3 className="text-2xl font-bold mt-8 mb-4">Core Strengths</h3>
+                        <div className="flex flex-col gap-3">
                             {strengths.map(s => (
-                                <p key={s} className="flex items-center gap-2 text-sm text-[#d1d5db]">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#2C5C88]"></span>
+                                <p key={s} className="flex items-center gap-3 text-md text-gray-300">
+                                    <span className="w-2 h-2 rounded-full bg-white/70"></span>
                                     {s}
                                 </p>
                             ))}
                         </div>
                     </div>
-                    <div className="card liquid-glass">
-                        <h3>Experience Workflow</h3>
-                        <div className="flex flex-col gap-3 mt-2">
+                    <div>
+                        <h3 className="text-2xl font-bold mb-4">Experience Workflow</h3>
+                        <div className="flex flex-col gap-6">
                             {workflow.map(w => (
-                                <div key={w.title}>
-                                    <h4 className="text-white text-sm font-semibold">{w.title}</h4>
-                                    <p className="text-xs text-[#d1d5db] mt-1">{w.description}</p>
+                                <div key={w.title} className="bg-white/5 p-4 rounded-xl border border-white/10">
+                                    <h4 className="text-white text-lg font-semibold">{w.title}</h4>
+                                    <p className="text-sm text-gray-300 mt-2 leading-relaxed">{w.description}</p>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
-            </div>
+            </BigCard>
 
-            {/* Spacer */}
-            <div style={{ height: '100vh' }}></div>
-
-            {/* Section 3 - Featured Projects */}
-            <section id="section-three">
-                <div className="inner" ref={sectionThreeInnerRef}>
-                    <p>Presenting</p>
-                    <h2>Featured Projects</h2>
-                    
-                    <div className="featured-grid w-full text-left" style={{ maxWidth: '1000px', margin: '0 auto' }}>
-                        {featuredProjects.map((project) => (
-                            <article key={project.id} className="featured-card liquid-glass-strong">
-                                <img src={project.image} alt={project.title} className="featured-card-image" />
-                                <div className="featured-card-body">
-                                    <h3>{project.title}</h3>
-                                    <p className="featured-card-subtitle">{project.subtitle}</p>
-                                    <p className="section-copy text-sm">{project.programFocus}</p>
-                                    <div className="tag-row">
-                                        {project.tech.slice(0, 5).map((item) => (
-                                            <span key={item} className="chip">{item}</span>
-                                        ))}
-                                    </div>
-                                    <div className="link-row">
-                                        <a href={`/projects/${project.slug}`} className="section-link">Details</a>
-                                        {project.liveUrl ? (
-                                            <a href={project.liveUrl} target="_blank" rel="noreferrer" className="section-link">
-                                                Live
-                                                <FaExternalLinkAlt />
-                                            </a>
-                                        ) : null}
-                                        <a href={project.link} target="_blank" rel="noreferrer" className="section-link">
-                                            Code
-                                            <FaGithub />
-                                        </a>
-                                    </div>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
-
-                    <a href="/projects" className="btn-secondary liquid-glass mt-12" style={{ borderRadius: '0.5rem' }}>See all projects</a>
-                </div>
-            </section>
-            
-            {/* Additional content placed below section three */}
-            <div className="home-page-layout pt-32 pb-24 text-left">
-                {/* ── FAQ ─────────────────────────────────── */}
-                <section id="faqs" className="content-section panel liquid-glass-strong">
-                    <h2 className="section-heading">FAQ</h2>
-                    <div className="faq-list">
-                        {faqs.map((item) => (
-                            <div key={item.question} className="faq-item">
-                                <h3>{item.question}</h3>
-                                <p className="section-copy mt-2">{item.answer}</p>
+            {/* Featured Projects Cards */}
+            {featuredProjects.map((project, index) => (
+                <BigCard key={project.id} id={`project-${project.id}`}>
+                    <div className="flex flex-col md:flex-row gap-12 items-center">
+                        <div className="md:w-1/2">
+                            <img src={project.image} alt={project.title} className="w-full rounded-2xl shadow-2xl border border-white/20 object-cover aspect-video" />
+                        </div>
+                        <div className="md:w-1/2 flex flex-col items-start text-left">
+                            <p className="uppercase tracking-widest text-sm text-gray-400 font-semibold mb-2">Featured Project 0{index + 1}</p>
+                            <h2 className="text-4xl font-bold mb-2">{project.title}</h2>
+                            <p className="text-xl text-gray-300 italic mb-4">{project.subtitle}</p>
+                            <p className="text-lg text-gray-200 leading-relaxed mb-6">{project.programFocus}</p>
+                            <div className="flex flex-wrap gap-2 mb-8">
+                                {project.tech.map((item) => (
+                                    <span key={item} className="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm text-gray-200 backdrop-blur-md">{item}</span>
+                                ))}
                             </div>
-                        ))}
+                            <div className="flex flex-wrap gap-4">
+                                <a href={`/projects/${project.slug}`} className="px-6 py-3 rounded-xl liquid-glass border border-white/30 hover:bg-white/20 transition-all font-semibold">View Details</a>
+                                {project.liveUrl && (
+                                    <a href={project.liveUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 rounded-xl liquid-glass border border-white/30 hover:bg-white/20 transition-all font-semibold">
+                                        Live <FaExternalLinkAlt />
+                                    </a>
+                                )}
+                                <a href={project.link} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 rounded-xl liquid-glass border border-white/30 hover:bg-white/20 transition-all font-semibold">
+                                        Code <FaGithub />
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </section>
+                </BigCard>
+            ))}
 
-                {/* ── Bottom Grid ─────────────────────────── */}
-                <div className="bottom-grid mt-6">
-                    <section className="panel bottom-card liquid-glass">
-                        <h2 className="section-heading mb-4 text-xl">Contact</h2>
-                        <div className="contact-links">
-                            <a href="mailto:sankavithayaparan1605@gmail.com" className="contact-link">
-                                <FaEnvelope />
-                                sankavithayaparan1605@gmail.com
-                            </a>
-                            <a
-                                href="https://www.linkedin.com/in/sankavi-thayaparan-b257392a0/"
-                                target="_blank"
-                                rel="noreferrer"
-                                className="contact-link"
-                            >
-                                <FaLinkedin />
-                                LinkedIn Profile
-                            </a>
-                            <a href="https://github.com/Sankavi1605" target="_blank" rel="noreferrer" className="contact-link">
-                                <FaGithub />
-                                GitHub Portfolio
-                            </a>
-                        </div>
-                    </section>
-
-                    <section className="panel bottom-card liquid-glass">
-                        <h2 className="section-heading mb-4 text-xl">Highlights</h2>
-                        <ul className="highlights-list">
-                            {quickFacts.map((fact) => (
-                                <li key={fact}>{fact}</li>
+            {/* FAQ & Highlights */}
+            <BigCard id="faq-section">
+                <div className="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h2 className="text-4xl font-bold mb-8">Frequently Asked Questions</h2>
+                        <div className="flex flex-col gap-6">
+                            {faqs.map((item) => (
+                                <div key={item.question} className="border-b border-white/20 pb-6">
+                                    <h3 className="text-xl font-bold mb-2">{item.question}</h3>
+                                    <p className="text-gray-300 text-lg leading-relaxed">{item.answer}</p>
+                                </div>
                             ))}
-                        </ul>
-                    </section>
-
-                    <section className="panel bottom-card liquid-glass">
-                        <h2 className="section-heading mb-4 text-xl">Education</h2>
-                        <div className="education-card">
-                            <h3>Software Engineering Path</h3>
-                            <p className="featured-card-subtitle mt-1">Academic and project-based development</p>
-                            <p className="section-copy mt-3">
-                                Built portfolio work through hands-on development in full-stack, backend security, mobile apps,
-                                and collaborative product delivery.
-                            </p>
-                            <a href="/education" className="section-link mt-4 inline-block">View education details</a>
                         </div>
-                    </section>
+                    </div>
+                    <div className="flex flex-col gap-8">
+                        <div className="bg-white/5 p-8 rounded-2xl border border-white/20">
+                            <h2 className="text-3xl font-bold mb-6">Quick Highlights</h2>
+                            <ul className="flex flex-col gap-4">
+                                {quickFacts.map((fact) => (
+                                    <li key={fact} className="flex items-start gap-3 text-lg text-gray-200">
+                                        <span className="w-2 h-2 mt-2 rounded-full bg-white/70 flex-shrink-0"></span>
+                                        <span>{fact}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="bg-white/5 p-8 rounded-2xl border border-white/20">
+                            <h2 className="text-3xl font-bold mb-4">Education Path</h2>
+                            <p className="text-lg text-gray-300 leading-relaxed mb-6">
+                                Built portfolio work through hands-on development in full-stack, backend security, mobile apps, and collaborative product delivery.
+                            </p>
+                            <a href="/education" className="px-6 py-3 rounded-xl liquid-glass border border-white/30 inline-block font-semibold">View Education Details &rarr;</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </BigCard>
+
+            {/* Contact Section */}
+            <BigCard id="contact-section">
+                <div className="text-center w-full max-w-3xl mx-auto flex flex-col items-center">
+                    <h2 className="text-5xl font-bold mb-6">Let's build something together.</h2>
+                    <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+                        Whether you are looking for a software engineering intern, a graduate developer, or just want to chat about tech, I'd love to hear from you.
+                    </p>
+                    <div className="flex flex-col md:flex-row gap-6 w-full justify-center">
+                        <a href="mailto:sankavithayaparan1605@gmail.com" className="flex items-center justify-center gap-3 px-8 py-5 rounded-2xl liquid-glass border border-white/30 hover:bg-white/20 transition-all text-xl font-semibold">
+                            <FaEnvelope /> Email Me
+                        </a>
+                        <a href="https://www.linkedin.com/in/sankavi-thayaparan-b257392a0/" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 px-8 py-5 rounded-2xl liquid-glass border border-white/30 hover:bg-white/20 transition-all text-xl font-semibold">
+                            <FaLinkedin /> LinkedIn
+                        </a>
+                        <a href="https://github.com/Sankavi1605" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 px-8 py-5 rounded-2xl liquid-glass border border-white/30 hover:bg-white/20 transition-all text-xl font-semibold">
+                            <FaGithub /> GitHub
+                        </a>
+                    </div>
+                </div>
+            </BigCard>
+            
         </div>
     );
 }
