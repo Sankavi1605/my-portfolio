@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import FloatingMessageButton from './components/FloatingMessageButton';
-import VeldaraBackground from './components/VeldaraBackground';
+import JellyfishBackground from './components/JellyfishBackground';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import ProjectDetails from './pages/ProjectDetails';
@@ -48,7 +48,7 @@ function App() {
   return (
     <div className="site-shell">
       <ScrollToTop />
-      <VeldaraBackground />
+      <JellyfishBackground />
       <div className="relative z-10 flex min-h-screen flex-col">
         <Navbar />
         <main className="flex-1">

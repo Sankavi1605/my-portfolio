@@ -148,13 +148,13 @@ export default function Home() {
                                 on the web & mobile.
                             </h1>
                             <div className="ctas justify-start">
-                                <div className="hero-meta text-white" style={{ background: 'rgba(26,26,26,0.6)', padding: '0.875rem 2rem', borderRadius: '0.5rem', border: '1px solid rgba(55,65,81,0.5)' }}>
+                                <div className="hero-meta text-white liquid-glass" style={{ padding: '0.875rem 2rem', borderRadius: '0.5rem' }}>
                                     <FaMapMarkerAlt />
                                     Colombo, Sri Lanka
                                     <span className="hero-meta-dot">•</span>
                                     Open to work
                                 </div>
-                                <a href="/contact" className="btn-primary" style={{ height: 'auto', padding: '0.875rem 2rem', borderRadius: '0.5rem' }}>Contact <span>&rarr;</span></a>
+                                <a href="/contact" className="btn-primary liquid-glass-strong" style={{ height: 'auto', padding: '0.875rem 2rem', borderRadius: '0.5rem', background: 'transparent' }}>Contact <span>&rarr;</span></a>
                             </div>
                         </div>
                         <div className="hidden md:flex md:w-2/5 justify-end">
@@ -176,11 +176,11 @@ export default function Home() {
             {/* Fixed Cards */}
             <div id="fixed-cards" ref={fixedCardsRef}>
                 <div className="grid" ref={cardsGridRef}>
-                    <div className="card">
+                    <div className="card liquid-glass">
                         <h3>About Me</h3>
                         <p>I architect robust software solutions designed for real-world impact. From dynamic public transit platforms to secure fintech applications, I specialize in bridging intuitive frontend interfaces with resilient backend architectures.</p>
                     </div>
-                    <div className="card">
+                    <div className="card liquid-glass">
                         <h3>Core Skills</h3>
                         <div className="flex flex-col gap-2 mt-2">
                             {strengths.map(s => (
@@ -191,7 +191,7 @@ export default function Home() {
                             ))}
                         </div>
                     </div>
-                    <div className="card">
+                    <div className="card liquid-glass">
                         <h3>Experience Workflow</h3>
                         <div className="flex flex-col gap-3 mt-2">
                             {workflow.map(w => (
@@ -216,7 +216,7 @@ export default function Home() {
                     
                     <div className="featured-grid w-full text-left" style={{ maxWidth: '1000px', margin: '0 auto' }}>
                         {featuredProjects.map((project) => (
-                            <article key={project.id} className="featured-card" style={{ background: 'rgba(26,26,26,0.4)' }}>
+                            <article key={project.id} className="featured-card liquid-glass-strong">
                                 <img src={project.image} alt={project.title} className="featured-card-image" />
                                 <div className="featured-card-body">
                                     <h3>{project.title}</h3>
@@ -245,14 +245,14 @@ export default function Home() {
                         ))}
                     </div>
 
-                    <a href="/projects" className="btn-secondary mt-12" style={{ borderRadius: '0.5rem', border: '1px solid rgba(255,255,255,0.1)' }}>See all projects</a>
+                    <a href="/projects" className="btn-secondary liquid-glass mt-12" style={{ borderRadius: '0.5rem' }}>See all projects</a>
                 </div>
             </section>
             
             {/* Additional content placed below section three */}
             <div className="home-page-layout pt-32 pb-24 text-left">
                 {/* ── FAQ ─────────────────────────────────── */}
-                <section id="faqs" className="content-section panel" style={{ background: 'rgba(26,26,26,0.4)' }}>
+                <section id="faqs" className="content-section panel liquid-glass-strong">
                     <h2 className="section-heading">FAQ</h2>
                     <div className="faq-list">
                         {faqs.map((item) => (
@@ -266,7 +266,7 @@ export default function Home() {
 
                 {/* ── Bottom Grid ─────────────────────────── */}
                 <div className="bottom-grid mt-6">
-                    <section className="panel bottom-card" style={{ background: 'rgba(26,26,26,0.4)' }}>
+                    <section className="panel bottom-card liquid-glass">
                         <h2 className="section-heading mb-4 text-xl">Contact</h2>
                         <div className="contact-links">
                             <a href="mailto:sankavithayaparan1605@gmail.com" className="contact-link">
@@ -289,7 +289,7 @@ export default function Home() {
                         </div>
                     </section>
 
-                    <section className="panel bottom-card" style={{ background: 'rgba(26,26,26,0.4)' }}>
+                    <section className="panel bottom-card liquid-glass">
                         <h2 className="section-heading mb-4 text-xl">Highlights</h2>
                         <ul className="highlights-list">
                             {quickFacts.map((fact) => (
@@ -298,7 +298,7 @@ export default function Home() {
                         </ul>
                     </section>
 
-                    <section className="panel bottom-card" style={{ background: 'rgba(26,26,26,0.4)' }}>
+                    <section className="panel bottom-card liquid-glass">
                         <h2 className="section-heading mb-4 text-xl">Education</h2>
                         <div className="education-card">
                             <h3>Software Engineering Path</h3>

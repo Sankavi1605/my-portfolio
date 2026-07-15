@@ -48,7 +48,7 @@ export default function Navbar() {
     return (
         <motion.nav
             className={`fixed top-0 left-0 right-0 z-50 transition-colors ${
-                scrolled ? 'bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/10' : 'bg-transparent border-transparent'
+                scrolled ? 'liquid-glass' : 'bg-transparent border-transparent'
             }`}
             initial={{ y: -18, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
