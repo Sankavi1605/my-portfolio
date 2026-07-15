@@ -5,7 +5,8 @@ import imgApex from "../assets/apex.jpeg";
 import imgSameepa from "../assets/sameepa.jpg";
 import imgSecureLogin from "../assets/login.jpg";
 import imgTerraSafe from "../assets/terrasafe.jpg";
-import imgAlphintra from "../assets/bg_image.png"; // Fallback image for new projects
+import imgAlphintra3D from "../assets/alphintra_3d.png";
+import imgAlphintraCorp from "../assets/alphintra_corporate.png";
 
 export const projects = [
     {
@@ -28,7 +29,7 @@ export const projects = [
         liveUrl: "https://alphintra.com",
         programFocus: "Delivering high-performance, interactive 3D web experiences.",
         categories: ["web", "3d"],
-        image: imgAlphintra,
+        image: imgAlphintra3D,
     },
     {
         id: 9,
@@ -51,7 +52,7 @@ export const projects = [
         liveUrl: "https://welcome-alphintra-kappa.vercel.app/",
         programFocus: "Blending modern web architecture with AI integrations.",
         categories: ["web", "fullstack", "ai"],
-        image: imgAlphintra,
+        image: imgAlphintraCorp,
     },
     {
         id: 7,

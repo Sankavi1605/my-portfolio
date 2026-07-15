@@ -139,7 +139,8 @@ export default function Home() {
             <div className="w-full min-h-screen flex flex-col items-center justify-center snap-start snap-always relative">
                 <div className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-between gap-12 z-10 p-8 liquid-glass rounded-3xl mt-20">
                     <div className="flex flex-col items-start text-left md:w-3/5">
-                        <p className="text-gray-300 tracking-widest uppercase text-sm mb-4 font-semibold">Engineering the Future</p>
+                        <h2 className="text-2xl md:text-3xl font-semibold mb-2 text-white">Hi, I'm Sankavi Thayaparan</h2>
+                        <p className="text-gray-300 tracking-widest uppercase text-sm mb-4 font-semibold">Web Developer • Engineering the Future</p>
                         <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-8">
                             Crafting scalable software products
                             <br />
