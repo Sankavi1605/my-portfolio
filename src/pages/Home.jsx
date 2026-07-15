@@ -11,69 +11,80 @@ const quickFacts = [
 ];
 
 const strengths = [
-    'Frontend Architecture with React & Next.js',
-    'Backend Systems with Spring Boot & Node.js',
-    'Cross-Platform Mobile Development via Flutter',
-    'Data Modeling & Database Administration',
-    'Cloud Deployment & DevOps workflows',
+    'Frontend: React.js, Next.js, Vue.js, Tailwind CSS',
+    'Backend: Node.js, Express.js, Django, FastAPI, REST APIs',
+    'Mobile & UI: Responsive Design, Component-Based Dev',
+    'Databases: MongoDB, PostgreSQL, MySQL',
+    'Cloud & Tools: Docker, Google Cloud Run, Vercel, Git',
 ];
 
-const workflow = [
+const experience = [
     {
-        title: 'Discover & Define',
-        description: 'We begin by analyzing the core problem, understanding user needs, and establishing clear technical constraints to ensure our solution delivers tangible value.',
+        title: 'Frontend Developer @ Alphintra',
+        date: 'Jan 2026 – Present',
+        description: 'Developed responsive web applications using React.js, Next.js, and Tailwind CSS. Built reusable components, integrated REST APIs, and connected AI-powered services while optimizing performance and accessibility.',
     },
     {
-        title: 'Architect & Design',
-        description: 'Next, we blueprint the system architecture and design intuitive interfaces, mapping out data flows to guarantee a scalable and practical foundation.',
-    },
-    {
-        title: 'Develop & Iterate',
-        description: 'Development proceeds in agile increments, focusing on code quality, maintainability, and continuous validation of the core user experience.',
-    },
-    {
-        title: 'Deploy & Scale',
-        description: 'Finally, we deploy the product, monitor real-world feedback, and continuously refine the system to support long-term growth and stability.',
-    },
+        title: 'Software Engineer Intern @ MoodforCode',
+        date: 'Dec 2025 – May 2026',
+        description: 'Developed frontend features and integrated backend services across web applications. Collaborated in Agile environments, improving application maintainability through structured troubleshooting and code reviews.',
+    }
 ];
 
-const faqs = [
+const education = [
     {
-        question: 'What roles are you currently targeting?',
-        answer: 'Internships, graduate software engineering roles, and early-career full-stack or mobile product opportunities.',
+        degree: 'Bachelor of Science in Computer Science',
+        institution: 'University of Colombo School of Computing',
+        year: '2023 – Present'
     },
     {
-        question: 'Which technologies do you use most?',
-        answer: 'React, Next.js, Spring Boot, Node.js, Flutter, PostgreSQL, and cloud deployment platforms including AWS and Vercel.',
-    },
-    {
-        question: 'What kind of products do you enjoy building?',
-        answer: 'Products with clear business value where engineering quality and user experience both matter.',
-    },
+        degree: 'G.C.E Advanced Level — Physical Science',
+        institution: 'Vembadi Girls’ High School, Jaffna',
+        year: '2019 – 2021'
+    }
 ];
 
-// Sound generation function
+const certifications = [
+    'Next.js Essential Training — LinkedIn Learning',
+    'Front End Development Libraries — freeCodeCamp',
+    'HTML, CSS, and JavaScript for Web Developers — Coursera',
+    'Machine Learning with Python Foundations — LinkedIn Learning'
+];
+
+// Sound generation function (Air Woosh Low Pitch)
 const playScrollSound = () => {
     try {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         if (!AudioContext) return;
         const ctx = new AudioContext();
-        const osc = ctx.createOscillator();
+        
+        const bufferSize = ctx.sampleRate * 0.5; // 0.5 seconds
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+            data[i] = Math.random() * 2 - 1; // White noise
+        }
+        
+        const noiseSource = ctx.createBufferSource();
+        noiseSource.buffer = buffer;
+        
+        // Low pitch filter sweep for the woosh effect
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(400, ctx.currentTime);
+        filter.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.5);
+        filter.Q.value = 0.5;
+        
         const gain = ctx.createGain();
-        
-        // A soft, deep, watery "bloop" or whoosh sound
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(300, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.4);
-        
         gain.gain.setValueAtTime(0, ctx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 0.1);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+        gain.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
         
-        osc.connect(gain);
+        noiseSource.connect(filter);
+        filter.connect(gain);
         gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.4);
+        
+        noiseSource.start();
     } catch (e) {
         // Ignore audio errors (e.g. strict autoplay policy before interaction)
     }
@@ -164,7 +175,7 @@ export default function Home() {
                 <div className="grid md:grid-cols-2 gap-12">
                     <div>
                         <p className="text-lg text-gray-200 leading-relaxed">
-                            I architect robust software solutions designed for real-world impact. From dynamic public transit platforms to secure fintech applications, I specialize in bridging intuitive frontend interfaces with resilient backend architectures.
+                            Computer Science undergraduate and Web Developer with hands-on experience building modern, responsive, and high-performance web applications using React.js, Next.js, Vue.js, JavaScript, and Tailwind CSS. I specialize in translating UI requirements into clean user interfaces, integrating REST APIs, optimizing frontend performance, and deploying web applications.
                         </p>
                         <h3 className="text-2xl font-bold mt-8 mb-4">Core Strengths</h3>
                         <div className="flex flex-col gap-3">
@@ -177,12 +188,13 @@ export default function Home() {
                         </div>
                     </div>
                     <div>
-                        <h3 className="text-2xl font-bold mb-4">Experience Workflow</h3>
+                        <h3 className="text-2xl font-bold mb-4">Professional Experience</h3>
                         <div className="flex flex-col gap-6">
-                            {workflow.map(w => (
+                            {experience.map(w => (
                                 <div key={w.title} className="bg-white/5 p-4 rounded-xl border border-white/10">
                                     <h4 className="text-white text-lg font-semibold">{w.title}</h4>
-                                    <p className="text-sm text-gray-300 mt-2 leading-relaxed">{w.description}</p>
+                                    <p className="text-xs text-gray-400 font-mono mt-1 mb-2">{w.date}</p>
+                                    <p className="text-sm text-gray-300 leading-relaxed">{w.description}</p>
                                 </div>
                             ))}
                         </div>
@@ -223,38 +235,38 @@ export default function Home() {
                 </BigCard>
             ))}
 
-            {/* FAQ & Highlights */}
+            {/* Education & Highlights */}
             <BigCard id="faq-section" align="right">
                 <div className="grid md:grid-cols-2 gap-12">
                     <div>
-                        <h2 className="text-4xl font-bold mb-8">Frequently Asked Questions</h2>
+                        <h2 className="text-4xl font-bold mb-8">Education Path</h2>
                         <div className="flex flex-col gap-6">
-                            {faqs.map((item) => (
-                                <div key={item.question} className="border-b border-white/20 pb-6">
-                                    <h3 className="text-xl font-bold mb-2">{item.question}</h3>
-                                    <p className="text-gray-300 text-lg leading-relaxed">{item.answer}</p>
+                            {education.map((item) => (
+                                <div key={item.degree} className="border-b border-white/20 pb-6">
+                                    <h3 className="text-xl font-bold mb-2">{item.degree}</h3>
+                                    <p className="text-gray-300 text-lg">{item.institution}</p>
+                                    <p className="text-gray-400 text-sm font-mono mt-1">{item.year}</p>
                                 </div>
                             ))}
                         </div>
                     </div>
                     <div className="flex flex-col gap-8">
                         <div className="bg-white/5 p-8 rounded-2xl border border-white/20">
-                            <h2 className="text-3xl font-bold mb-6">Quick Highlights</h2>
+                            <h2 className="text-3xl font-bold mb-6">Certifications</h2>
                             <ul className="flex flex-col gap-4">
-                                {quickFacts.map((fact) => (
-                                    <li key={fact} className="flex items-start gap-3 text-lg text-gray-200">
+                                {certifications.map((cert) => (
+                                    <li key={cert} className="flex items-start gap-3 text-lg text-gray-200">
                                         <span className="w-2 h-2 mt-2 rounded-full bg-white/70 flex-shrink-0"></span>
-                                        <span>{fact}</span>
+                                        <span>{cert}</span>
                                     </li>
                                 ))}
                             </ul>
                         </div>
                         <div className="bg-white/5 p-8 rounded-2xl border border-white/20">
-                            <h2 className="text-3xl font-bold mb-4">Education Path</h2>
+                            <h2 className="text-3xl font-bold mb-4">Quick Summary</h2>
                             <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                                Built portfolio work through hands-on development in full-stack, backend security, mobile apps, and collaborative product delivery.
+                                Focused on building user-friendly digital experiences, writing clean, maintainable code, and working independently in remote agile environments.
                             </p>
-                            <a href="/education" className="px-6 py-3 rounded-xl liquid-glass border border-white/30 inline-block font-semibold">View Education Details &rarr;</a>
                         </div>
                     </div>
                 </div>
