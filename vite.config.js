@@ -9,4 +9,8 @@ export default defineConfig({
     tailwindcss(),
     tslOperatorPlugin({logs:false})
   ],
+  build: {
+    minify: false,
+    target: 'esnext'
+  }
 })
