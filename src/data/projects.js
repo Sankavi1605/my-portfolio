@@ -1,5 +1,5 @@
 import imgCipherLux from "../assets/cipherlux.jpg";
-import imgBusHub from "../assets/private_buses_in_sri_lanka.jpg";
+import imgBusHub from "../assets/bushublk_new.jpg";
 import imgAgroMart from "../assets/agromart.jpg";
 import imgApex from "../assets/apex.jpeg";
 import imgSameepa from "../assets/sameepa.jpg";
