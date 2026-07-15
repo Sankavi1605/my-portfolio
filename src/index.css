@@ -8,7 +8,7 @@
 }
 
 
-::root {
+:root {
   color-scheme: dark;
   --page-bg: #010101;
   --surface: rgba(26, 26, 26, 0.6);
