@@ -52,13 +52,60 @@ const faqs = [
     },
 ];
 
-const BigCard = ({ children, id }) => (
-    <div id={id} className="w-full min-h-screen flex flex-col items-center justify-center p-4 snap-start snap-always">
-        <div className="w-full max-w-5xl p-8 md:p-12 liquid-glass-strong rounded-3xl shadow-2xl flex flex-col gap-6">
-            {children}
-        </div>
-    </div>
-);
+// Sound generation function
+const playScrollSound = () => {
+    try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        
+        // A soft, deep, watery "bloop" or whoosh sound
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(300, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.4);
+        
+        gain.gain.setValueAtTime(0, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+        
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.4);
+    } catch (e) {
+        // Ignore audio errors (e.g. strict autoplay policy before interaction)
+    }
+};
+
+const BigCard = ({ children, id, align = 'center' }) => {
+    let alignmentClass = 'items-center';
+    if (align === 'left') {
+        alignmentClass = 'items-start md:pl-20';
+    } else if (align === 'right') {
+        alignmentClass = 'items-end md:pr-20';
+    }
+
+    return (
+        <motion.div 
+            id={id} 
+            className={`w-full min-h-screen flex flex-col justify-center p-4 snap-start snap-always ${alignmentClass}`}
+            onViewportEnter={() => playScrollSound()}
+            viewport={{ amount: 0.5, margin: "-10%" }}
+        >
+            <motion.div 
+                initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                viewport={{ once: false, amount: 0.3 }}
+                className="w-full max-w-5xl p-8 md:p-12 liquid-glass-strong rounded-3xl shadow-2xl flex flex-col gap-6"
+            >
+                {children}
+            </motion.div>
+        </motion.div>
+    );
+};
 
 export default function Home() {
     const featuredProjects = projects.filter((project) => featuredProjectIds.includes(project.id));
@@ -112,7 +159,7 @@ export default function Home() {
             </div>
 
             {/* About & Skills Card */}
-            <BigCard id="about-section">
+            <BigCard id="about-section" align="left">
                 <h2 className="text-4xl font-bold mb-4">About Me & Skills</h2>
                 <div className="grid md:grid-cols-2 gap-12">
                     <div>
@@ -145,7 +192,7 @@ export default function Home() {
 
             {/* Featured Projects Cards */}
             {featuredProjects.map((project, index) => (
-                <BigCard key={project.id} id={`project-${project.id}`}>
+                <BigCard key={project.id} id={`project-${project.id}`} align={index % 2 === 0 ? "right" : "left"}>
                     <div className="flex flex-col md:flex-row gap-12 items-center">
                         <div className="md:w-1/2">
                             <img src={project.image} alt={project.title} className="w-full rounded-2xl shadow-2xl border border-white/20 object-cover aspect-video" />
@@ -177,7 +224,7 @@ export default function Home() {
             ))}
 
             {/* FAQ & Highlights */}
-            <BigCard id="faq-section">
+            <BigCard id="faq-section" align="right">
                 <div className="grid md:grid-cols-2 gap-12">
                     <div>
                         <h2 className="text-4xl font-bold mb-8">Frequently Asked Questions</h2>
@@ -214,7 +261,7 @@ export default function Home() {
             </BigCard>
 
             {/* Contact Section */}
-            <BigCard id="contact-section">
+            <BigCard id="contact-section" align="center">
                 <div className="text-center w-full max-w-3xl mx-auto flex flex-col items-center">
                     <h2 className="text-5xl font-bold mb-6">Let's build something together.</h2>
                     <p className="text-xl text-gray-300 mb-12 leading-relaxed">

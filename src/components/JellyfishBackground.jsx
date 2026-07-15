@@ -79,19 +79,18 @@ const JellyfishBackground = () => {
             const cameraPath = new THREE.CatmullRomCurve3(cameraPoints);
             const targetPath = new THREE.CatmullRomCurve3(targetPoints);
 
+            let targetCameraPos = cameraPath.getPoint(0);
+            let targetCameraLookAt = targetPath.getPoint(0);
+            let currentCameraLookAt = targetPath.getPoint(0).clone();
+
             const handleScroll = () => {
                 const scrollY = window.scrollY;
                 const maxScroll = document.body.scrollHeight - window.innerHeight;
                 let scrollProgress = maxScroll > 0 ? scrollY / maxScroll : 0;
                 scrollProgress = Math.max(0, Math.min(1, scrollProgress));
                 
-                if (appInstance && appInstance.camera) {
-                    const currentPos = cameraPath.getPoint(scrollProgress);
-                    const currentTarget = targetPath.getPoint(scrollProgress);
-                    
-                    appInstance.camera.position.copy(currentPos);
-                    appInstance.camera.lookAt(currentTarget);
-                }
+                targetCameraPos = cameraPath.getPoint(scrollProgress);
+                targetCameraLookAt = targetPath.getPoint(scrollProgress);
             };
             window.addEventListener("scroll", handleScroll);
 
@@ -99,7 +98,13 @@ const JellyfishBackground = () => {
             const animate = async () => {
                 const delta = clock.getDelta();
                 const elapsed = clock.getElapsedTime();
-                if (appInstance) {
+                
+                if (appInstance && appInstance.camera) {
+                    // Smoothly interpolate camera position and lookAt (Lerp)
+                    appInstance.camera.position.lerp(targetCameraPos, 0.05);
+                    currentCameraLookAt.lerp(targetCameraLookAt, 0.05);
+                    appInstance.camera.lookAt(currentCameraLookAt);
+                    
                     await appInstance.update(delta, elapsed);
                 }
                 animationFrameId = requestAnimationFrame(animate);
