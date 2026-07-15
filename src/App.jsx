@@ -1,6 +1,33 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const ErrorOverlay = () => {
+  const [errors, setErrors] = useState([]);
+  
+  useEffect(() => {
+    const handleError = (e) => setErrors(prev => [...prev, e.message || String(e)]);
+    const handleRejection = (e) => setErrors(prev => [...prev, e.reason ? String(e.reason) : 'Promise Rejection']);
+    window.addEventListener('error', handleError);
+    window.addEventListener('unhandledrejection', handleRejection);
+    return () => {
+      window.removeEventListener('error', handleError);
+      window.removeEventListener('unhandledrejection', handleRejection);
+    };
+  }, []);
+
+  if (errors.length === 0) return null;
+  
+  return (
+    <div className="fixed top-0 left-0 z-50 w-full bg-red-600/90 text-white p-4 max-h-[50vh] overflow-auto text-sm font-mono whitespace-pre-wrap pointer-events-auto shadow-2xl">
+      <h3 className="font-bold text-lg mb-2">Caught Errors ({errors.length}):</h3>
+      {errors.map((err, i) => (
+        <div key={i} className="mb-1 pb-1 border-b border-white/20">{err}</div>
+      ))}
+      <button onClick={() => setErrors([])} className="mt-2 bg-white text-red-900 px-3 py-1 rounded">Dismiss</button>
+    </div>
+  );
+};
 
 import Footer from './components/Footer';
 import FloatingMessageButton from './components/FloatingMessageButton';
@@ -47,6 +74,7 @@ function App() {
 
   return (
     <div className="site-shell">
+      <ErrorOverlay />
       <ScrollToTop />
       <JellyfishBackground />
       <div className="relative z-10 flex min-h-screen flex-col">
