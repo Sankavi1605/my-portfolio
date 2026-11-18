@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- terracotta tile with a brush-stroke S, tilted like the "Hello!" lettering -->
+  <rect width="64" height="64" rx="15" fill="#9a6a58"/>
+  <g transform="rotate(-7 32 32)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M45 21c-3.4-5.2-9.6-7.6-15.6-6.4C23.6 15.800 19.600 19.900 19.600 25c0 5.300 4.200 7.700 12.400 9.700 8.400 2.100 12.600 4.800 12.600 10.300 0 5.800-5 9.900-12.400 9.900-6.200 0-11.300-2.700-14.600-7.700" stroke="#222028" stroke-opacity=".28" stroke-width="8.500" transform="translate(1.500 2)"/>
+    <path d="M45 21c-3.4-5.2-9.6-7.6-15.6-6.4C23.600 15.800 19.600 19.900 19.600 25c0 5.300 4.200 7.700 12.400 9.700 8.400 2.100 12.600 4.800 12.600 10.300 0 5.800-5 9.900-12.400 9.900-6.200 0-11.300-2.700-14.600-7.700" stroke="#f3f1ee" stroke-width="7.500"/>
+  </g>
+</svg>

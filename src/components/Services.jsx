@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Reveal from './Reveal';
 import { services } from '../data/content';
+import notePaper from '../assets/canva/note.webp';
 
 const tilt = [-2.4, 1.6, -1.2, 2.2];
 
@@ -23,16 +24,20 @@ export default function Services() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ type: 'spring', stiffness: 150, damping: 13, delay: i * 0.1 }}
           >
-            <span className="note__no script" aria-hidden="true">
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <h3 className="serif">{s.title}</h3>
-            <p>{s.description}</p>
-            <ul>
-              {s.tools.map((t) => (
-                <li key={t}>{t}</li>
-              ))}
-            </ul>
+            {/* paper and shadow live on their own element so the text never sits inside a filtered layer */}
+            <img src={notePaper} alt="" className="note__paper" />
+            <div className="note__body">
+              <span className="note__no script" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 className="serif">{s.title}</h3>
+              <p>{s.description}</p>
+              <ul>
+                {s.tools.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+            </div>
           </motion.article>
         ))}
       </div>
