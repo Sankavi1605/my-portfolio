@@ -37,7 +37,9 @@
 
 @media (max-width: 759px) {
   :root {
-    --u: calc(100vw / 400);
+    /* phone layout is drawn on a 400-wide canvas; past 500px it stops growing and is centred */
+    --u: calc(min(100vw, 500px) / 400);
+    --pad: calc((100vw - 400 * var(--u)) / 2);
   }
 }
 
@@ -516,39 +518,42 @@ section[id] {
 
 @media (max-width: 759px) {
   .hero {
-    height: calc(var(--u) * 700);
+    height: calc(var(--u) * 736);
   }
   .hero__clip {
-    bottom: calc(var(--u) * 34);
+    bottom: calc(var(--u) * 36);
   }
+  /* no studio box behind the portrait on phones: she stands straight on the grain */
   .hero__studio {
-    left: calc(var(--u) * 150);
-    top: calc(var(--u) * 392);
+    display: none;
   }
   .hero__strip {
-    left: calc(var(--u) * -70);
+    left: -30vw;
     top: calc(var(--u) * 196);
-    width: calc(var(--u) * 640);
+    width: 160vw;
     height: calc(var(--u) * 232);
   }
+  /* portrait centred and large, with the arrow sweeping round it */
   .hero__arrow {
-    left: calc(var(--u) * 96);
-    top: calc(var(--u) * 372);
-    width: calc(var(--u) * 300);
+    left: calc(var(--pad) + var(--u) * 14);
+    top: calc(var(--u) * 392);
+    width: calc(var(--u) * 372);
   }
   .hero__portrait {
-    left: calc(var(--u) * 168);
-    top: calc(var(--u) * 404);
-    width: calc(var(--u) * 222);
+    left: calc(var(--pad) + var(--u) * 62);
+    top: calc(var(--u) * 418);
+    width: calc(var(--u) * 276);
   }
   .hero__hello {
-    left: calc(var(--u) * 16);
+    left: calc(var(--pad) + var(--u) * 16);
     top: calc(var(--u) * 52);
     font-size: calc(var(--u) * 178);
   }
   .hero__text {
-    left: calc(var(--u) * 30);
+    left: calc(var(--pad) + var(--u) * 30);
     top: calc(var(--u) * 246);
+    right: calc(var(--pad) + var(--u) * 20);
+    z-index: 6;
   }
   .hero__name {
     font-size: calc(var(--u) * 36);
@@ -559,13 +564,18 @@ section[id] {
   .hero__tagline {
     margin: calc(var(--u) * 14) 0 0 calc(var(--u) * 5);
   }
+  /* "Scroll down" is written on the crumpled strip at the foot of the hero */
   .hero__scroll {
-    margin: calc(var(--u) * 82) 0 0 calc(var(--u) * 5);
+    position: absolute;
+    left: 50%;
+    top: calc(var(--u) * 430);
+    margin: 0;
+    translate: -50% 0;
   }
   .hero__crumple {
-    left: calc(var(--u) * -40);
-    top: calc(var(--u) * 640);
-    width: calc(var(--u) * 520);
+    left: -10vw;
+    top: calc(var(--u) * 646);
+    width: 130vw;
   }
 }
 
@@ -1367,6 +1377,21 @@ section[id] {
   .acc__panel-links {
     gap: 34px;
   }
+  .acc__pages {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    font-size: 13px;
+  }
+  .acc__pages a {
+    padding-inline: 0.7em;
+  }
+}
+@media (max-width: 379px) {
+  .acc__pages {
+    grid-template-columns: 1fr;
+  }
+  .acc__panel-inner {
+    padding: 54px 34px 26px;
+  }
 }
 
 /* ------------------------------------------------------------------
@@ -1669,6 +1694,8 @@ section[id] {
     left: auto;
     top: auto;
     width: auto;
+    max-width: calc(var(--u) * 400);
+    margin: 0 auto;
     padding: 0 26px;
   }
   .contact__side .script {
@@ -1676,11 +1703,11 @@ section[id] {
   }
   .contact__note {
     position: relative;
-    left: auto;
+    left: calc(var(--u) * -8);
     top: auto;
     width: calc(var(--u) * 350);
     height: calc(var(--u) * 340);
-    margin: 46px 0 0 calc(var(--u) * 10);
+    margin: 46px auto 0;
   }
   .contact__note-copy {
     padding: calc(var(--u) * 44) calc(var(--u) * 34) 0 calc(var(--u) * 30);
@@ -1696,10 +1723,10 @@ section[id] {
   }
   .contact__hand {
     left: auto;
-    right: calc(var(--u) * -104);
+    right: calc(var(--pad) - var(--u) * 94);
     top: auto;
-    bottom: calc(var(--u) * 26);
-    width: calc(var(--u) * 240);
+    bottom: calc(var(--u) * 50);
+    width: calc(var(--u) * 250);
   }
   .contact__ground {
     left: -30%;

@@ -20,6 +20,10 @@ const pageTops = () =>
 
 const clampScroll = (y) => Math.max(0, Math.min(y, document.documentElement.scrollHeight - window.innerHeight));
 
+/* Phones and tablets scroll freely: with touch momentum and sections shorter than the
+   screen, taking over the scroll throws people around. Menu jumps still use the page. */
+const touchLayout = () => window.matchMedia('(pointer: coarse), (max-width: 759px)').matches;
+
 /**
  * Page-to-page transition. Whenever you scroll across a section boundary (or use
  * the nav), a blank sheet of paper covers the whole screen, the page underneath
@@ -55,7 +59,7 @@ export default function PageTransition() {
       const y = window.scrollY;
       const prev = lastY.current;
       lastY.current = y;
-      if (reduce || busy.current || y === prev) return;
+      if (reduce || busy.current || y === prev || touchLayout()) return;
 
       const vh = window.innerHeight;
       const tops = pageTops();
