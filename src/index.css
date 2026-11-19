@@ -1089,6 +1089,18 @@ section[id] {
   top: calc(100% - 5cqw);
   translate: 0 12cqw;
 }
+.shot__edge--b img {
+  display: block;
+  width: 100%;
+  max-width: none;
+}
+/* each continuation piece overlaps the one above by a pixel so no hairline shows */
+.shot__edge--b img + img {
+  margin-top: -1px;
+}
+.shot__edge--b .is-flipped {
+  transform: scaleY(-1);
+}
 .shot__edge--t {
   left: -16cqw;
   width: 132cqw;

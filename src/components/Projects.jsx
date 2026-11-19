@@ -8,6 +8,8 @@ import { projects } from '../data/content';
 import fist from '../assets/canva/fist.webp';
 import frameLight from '../assets/canva/frame-light.webp';
 import frameDark from '../assets/canva/frame-dark.webp';
+import frameLightBody from '../assets/canva/frame-light-body.webp';
+import frameDarkBody from '../assets/canva/frame-dark-body.webp';
 import burst from '../assets/canva/burst.webp';
 
 function Links({ project, className }) {
@@ -31,6 +33,7 @@ function Links({ project, className }) {
 function Column({ project, index, active, desktop, onOpen, onToggle }) {
   const dark = index % 2 === 1;
   const frame = dark ? frameDark : frameLight;
+  const frameBody = dark ? frameDarkBody : frameLightBody;
   const panelId = `project-panel-${project.id}`;
 
   // gallery projects (the landing pages) cycle through their screenshots while open
@@ -111,7 +114,14 @@ function Column({ project, index, active, desktop, onOpen, onToggle }) {
                 </div>
               )}
               <img className="shot__edge shot__edge--t" src={frame} alt="" />
-              <img className="shot__edge shot__edge--b" src={frame} alt="" />
+              {/* bottom strip, then the same paper mirrored over and over so it runs to the foot of the panel */}
+              <div className="shot__edge shot__edge--b">
+                <img src={frame} alt="" />
+                <img src={frameBody} alt="" className="is-flipped" />
+                <img src={frameBody} alt="" />
+                <img src={frameBody} alt="" className="is-flipped" />
+                <img src={frameBody} alt="" />
+              </div>
               <img className="shot__edge shot__edge--l" src={frame} alt="" />
               <img className="shot__edge shot__edge--r" src={frame} alt="" />
               <span className="shot__burst" aria-hidden="true">
